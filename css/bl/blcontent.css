@@ -1,0 +1,139 @@
+﻿body
+{
+	font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, serif	
+}
+h1
+{
+	font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, serif;
+	color:#EAEAEA;
+}
+h2
+{
+	font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, serif	
+}
+h3
+{
+	font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, serif	
+}
+.bendyHeader
+{
+	font-family: 'Seaweed Script', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, serif;
+	color:#EAEAEA;
+}
+.topSpacer
+{
+padding-bottom:50px;
+}
+
+.bendylineFooter
+{
+	background-color:#428BCA;
+	color: white;
+	padding:20px;
+}
+
+.logo
+{
+	font-family: 'Seaweed Script', sans-serif;
+	font-size: 24pt;
+}
+
+.logoFirstChar
+{
+	font-size: 20pt;	
+}
+
+.content
+{
+	margin-top:30px;
+	margin-bottom:60px;	
+}
+
+.footerLink
+{
+	color:white;	
+}
+
+.footerArea
+{
+	margin-top: 12px;		
+	font-size:10pt;
+}
+
+.copyright
+{	
+	text-align:right;	
+}
+
+.presentationHeroArea
+{
+    background-color:#1B8C15;
+    color:white;
+    padding:20px;
+    padding-bottom:70px;
+    padding-top:30px;
+    cursor:default;
+ }
+
+div.presentationHeroArea
+{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, serif;
+	font-weight:300;
+ }
+
+.bottomSpacer
+ {
+    padding-top:260px; 
+ }
+ 
+.presentationHeroLabel
+{
+    font-family: 'Roboto', sans-serif;
+    font-weight:100;
+    font-size:54pt;
+	margin-left: -4px;
+}
+
+.presentationHeroSubLabel
+{
+    font-family: 'Roboto', sans-serif;
+    font-weight:100;
+    font-size:24pt;
+    position:relative;
+    top: -20px;
+}
+
+
+.quallaArea
+{
+    background-color:#52bae4;
+    color:white;
+    padding:20px;
+    padding-bottom:70px;
+    padding-top:30px;
+    cursor:default;
+    margin-bottom:20px;
+ }
+
+div.quallaArea
+{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, serif;
+	font-weight:300;
+ }
+
+.quallaLabel
+{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, serif;
+    font-weight:100;
+    font-size:54pt;
+	margin-left: -5px;
+}
+
+.quallaSubLabel
+{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, serif;
+    font-weight:100;
+    font-size:24pt;
+    position:relative;
+    top: -20px;
+}
