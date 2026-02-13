@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bendyline LLC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #3a3a3a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: linear-gradient(135deg, #faf8f5 0%, #f0ebe4 100%);
+            min-height: 80vh;
+        }
+
+        .bag-icon {
+            width: 120px;
+            height: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #6b5b4f;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .qualla-link {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        .qualla-link:hover {
+            transform: scale(1.03);
+        }
+
+        .qualla-logo {
+            width: 320px;
+            max-width: 80vw;
+            height: auto;
+        }
+
+        .visit-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.85rem 2.5rem;
+            background-color: #5c4a3a;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            transition: background-color 0.2s ease;
+        }
+
+        .visit-btn:hover {
+            background-color: #7a6455;
+        }
+
+        .tagline {
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            color: #8a7d74;
+        }
+
+        footer {
+            background-color: #3a3028;
+            color: #c5bab0;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: #e0d6cc;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-contact {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <main class="hero">
+        <img src="assets/bag256.png" alt="Qualla bag" class="bag-icon">
+        <h1>Bendyline LLC</h1>
+        <a href="https://qualla.com" class="qualla-link">
+            <img src="assets/quallalogo.png" alt="Qualla" class="qualla-logo">
+        </a>
+        <a href="https://qualla.com" class="visit-btn">Visit Qualla</a>
+        <p class="tagline">Explore and collect the world around you.</p>
+    </main>
+    <footer>
+        <p class="footer-contact">Contact: <a href="mailto:support@bendyline.com">support@bendyline.com</a></p>
+        <p>&copy; 2025 Bendyline LLC</p>
+    </footer>
+</body>
+</html>
