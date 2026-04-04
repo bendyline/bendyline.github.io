@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bendyline LLC — Makers of Qualla</title>
-    <meta name="description" content="Bendyline LLC builds Qualla — visit the world through an endless stream of stories.">
+    <title>Bendyline</title>
+    <meta name="description" content="Bendyline builds Qualla, Squiggly Square, and DocBlocks.">
     <link rel="canonical" href="https://bendyline.com">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Bendyline LLC — Makers of Qualla">
-    <meta property="og:description" content="Visit the world through an endless stream of stories.">
+    <meta property="og:title" content="Bendyline">
+    <meta property="og:description" content="Bendyline builds Qualla, Squiggly Square, and DocBlocks.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bendyline.com">
     <meta property="og:image" content="https://bendyline.com/assets/bendylinelogo_t.png">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Bendyline LLC — Makers of Qualla">
-    <meta name="twitter:description" content="Visit the world through an endless stream of stories.">
+    <meta name="twitter:title" content="Bendyline">
+    <meta name="twitter:description" content="Bendyline builds Qualla, Squiggly Square, and DocBlocks.">
     <meta name="twitter:image" content="https://bendyline.com/assets/bendylinelogo_t.png">
     <style>
         * {
@@ -51,34 +51,78 @@
             margin-bottom: 1.5rem;
         }
 
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
         .product-card {
             background: #fff;
             border-radius: 12px;
             box-shadow: 0 2px 16px rgba(58, 48, 40, 0.10);
-            padding: 2rem 2.5rem;
-            max-width: 380px;
+            padding: 1rem 2.5rem 2rem;
+            max-width: 340px;
             width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
+            text-align: left;
             transition: box-shadow 0.2s ease;
+            text-decoration: none;
+            color: inherit;
         }
 
         .product-card:hover {
             box-shadow: 0 4px 24px rgba(58, 48, 40, 0.16);
         }
 
-        .card-bag {
+        .card-squisq {
+            background-color: #ECE8C4;
+            border: 3px solid #5c4a3a;
+        }
+
+        .card-squisq .card-icon {
+            width: 100px;
+            height: 100px;
+        }
+
+        .card-docblocks .card-icon {
+            width: 48px;
+            height: 48px;
+            margin-top: 16px;
+            margin-bottom: 2rem;
+        }
+
+        .card-icon {
             width: 80px;
-            height: auto;
-            margin-bottom: 1rem;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
         }
 
         .card-logo {
-            width: 220px;
+            width: 165px;
             max-width: 100%;
             height: auto;
             margin-bottom: 0.75rem;
+        }
+
+        .card-logo-pixelated {
+            width: 150px;
+            max-width: 150px;
+            image-rendering: pixelated;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #3a3a3a;
+            margin-bottom: 0.5rem;
         }
 
         .card-tagline {
@@ -98,10 +142,36 @@
             font-weight: 500;
             letter-spacing: 0.03em;
             transition: background-color 0.2s ease;
+            margin-top: auto;
         }
 
         .visit-btn:hover {
             background-color: #7a6455;
+        }
+
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: #8a7d74;
+            text-decoration: none;
+        }
+
+        .github-link:hover {
+            color: #5c4a3a;
+            text-decoration: underline;
+        }
+
+        .github-link img {
+            width: 18px;
+            height: 18px;
+            opacity: 0.6;
+        }
+
+        .github-link:hover img {
+            opacity: 0.85;
         }
 
         footer {
@@ -130,30 +200,48 @@
 <body>
     <main class="hero">
         <header>
-            <img src="assets/bendylinelogo_t.png" alt="Bendyline LLC" class="bendyline-logo">
+            <img src="assets/bendylinelogo_t.png" alt="Bendyline" class="bendyline-logo">
         </header>
 
-        <article class="product-card">
-            <img src="assets/bag256.png" alt="Qualla bag" class="card-bag">
-            <h1><img src="assets/quallalogo.png" alt="Qualla" class="card-logo"></h1>
-            <p class="card-tagline">Visit the world through an endless stream of stories.</p>
-            <a href="https://qualla.com" class="visit-btn">Visit Qualla</a>
-        </article>
+        <div class="products">
+            <div class="product-card card-squisq">
+                <img src="assets/squisq.jpg" alt="Squiggly Square" class="card-icon">
+                <p class="card-tagline"><b>{[ squisq ]}</b> is a simple extension format for Markdown that empowers you to make really rich documents from simple markdown. Available as open source components for developers to re-use and enjoy.</p>
+                <a href="https://squigglysquare.com" class="visit-btn">Visit Squiggly Square</a>
+                <a href="https://github.com/bendyline/squisq" class="github-link"><img src="assets/GitHub_Invertocat_Black.png" alt=""> GitHub</a>
+            </div>
+
+            <div class="product-card card-docblocks">
+                <img src="assets/docblk.webp" alt="DocBlocks" class="card-icon">
+                <h2><img src="assets/docblocks.webp" alt="DocBlocks" class="card-logo card-logo-pixelated"></h2>
+                <p class="card-tagline">A free open-source system for creating, editing, and producing markdown+Squiggly Square documents into rich media. Use the editor at docblocks.com, and use the command tool (docblk) to produce content.</p>
+                <a href="https://docblocks.com" class="visit-btn">Visit DocBlocks</a>
+                <a href="https://github.com/bendyline/docblocks" class="github-link"><img src="assets/GitHub_Invertocat_Black.png" alt=""> GitHub</a>
+            </div>
+
+            <div class="product-card">
+                <img src="assets/bag256.png" alt="Qualla bag" class="card-icon">
+                <h2><img src="assets/quallalogo.png" alt="Qualla" class="card-logo"></h2>
+                <p class="card-tagline">Visit the world through an endless stream of stories.</p>
+                <a href="https://qualla.com" class="visit-btn">Visit Qualla</a>
+                <a href="https://github.com/bendyline/qualla" class="github-link"><img src="assets/GitHub_Invertocat_Black.png" alt=""> GitHub</a>
+            </div>
+        </div>
     </main>
 
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Bendyline LLC",
+        "name": "Bendyline",
         "url": "https://bendyline.com",
         "logo": "https://bendyline.com/assets/bendylinelogo_t.png",
         "email": "support@bendyline.com",
-        "sameAs": ["https://qualla.com"]
+        "sameAs": ["https://qualla.com", "https://squigglysquare.com", "https://docblocks.com"]
     }
     </script>
     <footer>
-        <span>&copy; 2025 Bendyline LLC</span>
+        <span>&copy; 2026 Bendyline LLC</span>
         <span><a href="mailto:support@bendyline.com">support@bendyline.com</a></span>
     </footer>
 </body>
