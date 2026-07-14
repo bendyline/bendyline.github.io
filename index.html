@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bendyline</title>
-    <meta name="description" content="Bendyline builds Qualla, Squiggly Square, and DocBlocks.">
+    <title>Bendyline — Honest free software</title>
+    <meta name="description" content="Honest free software. Hopefully it makes the world a little better. Bendyline builds Qualla, Squiggly Square, and DocBlocks.">
     <link rel="canonical" href="https://bendyline.com">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Bendyline">
-    <meta property="og:description" content="Bendyline builds Qualla, Squiggly Square, and DocBlocks.">
+    <meta property="og:description" content="Honest free software. Hopefully it makes the world a little better. Bendyline builds Qualla, Squiggly Square, and DocBlocks.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bendyline.com">
     <meta property="og:image" content="https://bendyline.com/assets/bendylinelogo_t.png">
@@ -17,7 +17,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Bendyline">
-    <meta name="twitter:description" content="Bendyline builds Qualla, Squiggly Square, and DocBlocks.">
+    <meta name="twitter:description" content="Honest free software. Hopefully it makes the world a little better. Bendyline builds Qualla, Squiggly Square, and DocBlocks.">
     <meta name="twitter:image" content="https://bendyline.com/assets/bendylinelogo_t.png">
     <style>
         * {
@@ -40,7 +40,7 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            padding: 3rem 1.5rem 2rem;
+            padding: 2.4rem 1.5rem 2rem;
             background: linear-gradient(135deg, #faf8f5 0%, #f0ebe4 100%);
         }
 
@@ -48,7 +48,22 @@
             width: 180px;
             max-width: 50vw;
             height: auto;
-            margin-bottom: 1.5rem;
+            /* The logo PNG has ~26% transparent space baked in below the wordmark.
+               Negative margin pulls the tagline up into it for a tight visual gap. */
+            margin-bottom: -2rem;
+        }
+
+        .site-tagline {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            color: #8a7d74;
+            max-width: 34em;
+            margin: 0 auto 2.5rem;
+        }
+
+        .site-tagline .tagline-lead {
+            color: #3a3a3a;
+            font-weight: 600;
         }
 
         .products {
@@ -64,6 +79,7 @@
             background: #fff;
             border-radius: 12px;
             box-shadow: 0 2px 16px rgba(58, 48, 40, 0.10);
+            border: 3px solid #5c4a3a;
             padding: 1rem 2.5rem 2rem;
             max-width: 340px;
             width: 100%;
@@ -80,14 +96,19 @@
             box-shadow: 0 4px 24px rgba(58, 48, 40, 0.16);
         }
 
-        .card-squisq {
-            background-color: #ECE8C4;
-            border: 3px solid #5c4a3a;
+        .card-icon-spacer {
+            height: 80px;
+            margin-bottom: 1.5rem;
         }
 
-        .card-squisq .card-icon {
-            width: 100px;
-            height: 100px;
+        .card-squisq .card-logo {
+            width: 190px;
+            position: relative;
+            top: -3px;
+        }
+
+        .card-qualla .card-logo {
+            width: 148px;
         }
 
         .card-docblocks .card-icon {
@@ -143,35 +164,112 @@
             letter-spacing: 0.03em;
             transition: background-color 0.2s ease;
             margin-top: auto;
+            align-self: center;
         }
 
         .visit-btn:hover {
             background-color: #7a6455;
         }
 
-        .github-link {
+        .card-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem 1rem;
+            width: 100%;
+            margin-top: 0.85rem;
+        }
+
+        .card-link {
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            margin-top: 0.75rem;
             font-size: 0.85rem;
             color: #8a7d74;
             text-decoration: none;
+            white-space: nowrap;
         }
 
-        .github-link:hover {
+        .card-link:hover {
             color: #5c4a3a;
             text-decoration: underline;
         }
 
-        .github-link img {
+        .card-link img {
             width: 18px;
             height: 18px;
             opacity: 0.6;
         }
 
-        .github-link:hover img {
+        .card-link:hover img {
             opacity: 0.85;
+        }
+
+        .card-link svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .card-links--row {
+            flex-wrap: nowrap;
+            gap: 0.3rem;
+        }
+
+        .card-links--row .card-link {
+            gap: 0.3rem;
+            font-size: 0.82rem;
+        }
+
+        .card-links--row .card-link img,
+        .card-links--row .card-link svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .card-links--wrap {
+            flex-wrap: wrap;
+            gap: 0.4rem 0.9rem;
+        }
+
+        .card-links--wrap .card-link,
+        .npm-group .card-link {
+            gap: 0.3rem;
+            font-size: 0.82rem;
+        }
+
+        .card-links--wrap .card-link img,
+        .card-links--wrap .card-link svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .npm-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            white-space: nowrap;
+        }
+
+        .npm-group .npm-mark {
+            width: 15px;
+            height: 15px;
+            fill: currentColor;
+            color: #8a7d74;
+            flex: none;
+        }
+
+        .npm-label {
+            font-size: 0.82rem;
+            color: #8a7d74;
+        }
+
+        .card-sep {
+            color: #c3b6a8;
+            font-size: 0.85rem;
+            line-height: 1;
+            user-select: none;
         }
 
         footer {
@@ -201,14 +299,26 @@
     <main class="hero">
         <header>
             <img src="assets/bendylinelogo_t.png" alt="Bendyline" class="bendyline-logo">
+            <p class="site-tagline"><span class="tagline-lead">Honest free software.</span> Hopefully it makes the world a little better.</p>
         </header>
 
         <div class="products">
             <div class="product-card card-squisq">
-                <img src="assets/squisq.jpg" alt="Squiggly Square" class="card-icon">
-                <p class="card-tagline"><b>{[ squisq ]}</b> is a simple extension format for Markdown that empowers you to make really rich documents from simple markdown. Available as open source components for developers to re-use and enjoy.</p>
+                <div class="card-icon-spacer" aria-hidden="true"></div>
+                <h2><img src="assets/squisq.png" alt="Squiggly Square" class="card-logo"></h2>
+                <p class="card-tagline"><b>{[squisq]}</b> is a simple extension format for Markdown that empowers you to make really rich documents from simple markdown. Available as open source components for developers to re-use and enjoy.</p>
                 <a href="https://squigglysquare.com" class="visit-btn">Visit Squiggly Square</a>
-                <a href="https://github.com/bendyline/squisq" class="github-link"><img src="assets/GitHub_Invertocat_Black.png" alt=""> GitHub</a>
+                <div class="card-links card-links--wrap">
+                    <a href="https://github.com/bendyline/squisq" class="card-link"><img src="assets/GitHub_Invertocat_Black.png" alt=""> GitHub</a>
+                    <span class="npm-group">
+                        <svg class="npm-mark" viewBox="0 0 24 24" role="img" aria-label="npm"><title>npm</title><path d="M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L12.04 19.17H5.113z"/></svg>
+                        <a href="https://www.npmjs.com/package/@bendyline/squisq" class="card-link">squisq</a>
+                        <span class="card-sep" aria-hidden="true">&middot;</span>
+                        <a href="https://www.npmjs.com/package/@bendyline/squisq-react" class="card-link">react</a>
+                        <span class="card-sep" aria-hidden="true">&middot;</span>
+                        <a href="https://www.npmjs.com/package/@bendyline/squisq-editor-react" class="card-link">editor</a>
+                    </span>
+                </div>
             </div>
 
             <div class="product-card card-docblocks">
@@ -216,15 +326,30 @@
                 <h2><img src="assets/docblocks.webp" alt="DocBlocks" class="card-logo card-logo-pixelated"></h2>
                 <p class="card-tagline">A free open-source system for creating, editing, and producing markdown+Squiggly Square documents into rich media. Use the editor at docblocks.com, and use the command tool (docblk) to produce content.</p>
                 <a href="https://docblocks.com" class="visit-btn">Visit DocBlocks</a>
-                <a href="https://github.com/bendyline/docblocks" class="github-link"><img src="assets/GitHub_Invertocat_Black.png" alt=""> GitHub</a>
+                <div class="card-links card-links--wrap">
+                    <a href="https://github.com/bendyline/docblocks" class="card-link"><img src="assets/GitHub_Invertocat_Black.png" alt=""> GitHub</a>
+                    <span class="npm-group">
+                        <svg class="npm-mark" viewBox="0 0 24 24" role="img" aria-label="npm"><title>npm</title><path d="M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L12.04 19.17H5.113z"/></svg>
+                        <span class="npm-label">npm:</span>
+                        <a href="https://www.npmjs.com/package/@bendyline/docblocks-cli" class="card-link">cli+mcp</a>
+                    </span>
+                </div>
             </div>
 
-            <div class="product-card">
+            <div class="product-card card-qualla">
                 <img src="assets/bag256.png" alt="Qualla bag" class="card-icon">
                 <h2><img src="assets/quallalogo.png" alt="Qualla" class="card-logo"></h2>
                 <p class="card-tagline">Visit the world through an endless stream of stories.</p>
                 <a href="https://qualla.com" class="visit-btn">Visit Qualla</a>
-                <a href="https://github.com/bendyline/qualla" class="github-link"><img src="assets/GitHub_Invertocat_Black.png" alt=""> GitHub</a>
+                <div class="card-links card-links--row">
+                    <a href="https://github.com/bendyline/qualla" class="card-link"><img src="assets/GitHub_Invertocat_Black.png" alt=""> GitHub</a>
+                    <span class="card-sep" aria-hidden="true">&middot;</span>
+                    <a href="https://bsky.app/profile/quallaexplores.bsky.social" class="card-link" title="@quallaexplores.bsky.social"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.81 9.501 7.734 4.308 4.612-4.865-.428-6.86-4.281-7.201-.135-.021-.275-.04-.415-.056.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.789.624-6.479 0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg> Bluesky</a>
+                    <span class="card-sep" aria-hidden="true">&middot;</span>
+                    <a href="https://x.com/quallaexplores" class="card-link" title="@quallaexplores" aria-label="X: @quallaexplores"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                    <span class="card-sep" aria-hidden="true">&middot;</span>
+                    <a href="https://qualla.com/#apps-links" class="card-link">More apps</a>
+                </div>
             </div>
         </div>
     </main>
@@ -234,6 +359,7 @@
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Bendyline",
+        "slogan": "Honest free software. Hopefully it makes the world a little better.",
         "url": "https://bendyline.com",
         "logo": "https://bendyline.com/assets/bendylinelogo_t.png",
         "email": "support@bendyline.com",
