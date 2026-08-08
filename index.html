@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bendyline — Honest free software</title>
-    <meta name="description" content="Honest free software. Hopefully it makes the world a little better. Bendyline builds Qualla, Squiggly Square, and DocBlocks.">
+    <meta name="description" content="Honest free software. Hopefully it makes the world a little better. Bendyline builds Gezel, Qualla, Squiggly Square, and DocBlocks.">
     <link rel="canonical" href="https://bendyline.com">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Bendyline">
-    <meta property="og:description" content="Honest free software. Hopefully it makes the world a little better. Bendyline builds Qualla, Squiggly Square, and DocBlocks.">
+    <meta property="og:description" content="Honest free software. Hopefully it makes the world a little better. Bendyline builds Gezel, Qualla, Squiggly Square, and DocBlocks.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bendyline.com">
     <meta property="og:image" content="https://bendyline.com/assets/bendylinelogo_t.png">
@@ -17,7 +17,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Bendyline">
-    <meta name="twitter:description" content="Honest free software. Hopefully it makes the world a little better. Bendyline builds Qualla, Squiggly Square, and DocBlocks.">
+    <meta name="twitter:description" content="Honest free software. Hopefully it makes the world a little better. Bendyline builds Gezel, Qualla, Squiggly Square, and DocBlocks.">
     <meta name="twitter:image" content="https://bendyline.com/assets/bendylinelogo_t.png">
     <style>
         * {
@@ -66,13 +66,21 @@
             font-weight: 600;
         }
 
+        .content-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(360px, 420px);
+            align-items: start;
+            gap: 2rem;
+            width: 100%;
+            max-width: 1500px;
+        }
+
         .products {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
             justify-content: center;
             width: 100%;
-            max-width: 1200px;
         }
 
         .product-card {
@@ -80,7 +88,7 @@
             border-radius: 12px;
             box-shadow: 0 2px 16px rgba(58, 48, 40, 0.10);
             border: 3px solid #5c4a3a;
-            padding: 1rem 2.5rem 2rem;
+            padding: 2rem 2.5rem;
             max-width: 340px;
             width: 100%;
             display: flex;
@@ -96,34 +104,19 @@
             box-shadow: 0 4px 24px rgba(58, 48, 40, 0.16);
         }
 
-        .card-icon-spacer {
-            height: 80px;
-            margin-bottom: 1.5rem;
-        }
-
         .card-squisq .card-logo {
             width: 190px;
             position: relative;
             top: -3px;
         }
 
+        .card-gezel .card-logo {
+            width: 140px;
+            filter: invert(1);
+        }
+
         .card-qualla .card-logo {
             width: 148px;
-        }
-
-        .card-docblocks .card-icon {
-            width: 48px;
-            height: 48px;
-            margin-top: 16px;
-            margin-bottom: 2rem;
-        }
-
-        .card-icon {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin-bottom: 1.5rem;
-            border-radius: 8px;
         }
 
         .card-logo {
@@ -272,6 +265,98 @@
             user-select: none;
         }
 
+        .video-sidebar {
+            align-self: stretch;
+            width: 100%;
+            padding-inline: 3rem;
+            border-left: 1px solid rgba(92, 74, 58, 0.22);
+            text-align: left;
+        }
+
+        .video-sidebar h2 {
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+            color: #3a3a3a;
+        }
+
+        .video-frame {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #181818;
+        }
+
+        .video-frame iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-playlist {
+            display: grid;
+            gap: 0.45rem;
+            margin-top: 0.8rem;
+            list-style: none;
+        }
+
+        .video-playlist a {
+            display: grid;
+            grid-template-columns: 92px minmax(0, 1fr);
+            align-items: center;
+            gap: 0.7rem;
+            margin-inline: -0.4rem;
+            padding: 0.4rem;
+            border-radius: 6px;
+            color: #3a3a3a;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .video-playlist a:hover {
+            background-color: rgba(92, 74, 58, 0.08);
+        }
+
+        .video-playlist img {
+            width: 92px;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .video-playlist-title {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        .video-playlist-duration {
+            display: block;
+            margin-top: 0.2rem;
+            font-size: 0.75rem;
+            color: #8a7d74;
+        }
+
+        .video-channel-link {
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 899px) {
+            .content-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .video-sidebar {
+                max-width: 712px;
+                justify-self: center;
+                padding: 2rem 2rem 0;
+                border-top: 1px solid rgba(92, 74, 58, 0.22);
+                border-left: 0;
+            }
+        }
+
         footer {
             background-color: #3a3028;
             color: #c5bab0;
@@ -302,9 +387,47 @@
             <p class="site-tagline"><span class="tagline-lead">Honest free software.</span> Hopefully it makes the world a little better.</p>
         </header>
 
+        <div class="content-layout">
         <div class="products">
+            <div class="product-card card-gezel">
+                <h2><img src="assets/gezellogotype.png" alt="Gezel" class="card-logo"></h2>
+                <p class="card-tagline">Build a crew of named AI companions with distinct roles and tools, then put them to work on your projects. Their conversations, memory, and work stay on your computer as ordinary files.</p>
+                <a href="https://gezel.com" class="visit-btn">Visit Gezel</a>
+                <div class="card-links card-links--row">
+                    <a href="https://github.com/bendyline/gezel" class="card-link"><img src="assets/GitHub_Invertocat_Black.png" alt=""> GitHub</a>
+                </div>
+            </div>
+
+            <div class="product-card card-docblocks">
+                <h2><img src="assets/docblocks.webp" alt="DocBlocks" class="card-logo card-logo-pixelated"></h2>
+                <p class="card-tagline">A free open-source system for creating, editing, and producing markdown+Squiggly Square documents into rich media. Use the editor at docblocks.com, and use the command tool (docblk) to produce content.</p>
+                <a href="https://docblocks.com" class="visit-btn">Visit DocBlocks</a>
+                <div class="card-links card-links--wrap">
+                    <a href="https://github.com/bendyline/docblocks" class="card-link"><img src="assets/GitHub_Invertocat_Black.png" alt=""> GitHub</a>
+                    <span class="npm-group">
+                        <svg class="npm-mark" viewBox="0 0 24 24" role="img" aria-label="npm"><title>npm</title><path d="M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L12.04 19.17H5.113z"/></svg>
+                        <span class="npm-label">npm:</span>
+                        <a href="https://www.npmjs.com/package/@bendyline/docblocks-cli" class="card-link">cli+mcp</a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="product-card card-qualla">
+                <h2><img src="assets/quallalogo.png" alt="Qualla" class="card-logo"></h2>
+                <p class="card-tagline">Visit the world through an endless stream of stories.</p>
+                <a href="https://qualla.com" class="visit-btn">Visit Qualla</a>
+                <div class="card-links card-links--row">
+                    <a href="https://github.com/bendyline/qualla" class="card-link"><img src="assets/GitHub_Invertocat_Black.png" alt=""> GitHub</a>
+                    <span class="card-sep" aria-hidden="true">&middot;</span>
+                    <a href="https://bsky.app/profile/quallaexplores.bsky.social" class="card-link" title="@quallaexplores.bsky.social"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.81 9.501 7.734 4.308 4.612-4.865-.428-6.86-4.281-7.201-.135-.021-.275-.04-.415-.056.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.789.624-6.479 0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg> Bluesky</a>
+                    <span class="card-sep" aria-hidden="true">&middot;</span>
+                    <a href="https://x.com/quallaexplores" class="card-link" title="@quallaexplores" aria-label="X: @quallaexplores"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                    <span class="card-sep" aria-hidden="true">&middot;</span>
+                    <a href="https://qualla.com/#apps-links" class="card-link">More apps</a>
+                </div>
+            </div>
+
             <div class="product-card card-squisq">
-                <div class="card-icon-spacer" aria-hidden="true"></div>
                 <h2><img src="assets/squisq.png" alt="Squiggly Square" class="card-logo"></h2>
                 <p class="card-tagline"><b>{[squisq]}</b> is a simple extension format for Markdown that empowers you to make really rich documents from simple markdown. Available as open source components for developers to re-use and enjoy.</p>
                 <a href="https://squigglysquare.com" class="visit-btn">Visit Squiggly Square</a>
@@ -320,37 +443,42 @@
                     </span>
                 </div>
             </div>
+        </div>
 
-            <div class="product-card card-docblocks">
-                <img src="assets/docblk.webp" alt="DocBlocks" class="card-icon">
-                <h2><img src="assets/docblocks.webp" alt="DocBlocks" class="card-logo card-logo-pixelated"></h2>
-                <p class="card-tagline">A free open-source system for creating, editing, and producing markdown+Squiggly Square documents into rich media. Use the editor at docblocks.com, and use the command tool (docblk) to produce content.</p>
-                <a href="https://docblocks.com" class="visit-btn">Visit DocBlocks</a>
-                <div class="card-links card-links--wrap">
-                    <a href="https://github.com/bendyline/docblocks" class="card-link"><img src="assets/GitHub_Invertocat_Black.png" alt=""> GitHub</a>
-                    <span class="npm-group">
-                        <svg class="npm-mark" viewBox="0 0 24 24" role="img" aria-label="npm"><title>npm</title><path d="M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L12.04 19.17H5.113z"/></svg>
-                        <span class="npm-label">npm:</span>
-                        <a href="https://www.npmjs.com/package/@bendyline/docblocks-cli" class="card-link">cli+mcp</a>
-                    </span>
-                </div>
+        <aside class="video-sidebar" aria-labelledby="videos-heading">
+            <h2 id="videos-heading">Build with Bendyline</h2>
+            <div class="video-frame">
+                <iframe
+                    name="bendyline-player"
+                    src="https://www.youtube-nocookie.com/embed/LXrqys9I8_I?playlist=vzk9LDl5ZDQ,wLyMngs8Hw0"
+                    title="Bendyline video player"
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
             </div>
-
-            <div class="product-card card-qualla">
-                <img src="assets/bag256.png" alt="Qualla bag" class="card-icon">
-                <h2><img src="assets/quallalogo.png" alt="Qualla" class="card-logo"></h2>
-                <p class="card-tagline">Visit the world through an endless stream of stories.</p>
-                <a href="https://qualla.com" class="visit-btn">Visit Qualla</a>
-                <div class="card-links card-links--row">
-                    <a href="https://github.com/bendyline/qualla" class="card-link"><img src="assets/GitHub_Invertocat_Black.png" alt=""> GitHub</a>
-                    <span class="card-sep" aria-hidden="true">&middot;</span>
-                    <a href="https://bsky.app/profile/quallaexplores.bsky.social" class="card-link" title="@quallaexplores.bsky.social"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.81 9.501 7.734 4.308 4.612-4.865-.428-6.86-4.281-7.201-.135-.021-.275-.04-.415-.056.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.789.624-6.479 0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg> Bluesky</a>
-                    <span class="card-sep" aria-hidden="true">&middot;</span>
-                    <a href="https://x.com/quallaexplores" class="card-link" title="@quallaexplores" aria-label="X: @quallaexplores"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
-                    <span class="card-sep" aria-hidden="true">&middot;</span>
-                    <a href="https://qualla.com/#apps-links" class="card-link">More apps</a>
-                </div>
-            </div>
+            <ol class="video-playlist" aria-label="Latest Bendyline videos">
+                <li>
+                    <a href="https://www.youtube-nocookie.com/embed/LXrqys9I8_I?autoplay=1&amp;playlist=vzk9LDl5ZDQ,wLyMngs8Hw0" target="bendyline-player">
+                        <img src="https://i.ytimg.com/vi/LXrqys9I8_I/hqdefault.jpg" alt="" loading="lazy">
+                        <span><span class="video-playlist-title">Introduction to Gezel</span><span class="video-playlist-duration">13:17</span></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.youtube-nocookie.com/embed/vzk9LDl5ZDQ?autoplay=1&amp;playlist=wLyMngs8Hw0" target="bendyline-player">
+                        <img src="https://i.ytimg.com/vi/vzk9LDl5ZDQ/hqdefault.jpg" alt="" loading="lazy">
+                        <span><span class="video-playlist-title">All About DocBlocks</span><span class="video-playlist-duration">10:22</span></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.youtube-nocookie.com/embed/wLyMngs8Hw0?autoplay=1" target="bendyline-player">
+                        <img src="https://i.ytimg.com/vi/wLyMngs8Hw0/hqdefault.jpg" alt="" loading="lazy">
+                        <span><span class="video-playlist-title">Let’s begin.</span><span class="video-playlist-duration">5:01</span></span>
+                    </a>
+                </li>
+            </ol>
+            <a href="https://www.youtube.com/@bendyline" class="card-link video-channel-link">View the Bendyline channel on YouTube</a>
+        </aside>
         </div>
     </main>
 
@@ -363,7 +491,7 @@
         "url": "https://bendyline.com",
         "logo": "https://bendyline.com/assets/bendylinelogo_t.png",
         "email": "support@bendyline.com",
-        "sameAs": ["https://qualla.com", "https://squigglysquare.com", "https://docblocks.com"]
+        "sameAs": ["https://gezel.com", "https://qualla.com", "https://squigglysquare.com", "https://docblocks.com"]
     }
     </script>
     <footer>
