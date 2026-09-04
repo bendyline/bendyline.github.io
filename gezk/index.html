@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gezk &middot; Bendyline</title>
+    <meta name="description" content="gezk is an open format for knowledge catalogs: reference documents with full-text and vector indexes in a single portable file. JSON Schemas and specification.">
+    <link rel="canonical" href="https://bendyline.com/gezk/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="gezk &middot; Bendyline">
+    <meta property="og:description" content="An open format for knowledge catalogs: reference documents with full-text and vector indexes in a single portable file.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bendyline.com/gezk/">
+    <meta property="og:image" content="https://bendyline.com/assets/bendylinelogo_t.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="gezk &middot; Bendyline">
+    <meta name="twitter:description" content="An open format for knowledge catalogs: reference documents with full-text and vector indexes in a single portable file.">
+    <meta name="twitter:image" content="https://bendyline.com/assets/bendylinelogo_t.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #3a3a3a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 3rem 1.5rem 2rem;
+            background: linear-gradient(135deg, #faf8f5 0%, #f0ebe4 100%);
+        }
+
+        .bendyline-logo {
+            width: 180px;
+            max-width: 50vw;
+            height: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-home {
+            align-self: flex-start;
+            color: #8a7d74;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-home:hover {
+            color: #5c4a3a;
+            text-decoration: underline;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #3a3a3a;
+            margin-bottom: 0.5rem;
+        }
+
+        .version-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: #8a7d74;
+            border: 1px solid #d8cec4;
+            border-radius: 4px;
+            padding: 0.15rem 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-intro {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #8a7d74;
+            max-width: 620px;
+            margin-bottom: 2.5rem;
+        }
+
+        .panel {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(58, 48, 40, 0.10);
+            padding: 2rem 2.5rem;
+            width: 100%;
+            max-width: 780px;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .panel h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #3a3a3a;
+            margin-bottom: 0.4rem;
+        }
+
+        .panel p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #8a7d74;
+            margin-bottom: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th {
+            text-align: left;
+            font-weight: 600;
+            color: #5c4a3a;
+            border-bottom: 1px solid #e6ddd4;
+            padding: 0 0 0.6rem;
+        }
+
+        td {
+            border-bottom: 1px solid #f0ebe4;
+            padding: 0.7rem 0;
+            vertical-align: top;
+            color: #8a7d74;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        td:first-child {
+            padding-right: 1.5rem;
+            white-space: nowrap;
+        }
+
+        td a {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.85rem;
+            color: #5c4a3a;
+            text-decoration: none;
+        }
+
+        td a:hover {
+            text-decoration: underline;
+        }
+
+        .visit-btn {
+            display: inline-block;
+            padding: 0.75rem 2.2rem;
+            background-color: #5c4a3a;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            transition: background-color 0.2s ease;
+        }
+
+        .visit-btn:hover {
+            background-color: #7a6455;
+        }
+
+        .note {
+            font-size: 0.85rem;
+            color: #a0938a;
+            max-width: 620px;
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            background-color: #3a3028;
+            color: #c5bab0;
+            text-align: center;
+            padding: 1rem 1.5rem;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        footer a {
+            color: #e0d6cc;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 620px) {
+            .panel {
+                padding: 1.5rem 1.25rem;
+            }
+
+            td:first-child {
+                white-space: normal;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="hero">
+        <a href="/" class="back-home">&larr; Home</a>
+        <header>
+            <a href="/"><img src="../assets/bendylinelogo_t.png" alt="Bendyline" class="bendyline-logo"></a>
+        </header>
+
+        <h1 class="page-title">gezk</h1>
+        <span class="version-badge">VERSION 0.5 &middot; PRELIMINARY</span>
+        <p class="page-intro">
+            An open format for <strong>knowledge catalogs</strong>. A <code>.gezk</code> file is a
+            portable, read-only body of reference documents with full-text and vector indexes,
+            shipped as one file that any reader can search, cite and browse offline. It is built
+            from parts that already exist everywhere &mdash; ZIP, SQLite, JSON, brotli, Ed25519
+            &mdash; so a reader needs no vector-database extension, and no tie to any one product.
+        </p>
+
+        <div class="panel">
+            <h2>JSON Schemas</h2>
+            <p>
+                These URLs are the <code>$id</code> of each schema. They are generated from the
+                reference implementation, so they follow the specification rather than the other
+                way round. Refinements JSON Schema cannot express &mdash; NFC normalization of
+                document ids, the reserved-name rule on versions &mdash; are enforced by conforming
+                readers on top of these files. The path carries the format version, so a later
+                line never overwrites what catalogs published under 0.5 point at.
+            </p>
+            <table>
+                <thead>
+                    <tr><th>Schema</th><th>Validates</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="0.5/schemas/catalog-manifest.schema.json">catalog-manifest</a></td>
+                        <td><code>manifest.json</code> inside a <code>.gezk</code> archive</td>
+                    </tr>
+                    <tr>
+                        <td><a href="0.5/schemas/registry-index.schema.json">registry-index</a></td>
+                        <td>A publisher&rsquo;s registry <code>index.json</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="0.5/schemas/source-notices.schema.json">source-notices</a></td>
+                        <td><code>LICENSES/source-notices.json</code></td>
+                    </tr>
+                    <tr>
+                        <td><a href="0.5/schemas/embedding-profile.schema.json">embedding-profile</a></td>
+                        <td>The <code>embedding</code> block of a manifest</td>
+                    </tr>
+                    <tr>
+                        <td><a href="0.5/schemas/chunking-profile.schema.json">chunking-profile</a></td>
+                        <td>The <code>chunking</code> block of a manifest</td>
+                    </tr>
+                    <tr>
+                        <td><a href="0.5/schemas/catalog-document.schema.json">catalog-document</a></td>
+                        <td>One normalized document fed to a compiler</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="note">
+            The specification, the conformance kit every implementation is held to, and a
+            reference reader in Python live in the gezk repository. The specification is
+            licensed CC&nbsp;BY&nbsp;4.0; the code, schemas and conformance kit are MIT.
+        </p>
+
+        <a href="https://github.com/bendyline/gezk" class="visit-btn">gezk on GitHub</a>
+    </main>
+
+    <footer>
+        <span>&copy; 2026 Bendyline LLC</span>
+        <span><a href="/support/">Support</a></span>
+        <span><a href="/privacy/">Privacy</a></span>
+        <span><a href="mailto:support@bendyline.com">support@bendyline.com</a></span>
+    </footer>
+</body>
+</html>
