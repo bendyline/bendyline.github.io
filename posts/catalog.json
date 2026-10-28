@@ -1,0 +1,99 @@
+{
+  "generator": "docblocks-workspace-catalog",
+  "version": 1,
+  "title": "Documents",
+  "documents": [
+    {
+      "path": "allaboutlocalmodels.html",
+      "source": "allaboutlocalmodels_files/allaboutlocalmodels.md",
+      "format": "html",
+      "title": "Everything You Need to Know about Local Models",
+      "outline": [
+        {
+          "level": 2,
+          "title": "Everything You Need to Know about Local Models"
+        },
+        {
+          "level": 3,
+          "title": "What's in a model name"
+        },
+        {
+          "level": 3,
+          "title": "Qwen 3.5 2B"
+        },
+        {
+          "level": 3,
+          "title": "Qwen 3.5 4B"
+        },
+        {
+          "level": 3,
+          "title": "Qwen 3.5 9B"
+        },
+        {
+          "level": 3,
+          "title": "Qwen 3.5 27B"
+        },
+        {
+          "level": 3,
+          "title": "Gemma 4 E4B"
+        },
+        {
+          "level": 3,
+          "title": "Gemma 4 31B"
+        }
+      ],
+      "wordCount": 2373,
+      "excerpt": "Take, for example, \"Qwen 3.6 35B-A3B-Q4\"."
+    },
+    {
+      "path": "introducingknowledge.html",
+      "source": "introducingknowledge_files/introducingknowledge.md",
+      "format": "html",
+      "title": "Gezel and Knowledge",
+      "outline": [
+        {
+          "level": 1,
+          "title": "Gezel and Knowledge"
+        },
+        {
+          "level": 3,
+          "title": "What is in a Model's Brain?"
+        },
+        {
+          "level": 3,
+          "title": "How Much Knowledge Actually Fits In There?"
+        },
+        {
+          "level": 3,
+          "title": "RAG: Giving the Model a Notebook"
+        },
+        {
+          "level": 3,
+          "title": "Pre-Packaged Web Search"
+        },
+        {
+          "level": 3,
+          "title": "Gezel's Knowledge System"
+        },
+        {
+          "level": 4,
+          "title": "Seeing this in action"
+        },
+        {
+          "level": 4,
+          "title": "Pre-built knowledge catalogs"
+        },
+        {
+          "level": 4,
+          "title": "Bring your own catalog"
+        },
+        {
+          "level": 3,
+          "title": "Bonus: the knowledge browser!"
+        }
+      ],
+      "wordCount": 1830,
+      "excerpt": "We're going to talk a little bit about indexing, knowledge, and how to improve the performance of models running locally on your devices."
+    }
+  ]
+}
