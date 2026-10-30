@@ -1,55 +1,16 @@
 {
   "generator": "docblocks-workspace-catalog",
   "version": 1,
-  "title": "Documents",
+  "title": "Bendyline Blog",
   "documents": [
-    {
-      "path": "allaboutlocalmodels.html",
-      "source": "allaboutlocalmodels_files/allaboutlocalmodels.md",
-      "format": "html",
-      "title": "Everything You Need to Know about Local Models",
-      "outline": [
-        {
-          "level": 2,
-          "title": "Everything You Need to Know about Local Models"
-        },
-        {
-          "level": 3,
-          "title": "What's in a model name"
-        },
-        {
-          "level": 3,
-          "title": "Qwen 3.5 2B"
-        },
-        {
-          "level": 3,
-          "title": "Qwen 3.5 4B"
-        },
-        {
-          "level": 3,
-          "title": "Qwen 3.5 9B"
-        },
-        {
-          "level": 3,
-          "title": "Qwen 3.5 27B"
-        },
-        {
-          "level": 3,
-          "title": "Gemma 4 E4B"
-        },
-        {
-          "level": 3,
-          "title": "Gemma 4 31B"
-        }
-      ],
-      "wordCount": 2373,
-      "excerpt": "Take, for example, \"Qwen 3.6 35B-A3B-Q4\"."
-    },
     {
       "path": "introducingknowledge.html",
       "source": "introducingknowledge_files/introducingknowledge.md",
       "format": "html",
       "title": "Gezel and Knowledge",
+      "date": "2026-10-28",
+      "firstPublishedDate": "2026-10-28T18:46:42Z",
+      "lastModifiedDate": "2026-10-29T02:19:10Z",
       "outline": [
         {
           "level": 1,
@@ -90,10 +51,142 @@
         {
           "level": 3,
           "title": "Bonus: the knowledge browser!"
+        },
+        {
+          "level": 3,
+          "title": "Summary"
         }
       ],
-      "wordCount": 1830,
-      "excerpt": "We're going to talk a little bit about indexing, knowledge, and how to improve the performance of models running locally on your devices."
+      "wordCount": 2056,
+      "excerpt": "We're going to talk a little bit about indexing, knowledge, and how to improve the performance of models running locally on your devices.",
+      "contentHash": "a4d09125377ebd54373041899024abb848e118471249c1369f80acfc7dd39ed8"
+    },
+    {
+      "path": "allaboutlocalmodels.html",
+      "source": "allaboutlocalmodels_files/allaboutlocalmodels.md",
+      "format": "html",
+      "title": "Everything You Need to Know about Local Models",
+      "date": "2026-10-27",
+      "firstPublishedDate": "2026-10-27",
+      "lastModifiedDate": "2026-10-30T04:06:42Z",
+      "outline": [
+        {
+          "level": 2,
+          "title": "Everything You Need to Know about Local Models"
+        },
+        {
+          "level": 3,
+          "title": "So what's in a model name?"
+        },
+        {
+          "level": 3,
+          "title": "What do models know?"
+        },
+        {
+          "level": 4,
+          "title": "Qwen 3.5 2B"
+        },
+        {
+          "level": 4,
+          "title": "Qwen 3.5 4B"
+        },
+        {
+          "level": 4,
+          "title": "Qwen 3.5 9B"
+        },
+        {
+          "level": 4,
+          "title": "Qwen 3.5 27B"
+        },
+        {
+          "level": 4,
+          "title": "Gemma 4 E4B"
+        },
+        {
+          "level": 4,
+          "title": "Gemma 4 31B"
+        },
+        {
+          "level": 3,
+          "title": "Quantization"
+        },
+        {
+          "level": 4,
+          "title": "Mixture of Experts Models"
+        },
+        {
+          "level": 3,
+          "title": "What does this mean for hardware?"
+        },
+        {
+          "level": 4,
+          "title": "So what should you use?"
+        },
+        {
+          "level": 4,
+          "title": "What should you buy?"
+        }
+      ],
+      "wordCount": 3841,
+      "excerpt": "The ideal is that you should never need to know much about local AI models. Apps like Gezel try to, or should try to, autoselect the best possible model for you. But if you're curious, or experimenting, you may want to know a bit more about AI models. You'll want to visit…",
+      "contentHash": "e0452c1970140ea582a76a652f4c90eb75d9e7c3cf73a5f6e4a49a531ae860ea"
+    },
+    {
+      "path": "howdocblocksusesgezelasanapi.html",
+      "source": "howdocblocksusesgezelasanapi_files/howdocblocksusesgezelasanapi.md",
+      "format": "html",
+      "title": "DocBlocks and how Gezel works as an API",
+      "firstPublishedDate": "2026-10-29T02:19:10Z",
+      "lastModifiedDate": "2026-10-29T22:07:14Z",
+      "outline": [
+        {
+          "level": 2,
+          "title": "DocBlocks and how Gezel works as an API"
+        },
+        {
+          "level": 3,
+          "title": "The Background"
+        },
+        {
+          "level": 3,
+          "title": "Squiggly Square: Core content engine"
+        },
+        {
+          "level": 3,
+          "title": "Adding speech to text (dictation) and text to speech (narration)"
+        },
+        {
+          "level": 3,
+          "title": "Enter AI"
+        },
+        {
+          "level": 3,
+          "title": "How it looks"
+        },
+        {
+          "level": 3,
+          "title": "Gezel as an AI API"
+        },
+        {
+          "level": 3,
+          "title": "Knowledge in action"
+        },
+        {
+          "level": 3,
+          "title": "The Downsides"
+        },
+        {
+          "level": 3,
+          "title": "The Implications"
+        },
+        {
+          "level": 3,
+          "title": "Summary"
+        }
+      ],
+      "wordCount": 1848,
+      "excerpt": "DocBlocks started off as a simple markdown editor, but the vision has always been to let you do more with your content. Convert to video. Save off web pages. Produce slideshows. Quiz via flashcard. Act as a teleprompter. Write a blog post that saves as HTML, like I'm doing now.…",
+      "contentHash": "d595ca557a0fd8170a5a9df073e28b2b23a87d9f7606a4209f8dfa93bca82ddf"
     }
   ]
 }

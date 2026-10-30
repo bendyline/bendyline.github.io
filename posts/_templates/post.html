@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!-- A Bendyline blog post. DocBlocks generates each posts/*.html page through
+     posts/_templates/post.html: edit that template or the post's Markdown,
+     not the generated page. -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><slot name="title">Post title</slot> &middot; Bendyline</title>
+    <meta name="description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
+    <link rel="icon" href="/assets/bendyline128.png">
+    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/post.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Bendyline Blog">
+    <meta property="og:description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Bendyline">
+    <meta property="og:image" content="https://bendyline.com/assets/bendylinelogo_t.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Bendyline Blog">
+    <meta name="twitter:description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
+    <meta name="twitter:image" content="https://bendyline.com/assets/bendylinelogo_t.png">
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="/"><img src="/assets/bendyline-wordmark.webp" alt="Bendyline home" width="480" height="323"></a>
+            <nav class="site-nav" aria-label="Main">
+                <a class="nav-section" href="/#products">Products</a>
+                <a class="nav-section" href="/#open-source">Open source</a>
+                <a href="/blog/">Blog</a>
+                <a href="/support/">Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <article class="post-article">
+            <div class="wrap wrap--prose">
+                <div class="post-intro">
+                    <a class="eyebrow post-eyebrow" href="/blog/">Blog</a>
+                    <p class="post-dateline">
+                        <time data-post-date><slot name="date"></slot></time>
+                        <span class="post-reading" data-post-reading></span>
+                    </p>
+                </div>
+
+                <div class="post-body" data-post-body>
+                    <slot>
+                        <h1>A sample post title</h1>
+                        <p>This is the page template for Bendyline blog posts. When DocBlocks saves a post, its content replaces this sample, the post's title fills the page title, and the dateline above shows the date the blog catalog first published it.</p>
+                        <h2>Writing a post</h2>
+                        <p>Start a post with a heading; the first heading is styled as the title. Everything after it is ordinary Markdown: <strong>bold</strong>, <em>emphasis</em>, <a href="/blog/">links</a>, lists, tables, quotes, code, images, and embedded videos.</p>
+                        <blockquote><p>Honest free software. Hopefully it makes the world a little better.</p></blockquote>
+                        <ul>
+                            <li>Shared chrome lives here, in one place.</li>
+                            <li>Post styles live in <code>/assets/post.css</code>.</li>
+                        </ul>
+                        <pre><code>squisq-output-template: /_templates/post.html</code></pre>
+                    </slot>
+                </div>
+            </div>
+
+            <footer class="wrap wrap--prose post-end">
+                <p class="post-end-note">Thanks for reading. More notes from the workshop are on the blog.</p>
+                <a class="btn btn--ghost" href="/blog/">&larr; All posts</a>
+            </footer>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap footer-grid">
+            <div class="footer-brand">
+                <img src="/assets/bendyline-wordmark.webp" alt="Bendyline" width="480" height="323" loading="lazy">
+                <p>Honest free software. Hopefully it makes the world a little better.</p>
+            </div>
+            <nav aria-labelledby="footer-products">
+                <h2 id="footer-products">Products</h2>
+                <ul>
+                    <li><a href="https://gezel.com">Gezel</a></li>
+                    <li><a href="https://gezel.com/docs/npm-packages/">Gezel Platform</a></li>
+                    <li><a href="https://docblocks.com">DocBlocks</a></li>
+                    <li><a href="https://qualla.com">Qualla</a></li>
+                </ul>
+            </nav>
+            <nav aria-labelledby="footer-open-source">
+                <h2 id="footer-open-source">Open source</h2>
+                <ul>
+                    <li><a href="https://squigglysquare.com">Squiggly Square</a></li>
+                    <li><a href="https://molen.dev">Molen</a></li>
+                    <li><a href="/gezk/">gezk format</a></li>
+                    <li><a href="https://github.com/bendyline">GitHub</a></li>
+                </ul>
+            </nav>
+            <nav aria-labelledby="footer-company">
+                <h2 id="footer-company">Company</h2>
+                <ul>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/support/">Support</a></li>
+                    <li><a href="/privacy/">Privacy</a></li>
+                    <li><a href="https://www.youtube.com/@bendyline">YouTube</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="wrap footer-base">
+            <span>&copy; 2026 Bendyline LLC</span>
+            <a href="mailto:support@bendyline.com">support@bendyline.com</a>
+        </div>
+    </footer>
+
+    <script>
+        // Fill the dateline and reading time from the same catalog entry the blog
+        // list reads, so the two always agree. The dateline uses the catalog's
+        // firstPublishedDate; without JavaScript, or until the catalog loads, the
+        // post's `date` frontmatter shows instead.
+        (function () {
+            const time = document.querySelector("[data-post-date]");
+            const reading = document.querySelector("[data-post-reading]");
+
+            // Formats like the blog list ("October 28, 2026"): a bare date is a
+            // calendar day; a timestamp is shown in the reader's time zone.
+            function showDate(value) {
+                const day = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+                const date = day ? new Date(Date.UTC(+day[1], +day[2] - 1, +day[3])) : new Date(value);
+                if (!time || Number.isNaN(date.getTime())) return;
+                time.dateTime = value;
+                time.textContent = date.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    timeZone: day ? "UTC" : undefined,
+                });
+                time.hidden = false;
+            }
+
+            if (time) {
+                const written = time.textContent.trim();
+                time.hidden = !written;
+                if (written) showDate(written);
+            }
+
+            const catalogUrl = new URL("/posts/catalog.json", location.href);
+            fetch(catalogUrl)
+                .then((response) => (response.ok ? response.json() : null))
+                .then((catalog) => {
+                    const entry = ((catalog && catalog.documents) || []).find(
+                        (item) => new URL(item.path, catalogUrl).pathname === location.pathname,
+                    );
+                    if (!entry) return;
+                    if (entry.firstPublishedDate) showDate(entry.firstPublishedDate);
+                    if (reading && entry.wordCount) {
+                        reading.textContent = `${Math.max(1, Math.round(entry.wordCount / 225))} min read`;
+                    }
+                })
+                .catch(() => {});
+        })();
+    </script>
+</body>
+</html>

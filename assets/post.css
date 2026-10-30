@@ -1,0 +1,312 @@
+/* Blog post pages. DocBlocks generates /posts/*.html through
+   posts/_templates/post.html, which loads site.css and then this file.
+   Post content is plain semantic HTML (plus a few squisq-* blocks whose
+   layout DocBlocks supplies), so everything is styled under .post-body. */
+
+.wrap--prose {
+    max-width: calc(720px + 2 * var(--gutter));
+}
+
+/* ---------- Article frame ---------- */
+
+.post-article {
+    padding-bottom: 72px;
+    background:
+        radial-gradient(ellipse 45% 420px at 92% 0%, var(--sun-soft), transparent 70%),
+        linear-gradient(180deg, var(--cream) 0, var(--sand) 160px, var(--paper) 460px);
+}
+
+.post-intro {
+    padding-top: 56px;
+}
+
+.post-eyebrow {
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+}
+
+.post-eyebrow:hover {
+    color: var(--brand-hover);
+}
+
+.post-dateline {
+    margin-bottom: 1.25rem;
+    font-size: 0.92rem;
+    color: var(--muted);
+}
+
+.post-dateline time:empty,
+.post-dateline time[hidden] {
+    display: none;
+}
+
+.post-dateline time:not(:empty):not([hidden]) + .post-reading:not(:empty)::before {
+    content: " · ";
+}
+
+/* ---------- Content ---------- */
+
+.post-body {
+    font-size: 1.08rem;
+    line-height: 1.75;
+    color: var(--ink);
+    overflow-wrap: break-word;
+}
+
+.post-body > :first-child {
+    margin-top: 0;
+}
+
+/* A post opens with its own heading: that is the page title. (The slot
+   selectors style the sample when the template itself is opened.) */
+.post-body > h1:first-child,
+.post-body > h2:first-child,
+.post-body > slot > h1:first-child {
+    font-size: clamp(2.2rem, 4.6vw, 3.2rem);
+    line-height: 1.08;
+    margin-bottom: 2rem;
+}
+
+.post-body h1 {
+    font-size: 2.3rem;
+    margin: 3rem 0 1rem;
+}
+
+.post-body h2 {
+    font-size: 1.85rem;
+    margin: 2.75rem 0 0.9rem;
+}
+
+.post-body h3 {
+    font-size: 1.4rem;
+    margin: 2.25rem 0 0.7rem;
+}
+
+.post-body h4,
+.post-body h5,
+.post-body h6 {
+    margin: 1.75rem 0 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.post-body p,
+.post-body ul,
+.post-body ol,
+.post-body blockquote,
+.post-body pre,
+.post-body table,
+.post-body figure {
+    margin-bottom: 1.35rem;
+}
+
+.post-body ul,
+.post-body ol {
+    padding-left: 1.5rem;
+}
+
+.post-body li + li {
+    margin-top: 0.4rem;
+}
+
+.post-body li > ul,
+.post-body li > ol {
+    margin: 0.4rem 0 0;
+}
+
+/* Loose lists wrap each item in a paragraph; keep items together. */
+.post-body li > p {
+    margin-bottom: 0.4rem;
+}
+
+.post-body li > p:last-child {
+    margin-bottom: 0;
+}
+
+.post-body li + li {
+    margin-top: 0.6rem;
+}
+
+.post-body li::marker {
+    color: var(--brand);
+}
+
+.post-body a {
+    color: var(--brand);
+    text-decoration: underline;
+    text-decoration-color: var(--sun);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+.post-body a:hover {
+    color: var(--brand-hover);
+}
+
+.post-body strong {
+    font-weight: 650;
+}
+
+.post-body img {
+    margin: 2rem auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow);
+}
+
+.post-body blockquote {
+    padding: 0.35rem 0 0.35rem 1.4rem;
+    border-left: 4px solid var(--sun);
+    font-family: var(--font-serif);
+    font-size: 1.18rem;
+    font-style: italic;
+    color: var(--ink-soft);
+}
+
+.post-body blockquote > :last-child {
+    margin-bottom: 0;
+}
+
+.post-body hr {
+    margin: 3rem 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+}
+
+/* ---------- Code ---------- */
+
+.post-body code {
+    padding: 0.12em 0.4em;
+    border-radius: 5px;
+    background: var(--sand);
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+}
+
+.post-body pre {
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    border-radius: var(--radius-sm);
+    background: var(--code-bg);
+    color: var(--code-ink);
+    font-size: 0.9rem;
+    line-height: 1.65;
+}
+
+.post-body pre code {
+    padding: 0;
+    background: none;
+    color: inherit;
+    font-size: inherit;
+}
+
+/* ---------- Tables ---------- */
+
+/* Scroll a wide table sideways rather than stretching the page. */
+.post-body table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.post-body th,
+.post-body td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+}
+
+.post-body th {
+    border-bottom: 2px solid var(--line-strong);
+    background: var(--cream);
+    font-weight: 600;
+}
+
+/* ---------- DocBlocks blocks ---------- */
+
+/* Feature sections (an image beside text) and video embeds get their layout
+   from DocBlocks; these only fit them to the column. */
+.post-body .squisq-feature {
+    margin: 2.25rem 0;
+}
+
+.post-body .squisq-feature__media img {
+    margin: 0;
+}
+
+.post-body .squisq-video-embed {
+    max-width: none;
+    margin: 2rem 0;
+}
+
+.post-body .squisq-video-embed-frame {
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow);
+}
+
+.post-body .squisq-svg-island img {
+    border: 0;
+    box-shadow: none;
+}
+
+.post-body .squisq-footnotes {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+}
+
+.post-body .squisq-footnote-ref a,
+.post-body .squisq-footnote-backref {
+    text-decoration: none;
+}
+
+/* ---------- End of post ---------- */
+
+.post-end {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 1.5rem;
+    margin-top: 3.5rem;
+}
+
+.post-end::before {
+    content: "";
+    flex-basis: 100%;
+    border-top: 1px solid var(--line);
+    margin-bottom: 1.5rem;
+}
+
+.post-end-note {
+    color: var(--ink-soft);
+}
+
+@media (max-width: 720px) {
+    .post-intro {
+        padding-top: 36px;
+    }
+
+    .post-body {
+        font-size: 1.02rem;
+    }
+
+    .post-body > h1:first-child,
+    .post-body > h2:first-child {
+        margin-bottom: 1.5rem;
+    }
+
+    .post-body pre {
+        margin-left: calc(-1 * var(--gutter));
+        margin-right: calc(-1 * var(--gutter));
+        border-radius: 0;
+    }
+}
