@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- docblocks-workspace-catalog v1 inputs=sha256:950ac32cd24b1a45403029f2469f293d3cb211232c48e57eeb5b4468099b7fd2 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bendyline Blog</title>
+<style>
+  :root { color-scheme: light; }
+  body { font-family: system-ui, -apple-system, sans-serif; max-width: 800px; margin: 2em auto; padding: 0 1em; line-height: 1.6; color: #1f2937; background: #fff; }
+  h1, h2, h3, h4, h5, h6 { margin-top: 1.5em; margin-bottom: 0.5em; }
+  pre { background: #f3f4f6; padding: 1em; border-radius: 4px; overflow-x: auto; }
+  code { background: #f3f4f6; padding: 0.15em 0.3em; border-radius: 3px; font-size: 0.9em; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 3px solid #d1d5db; margin-left: 0; padding-left: 1em; color: #6b7280; }
+  /* Images: cap at the container width so nothing overflows, but only
+     force aspect-ratio height when the author didn't set explicit
+     dimensions on the \3c img> tag. The WYSIWYG editor writes width/height
+     attributes after a resize — overriding them here would silently
+     ignore the user's sizing. */
+  img { max-width: 100%; }
+  img:not([width]):not([height]) { height: auto; }
+  a { color: #3b82f6; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+  th, td { border: 1px solid #d1d5db; padding: 6px 10px; text-align: left; }
+  th { background: #f3f4f6; font-weight: 600; }
+  hr { border: none; border-top: 1px solid #d1d5db; margin: 1.5em 0; }
+  .squisq-feature {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    align-items: center;
+    margin: 1.75em 0;
+  }
+  .squisq-feature--right { flex-direction: row-reverse; }
+  .squisq-feature__media {
+    flex: 0 0 42%;
+    min-width: 0;
+  }
+  .squisq-feature__media--empty { display: none; }
+  /* Default: image fills the media column. */
+  .squisq-feature__media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+  }
+  /* "Sized" media: the image carried explicit width/height attrs (the
+     WYSIWYG editor wrote them after a resize). Honor the attribute
+     values and center the image inside the media column with padding. */
+  .squisq-feature__media--sized {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    box-sizing: border-box;
+  }
+  /* Leave width and height untouched here -- the HTML attributes set
+     the intrinsic dimensions, and CSS overrides would silently discard
+     the author's sizing. max-width: 100% still keeps the image from
+     overflowing the column on narrow viewports; HTML5 derives the
+     aspect ratio from the width/height pair so the scale stays right. */
+  .squisq-feature__media--sized img {
+    max-width: 100%;
+    display: block;
+    border-radius: 6px;
+  }
+  .squisq-feature__body {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .squisq-feature__body > :first-child { margin-top: 0; }
+  .squisq-feature__body > :last-child { margin-bottom: 0; }
+  @media (max-width: 600px) {
+    .squisq-feature, .squisq-feature--right { flex-direction: column; }
+    .squisq-feature__media { flex-basis: auto; width: 100%; }
+  }
+</style>
+</head>
+<body>
+<h1>Bendyline Blog</h1>
+<ul><li><p><a href="introducingknowledge.html">Gezel and Knowledge</a> · 2026-10-28 — We're going to talk a little bit about indexing, knowledge, and how to improve the performance of models running locally on your devices.</p></li><li><p><a href="allaboutlocalmodels.html">Everything You Need to Know about Local Models</a> · 2026-10-27 — The ideal is that you should never need to know much about local AI models. Apps like Gezel try to, or should try to, autoselect the best possible model for you. But if you're curious, or experimenting, you may want to know a bit more about AI models. You'll want to visit…</p></li><li><p><a href="howdocblocksusesgezelasanapi.html">DocBlocks and how Gezel works as an API</a> — DocBlocks started off as a simple markdown editor, but the vision has always been to let you do more with your content. Convert to video. Save off web pages. Produce slideshows. Quiz via flashcard. Act as a teleprompter. Write a blog post that saves as HTML, like I'm doing now.…</p></li></ul>
+</body>
+</html>

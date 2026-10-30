@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!-- A Bendyline blog post. DocBlocks generates each posts/*.html page through
+     posts/_templates/post.html: edit that template or the post's Markdown,
+     not the generated page. -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everything You Need to Know about Local Models &middot; Bendyline</title>
+    <meta name="description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
+    <link rel="icon" href="/assets/bendyline128.png">
+    <style data-squisq>
+  .squisq-feature {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    align-items: center;
+    margin: 1.75em 0;
+  }
+  .squisq-feature--right { flex-direction: row-reverse; }
+  .squisq-feature__media {
+    flex: 0 0 42%;
+    min-width: 0;
+  }
+  .squisq-feature__media--empty { display: none; }
+  /* Default: image fills the media column. */
+  .squisq-feature__media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+  }
+  /* "Sized" media: the image carried explicit width/height attrs (the
+     WYSIWYG editor wrote them after a resize). Honor the attribute
+     values and center the image inside the media column with padding. */
+  .squisq-feature__media--sized {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    box-sizing: border-box;
+  }
+  /* Leave width and height untouched here -- the HTML attributes set
+     the intrinsic dimensions, and CSS overrides would silently discard
+     the author's sizing. max-width: 100% still keeps the image from
+     overflowing the column on narrow viewports; HTML5 derives the
+     aspect ratio from the width/height pair so the scale stays right. */
+  .squisq-feature__media--sized img {
+    max-width: 100%;
+    display: block;
+    border-radius: 6px;
+  }
+  .squisq-feature__body {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .squisq-feature__body > :first-child { margin-top: 0; }
+  .squisq-feature__body > :last-child { margin-bottom: 0; }
+  @media (max-width: 600px) {
+    .squisq-feature, .squisq-feature--right { flex-direction: column; }
+    .squisq-feature__media { flex-basis: auto; width: 100%; }
+  }
+  .squisq-video-embed { display: block; max-width: 720px; margin: 1.25em 0; }
+  .squisq-video-embed[data-orientation="portrait"] { max-width: 340px; }
+  .squisq-video-embed-frame { position: relative; display: block; overflow: hidden; border-radius: 6px; background: #000; }
+  .squisq-video-embed-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .squisq-video-embed-poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .squisq-video-embed-play { position: absolute; left: 50%; top: 50%; width: 64px; height: 44px; margin: -22px 0 0 -32px; border-radius: 12px; background: rgba(0, 0, 0, 0.72); }
+  .squisq-video-embed-play::after { content: ''; position: absolute; left: 26px; top: 12px; border-style: solid; border-width: 10px 0 10px 16px; border-color: transparent transparent transparent #fff; }
+  .squisq-video-embed-provider { position: absolute; left: 12px; bottom: 10px; color: #fff; font-size: 0.8em; font-weight: 600; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); }
+  .squisq-video-embed-caption { margin-top: 0.4em; font-size: 0.875em; opacity: 0.8; }
+</style>
+<link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/post.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Everything You Need to Know about Local Models">
+    <meta property="og:description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Bendyline">
+    <meta property="og:image" content="https://bendyline.com/posts/allaboutlocalmodels_files/og-image.png?v=73c5d306">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Everything You Need to Know about Local Models">
+    <meta name="twitter:description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
+    <meta name="twitter:image" content="https://bendyline.com/posts/allaboutlocalmodels_files/og-image.png?v=73c5d306">
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="/"><img src="/assets/bendyline-wordmark.webp" alt="Bendyline home" width="480" height="323"></a>
+            <nav class="site-nav" aria-label="Main">
+                <a class="nav-section" href="/#products">Products</a>
+                <a class="nav-section" href="/#open-source">Open source</a>
+                <a href="/blog/">Blog</a>
+                <a href="/support/">Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <article class="post-article">
+            <div class="wrap wrap--prose">
+                <div class="post-intro">
+                    <a class="eyebrow post-eyebrow" href="/blog/">Blog</a>
+                    <p class="post-dateline">
+                        <time data-post-date>2026-10-27</time>
+                        <span class="post-reading" data-post-reading></span>
+                    </p>
+                </div>
+
+                <div class="post-body" data-post-body>
+                    <!-- squisq:content -->
+<h2>Everything You Need to Know about Local Models</h2>
+<p>The ideal is that you should never need to know much about local AI models. Apps like Gezel try to, or should try to, autoselect the best possible model for you. But if you're curious, or experimenting, you may want to know a bit more about AI models. You'll want to visit Hugging Face, an industry standard catalog of open models to see what's available.</p>
+<p>And when you're going AI model shopping, frequently you'll see that the model name acts like a product label to let you know its technical specs.</p>
+<p>First, it’s key to understand that AI models are categorized as “text-to-text,” “text-to-image” (generating an image from a prompt), or “text-to-video” (generating a video from a prompt). “Text to text” means you provide text, and it returns text—whether that’s a simple answer or something complex. When you see AI doing things, like editing files or sending emails, it's really as simple as a layer on top of text generation: an AI harness like Claude instructs the model to generate formatted sentences (“tools”), and the system executes those commands and delivers the results.</p>
+<p>So, the AI industry boils down to this: you input questions or prompts, the AI model returns some text sentences, and software that wraps that model (a "harness") runs commands based on those sentences.</p>
+<figure class="squisq-video-embed" data-provider="youtube" data-orientation="landscape"><span class="squisq-video-embed-frame" style="aspect-ratio: 16 / 9"><iframe src="https://www.youtube-nocookie.com/embed/gMUBHnmHdyc" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy"></iframe></span></figure>
+<h3>So what's in a model name?</h3>
+<p>Take, for example, "Qwen 3.6 35B-A3B-Q4".</p>
+<p><em>Qwen</em> is a family of models from Alibaba, and <em>Qwen 3.6</em> is a series that came out in April. The "35B" in the name tells you the model has 35 billion parameters, while "Q4" indicates it's been quantized to 4 bits. The "A3B" part is where things get interesting: it signals that this is a "Mixture of Experts (MoE)" model rather than a "Dense" one. Dense models push every token through all of their parameters, whereas MoE models only activate a subset of parameters for each token — in this case, just 3 billion out of the 35 billion are active at any given moment.</p>
+<p>Local AI models tend to be released in families. 2-4 models trained from a single source, on a consistent architecture, offered at different sizes. As an example, Qwen 3.5 release is one such family, and shows us how models can span a range of sizes for different roles. As an aside, note that every model is linked to its page on Hugging Face. Hugging Face (<a href="http://huggingface.co">huggingface.co</a>) is a website that hosts downloads of available open-source models (now owned by NVIDIA).</p>
+<p>Here is the range of models in Qwen 3.5:</p>
+<table><thead><tr><th>Model</th><th>Size</th><th>Hardware, Roughly</th><th>Tasks passed</th><th>Quality</th><th>Performance</th><th>Memory used</th></tr></thead><tbody><tr><td><a href="https://huggingface.co/Qwen/Qwen3.5-0.8B">qwen3.5-0.8b</a></td><td>0.8 billion parameters</td><td>Phone</td><td></td><td></td><td></td><td></td></tr><tr><td><a href="https://huggingface.co/Qwen/Qwen3.5-2B">qwen3.5-2b</a></td><td>2 billion parameters</td><td>Higher end phone</td><td>6/33 (18%)</td><td>2.7/10 (9 pieces)</td><td>203.3 tok/s output<br />7,605 tok/s prefill</td><td>5.1 GB</td></tr><tr><td><a href="https://huggingface.co/Qwen/Qwen3.5-4B">qwen3.5-4b</a></td><td>4 billion parameters</td><td>Low to Medium PC (no dedicated GPU)</td><td>16/33 (48%)</td><td>5.3/10 (9 pieces)</td><td>153 tok/s output<br />3,349 tok/s prefill</td><td>7.2 GB</td></tr><tr><td><a href="https://huggingface.co/Qwen/Qwen3.5-9B">qwen3.5-9b</a></td><td>9 billion parameters</td><td>Medium PC with dedicated GPU/Mac 16gb RAM</td><td>26/33 (79%)</td><td>5.3/10 (9 pieces)</td><td>122.9 tok/s output<br />2,143 tok/s prefill</td><td>8.9 GB</td></tr><tr><td><a href="https://huggingface.co/Qwen/Qwen3.5-27B">qwen3.5-27b</a></td><td>27 billion parameters</td><td>High End PC with dedicated GPU/Mac 24gb RAM</td><td>30/33 (91%)</td><td>6.4/10 (9 pieces)</td><td>55.9 tok/s output<br />656 tok/s prefill</td><td>22.2 GB</td></tr></tbody></table>
+<p><em>(performance measured on a Windows 11 Ryzen 7950X3D + AMD AI Pro 9700)</em></p>
+<p>Keep in mind that frontier (cloud) models like GPT4 are 1.8 trillion tokens, GLM 5.3 is ~744 billion, Kimi K3 is 2.8T.. so there is a huge size difference between models like ChatGPT's GPT 6.1 Sol and the model that runs on your device.</p>
+<p>As you look at this table, do notice that the pass rate of tests varies significantly between a model that can fit on your phone, to a model that can run on a higher end machine; it's the difference between 18% and 91%. Also, models have improved considerably in the past 6 months. But all this to say: even for hardware you personally own, the difference between your newest phone, which can run reasonable models, to a high-end PC (or gaming PC) - is considerable. And also: running local AI that can do things is as at least as within reach as a higher-end laptop or PC is (though unfortunately, all computer hardware is rapidly getting more expensive.)</p>
+<h3>What do models know?</h3>
+<p>Another way to look at this is to test how much models "know" by asking them a series of questions and seeing what they do, when you tell them they have no tools (they can't search the internet, etc.). They just have to recite what's in their brain... just like if I asked you to tell me everything you know about a topic, but took your phone away.</p>
+<p>And so I prompted Qwen 3.5 across a range of sizes:</p>
+<p><em>Without doing any research or using search tools, can you output a bulleted list of facts and everything in your knowledge about Issaquah, Washington to a file called "</em><a href="http://Issaquah.md"><em>Issaquah.md</em></a><em>"?</em></p>
+<p>Here is a summary of what the models said (<strong>bolded text</strong> may be inaccurate)</p>
+<h4><strong>Qwen 3.5 2B</strong></h4>
+<ul><li><p>Issaquah is a city in <strong>Pierce County, Washington, USA. It is located approximately 25 miles south of Seattle</strong> and <strong>about 17 miles east of Spokane.</strong></p></li><li><p>The city has a population of approximately <strong>109,873 residents as of the 2020 census.</strong></p></li><li><p>(Coordinates <strong>were for Seatac Airport</strong>)</p></li><li><p>Racial Composition: <strong>Approximately 68% White, 12% Asian, 9% Black or African American, 7% Hispanic or Latino</strong></p></li><li><p>Major Companies: <strong>Google (has a presence), Amazon</strong>, Microsoft, Boeing, <strong>and various healthcare organizations</strong></p></li><li><p>Notable Attractions: Issaquah High School, the <strong>Issaquah Community Center,</strong> and the <strong>Issaquah Riverfront Park</strong></p></li><li><p>Hiking Trails: The <strong>Issaquah Trail</strong> offers scenic routes through the city, Dining: Offers a diverse culinary scene including Italian, Asian, and seafood restaurants</p></li><li><p>Roads: Well-connected to Interstate 90 <strong>and Interstate 84,</strong> Median Home Price: Approximately $480,000</p></li><li><p>Medical Centers: Various clinics and hospitals provide comprehensive medical care</p></li><li><p>The city is divided into several neighborhoods including - <strong>Riverfront - A popular residential area with waterfront views, Northwood - Known for family-oriented amenities, Lakeside - A historic neighborhood with a distinctive character, Greenwood - Close to the Issaquah River</strong></p></li></ul>
+<p>Note the completely fabricated neighborhood names, and the generic made-up things ("Issaquah Riverfront Park")</p>
+<h4>Qwen 3.5 4B</h4>
+<ul><li><p>Issaquah is a city in King County, Washington, located in the Cascade Mountains of the Pacific Northwest.</p></li><li><p>As of 2023, it has a population of approximately <strong>56,000 residents.</strong></p></li><li><p><strong>Mount Rainier National Park:</strong> Located just <strong>10 miles north of Issaquah</strong>; one of the most popular destinations in the Pacific Northwest</p></li><li><p>Location: Situated in the Cascade Mountains, between Seattle to the northwest and Tacoma to the southeast</p></li><li><p>Elevation: Ranges from 150 feet along the <strong>Duwamish River valley floor</strong></p></li><li><p>The name "Issaquah" comes from the <strong>Suquamish word for "the place of water",</strong></p></li><li><p><strong>...first settled in the early 20th century,... The city was incorporated in 1946</strong></p></li><li><p>Technology: Numerous tech companies have offices in the city, <strong>including Amazon's headquarters in the adjacent Redmond</strong></p></li><li><p>Public Transit: Served by King County Metro bus routes; the city is well-connected <strong>via the Sound Transit Link Light Rail (the 1 Line)</strong></p></li><li><p>Roads: ... Interstate 405 to <strong>Washington State Route 525</strong> and the <strong>Duwamish River Parkway</strong></p></li><li><p>Seasonal Festival: The <strong>Issaquah Summer Festival</strong> is a major annual event</p></li></ul>
+<h4>Qwen 3.5 9B</h4>
+<p>Here, Qwen 3.5 9B was a little more sophisticated in admitting what it didn't know, and refused to generate a list at first!</p>
+<ul><li><p>Location: Issaquah is a city in King County, Washington state, USA, located approximately 15 miles east of Seattle.</p></li><li><p>Geography: The city is situated in the Pacific Northwest, characterized by a temperate marine climate with mild, wet winters and warm, dry summers. It features a mix of urban development and natural landscapes including the Issaquah Creek watershed and proximity to the Cascade Mountains.</p></li><li><p>History: Originally inhabited by the Suquamish and Duwamish people<strong>s, Issaquah was named after Chief Issaquah of the Suquamish tribe.</strong> The city was incorporated in 1905</p></li><li><p>Economy: The city has a diverse economy ... several major employers including Microsoft (with its Redmond campus nearby), Boeing, and various tech startups.</p></li><li><p>The city offers extensive outdoor recreation opportunities including ... proximity to Lake Sammamish and the Issaquah Creek Greenway.</p></li><li><p>The <strong>Issaquah Falls State Park</strong> is a notable natural landmark nearby.</p></li><li><p>Transportation: Issaquah is served by several major roadways including Interstate 90 and <strong>State Route 200.</strong> The city has multiple public transportation options.... <strong>Sound Transit light rail connections to Seattle.</strong></p></li><li><p>As of recent census data, Issaquah has a population exceeding 40,000 residents. The city is known for its "Issaquah Creek" which runs through downtown, providing a unique urban waterway feature.</p></li></ul>
+<h4><strong>Qwen 3.5 27B</strong></h4>
+<ul><li><p>Located in the Issaquah Valley in the Eastside region of the Seattle metropolitan area. <strong>Incorporated in 1928</strong></p></li><li><p>Situated at the base of the Cascade Mountains. Approximately 25 miles east of downtown Seattle. Issaquah Creek runs through the city</p></li><li><p><strong>Named after the Issaquah Tribe, a Coast Salish people. The name "Issaquah" comes from the Lushootseed word meaning "watering place" or "where there is water"</strong></p></li><li><p>Population around 40,000-42,000 residents (as of recent estimates) Predominantly suburban community with growing urban elements</p></li><li><p>Home to Microsoft's Issaquah campus (one of their major facilities). Traditional retail and commercial areas along <strong>Issaquah Parkway and NE 30th Street</strong></p></li><li><p>Close proximity to Issaquah Alps (popular hiking area). Near Snoqualmie Pass and various mountain recreation areas</p></li><li><p>Issaquah Highlands - master-planned community with parks and trails. <strong>Creekwood Park,</strong> Cougar Mountain Regional Wildland Park nearby</p></li><li><p>Historic Downtown Issaquah with preserved architecture. Annual events including the <strong>Issaquah Folk Festival</strong> and Christmas parade</p></li><li><p>Accessible via State Route 18 (Issaquah-Hobart Road) and Interstate 90</p></li><li><p>Issaquah Transit Center provides bus connections. Growing light rail connectivity discussions as part of regional transit planning</p></li><li><p>Issaquah School District serves the area. Known for highly-rated public schools in the region</p></li></ul>
+<h4>Gemma 4 E4B</h4>
+<p>Also: Refused to generate a list at first!</p>
+<ul><li><p>Location: Located in King County, on the east side of Puget Sound. It is situated in the foothills of the Cascade Mountains.</p></li><li><p>Population: As a growing suburb, its population has increased significantly over recent decades (specific current figures vary based on source and census year).</p></li><li><p>Geography: The town is characterized by a mix of suburban development nestled against the natural terrain, including numerous wooded areas and access to mountainous regions.</p></li><li><p>Origins: The area has historical ties to logging and mining industries common in the Pacific Northwest.</p></li><li><p>Development: It has evolved from a smaller, more rural community into a desirable residential and commercial hub.</p></li><li><p>Recreation: Issaquah offers extensive outdoor activities, including hiking (such as trails leading into Tiger Mountain), mountain biking, and access to the nearby mountains for skiing in winter.</p></li><li><p>Community: It is known for its high quality of life, strong community focus, and blend of suburban comfort with natural surroundings.</p></li><li><p>Education: The area hosts established school districts serving a diverse population.</p></li><li><p>Transit: It is served by various local bus routes and has connections to larger metropolitan areas.</p></li><li><p>Business: It features a growing selection of local businesses, shops, and services.</p></li><li><p>This is a summary based on general knowledge. For the most precise or up-to-date statistics, consulting local government or recent census data is recommended.</p></li></ul>
+<h4>Gemma 4 31B</h4>
+<ul><li><p>Located in King County, Washington, in the Eastside region of the Seattle metropolitan area.</p></li><li><p><strong>Often referred to as the "Gateway to the Cascades"</strong> due to its position at the foot of the Cascade Mountain range.</p></li><li><p>Situated in a valley between Tiger Mountain to the east and Squak Mountain to the west, with the Issaquah Creek running through the center of town.</p></li><li><p>Typical Pacific Northwest climate with mild, wet winters and warm, dry summers.</p></li><li><p>Serves as a significant commercial center for the Eastside, with various retail and service industries.</p></li><li><p>The local economy is heavily influenced by tourism and outdoor sports, given its proximity to hiking trails and mountain resorts.</p></li><li><p>Cougar Mountain Regional Wildland Park: A major destination for hiking, biking, and exploring old mining sites.</p></li><li><p>Squak Mountain: Another prominent natural area offering extensive trail networks.</p></li><li><p>Hiking Access: Provides easy access to the Snoqualmie Pass area and various alpine lakes.</p></li><li><p>Salmon Recovery: Known for efforts to restore salmon populations in Issaquah Creek.</p></li><li><p>Community Events: Hosts various local festivals and farmers markets that celebrate the region's agricultural roots.</p></li><li><p>Education: Part of the Issaquah School District, which is generally well-regarded in the state.</p></li><li><p>Infrastructure: I-90 runs directly through the city, serving as a primary artery for commuters and travelers heading toward Snoqualmie Pass.</p></li><li><p>The Issaquah Highlands is a significant example of "New Urbanism," featuring a planned community on the plateau above the valley.</p></li><li><p>The region has a legacy of coal mining, evident in the old shafts and ruins found within Cougar Mountain Regional Wildland Park.</p></li><li><p>The city is served by the Issaquah School District, with Issaquah High School and Skyline High School being the primary public secondary institutions.</p></li><li><p>The Issaquah Salmon Recovery project is a prominent local effort focused on restoring the habitat for Coho salmon in Issaquah Creek.</p></li></ul>
+<p>What can we tell from this?</p>
+<ul><li><p>Qwen 3.5 2B and 4B didn't really have any interesting knowledge about Issaquah, Washington. On the other size, Qwen 3.5 27B did have some facts about Issaquah (Salmon, Cougar Mountain Park).</p></li><li><p>Qwen 3.5 on the whole has a tendency to hallucinate and make up facts. For small Qwen models, it's almost charming the extent it tries to make up facts "The Issaquah River! Issaquah Trail!" and fake-real-fake suburb names.</p></li><li><p>Google models did much better to avoid making things up; Gemma 4 E4B (sized somewhere between Qwen 3.5 4B and 9B in size) did not make up facts nearly as much; I would say this is an outcome of more modern training. Gemma 31B was respectable in terms of giving a good synopsis.</p></li></ul>
+<h3>Quantization</h3>
+<p>Another important topic for models is quantization.</p>
+<p>Think of quantization as: how much fidelity does a model have to make fine-grained decisions? The lower the number, the coarser a model thinks. It's kind of like the difference between "regular TV", "HD TV", and "4K TV" -- all show the same picture, but regular TV is much fuzzier than 4K. It's also conceivable that the resolution of TV is so bad you can't even see details anymore.</p>
+<p>The same is true for models: Most models start at 16 bits of precision per parameter, but you can give them only 8 or 4 bits of quality per parameter and they will still be able to think. At 1 or 2 bits of precision, though, models stop being able to think coherently at all. They'll lose all sense of details, they may even start to make up words or repeat sentences, etc. They come incoherent. Different models become "incoherent' at different quantizations. Some work well at 2 bits of quantization, while others fall apart at 3 bits of quantization.</p>
+<p>Savvy model tuners can apply highly customized algorithms for quantization: they can leave certain parts of the model "brain" at a higher level quantization like 4 or 6 bits, while shrinking less critical parts down to 2 bits. This is why it's rare that any quantized model is literally all 2 bits - they're typically more like 2.4 bits in size. When you visit Hugging Face, you'll often see different suffixes, like _IQM or IQXXS. Those are different recipes that were used for quantization, and sometimes the set of assumptions around sizing that fit into those sizings.</p>
+<p>Here is how the quantization breaks down for a model like Qwen 3.8 27B:</p>
+<table><thead><tr><th><strong>Model</strong></th><th><strong>Size</strong></th><th><strong>Tasks passed</strong></th><th><strong>Quality</strong></th><th><strong>Performance</strong></th><th><strong>Context</strong></th><th><strong>Memory used</strong></th></tr></thead><tbody><tr><td>IQ1</td><td>27B</td><td>28/72 (39%)</td><td>3.9/10 (25 pieces) prod</td><td>11.1 tok/s output<br />190 tok/s prefill</td><td>256K</td><td>21.1</td></tr><tr><td>Q2</td><td>27B</td><td>67/72 (93%)</td><td>7.9/10 (9 pieces) core, <br />7.3/10 (25 pieces) prod</td><td>24.1 tok/s output<br />241 tok/s prefill</td><td>256K</td><td>21.1 GB</td></tr><tr><td>Q3</td><td>27B</td><td>68/72 (94%)</td><td>8/10 (9 pieces) core,<br />7.1/10 (27 pieces) prod</td><td>22.7 tok/s output<br />239 tok/s prefill</td><td>256K</td><td>24.5 GB</td></tr><tr><td>Q4</td><td>27B</td><td>67/72 (93%)</td><td>7.8/10 (17 pieces) core,<br />7.3/10 (53 pieces) prod</td><td>21.9 tok/s output<br />232 tok/s prefill</td><td>256K</td><td>28.4 GB</td></tr></tbody></table>
+<p><em>Mac Studio M4 Max · 64 GB · llama-cpp · 3 trials per task</em></p>
+<p>Note here that you can see that as far as this test was concerned, 2 bit quantization was just as reasonable in 4 bit quantization. I treat these results with some skepticism: I don't think Q2 is truly as good as Q4, but at least 2-bit quantizations can be worthwhile if you need to fit the model into a smaller amount of memory (like a 16GB graphics card).</p>
+<p>The community also mixes their own recipes based on core models - for example, <a href="https://huggingface.co/ConwayResearch/Underdog-Saluki-27B-1.0">Underdog Saluki</a> is an adaptation of Qwen 3.8 27B - the 2 bit quantization - designed to fit into smaller devices while retaining the quality of Qwen 3.8 (and it tests well.)</p>
+<h4>Mixture of Experts Models</h4>
+<p>Mixture of experts models has a second concept – out of all the nodes that they have available, only "activate" "the right set" of experts for a given token. For example, Qwen3.6-35b-a3b means 35 billion parameters, but only 3 billion active when processing a particular token. The benefit here is really for performance: by only "pulsing" 3 billion parameters for every token, they can be much faster to process vs. dense models that need to pulse all 35 billion parameters. The downside is you need to have enough memory to hold all 35 billion parameters, even if only 3 billion are active at any one time.</p>
+<p>Some people load these mixture of elements models into their (slow, but typically more plentiful) main system RAM  vs. their dedicated GPU RAM.  Only the performance sensitive parts might go onto the GPU. Here, the slowness of RAM (vs dedicated GPU graphics) is offset by the speed of only processing a certain number of parameters at only one time.</p>
+<table><thead><tr><th><strong>Model</strong></th><th><strong>Size</strong></th><th><strong>Tasks passed</strong></th><th><strong>Quality</strong></th><th><strong>Performance</strong></th><th><strong>Context</strong></th><th><strong>Memory used</strong></th></tr></thead><tbody><tr><td>qwen3.8-27b-q4</td><td>27B</td><td>32/33 (97%)</td><td>8.1/10 (18 pieces)</td><td>31.8 tok/s output<br />681 tok/s prefill</td><td>256K</td><td>15.8 GB</td></tr><tr><td>qwen3.6-35b-a3b-q4</td><td>35B</td><td>30/33 (91%)</td><td>7.8/10 (9 pieces)</td><td>131.1 tok/s output<br />2,102 tok/s prefill</td><td>64K</td><td>16.1 GB</td></tr></tbody></table>
+<p><em>AMD Ryzen 9 7950X3D 16-Core Processor · AMD Radeon AI PRO R9700 · 64 gigabytes</em></p>
+<h3>What does this mean for hardware?</h3>
+<p>Before we describe hardware + models, it's important to realize that there three phases for running a model to process tokens locally for the first tine:</p>
+<ol><li><p>Model load time</p></li><li><p>Prefill time (reading your prompt)</p></li><li><p>Token generation</p></li></ol>
+<p>Prefill time will probably catch you by surprise the first time you see it. It can take a good amount of time for a model to "prefill"/read your initial prompt. If you have a complex system prompt and a lot of tools exposed, a model may need to read 15 or 20K worth of tokens (which can be 1-3 min of time) before it even gets to your prompt.   When you use frontier/cloud models like Claude, you never see #1 and #2, because their system prompts are consistent across sessions so they can cache state from one sessoin to the next. But when you boot local models on your device, you will need to pay that tax. Gezel as a case in point puts a lot of work into trying to optimize how much prompt a given session sees, trims tool size to the bare essentials, and cache the different prompts. That's really core to the whole concept of gezel.</p>
+<p>Local AI hardware falls into two buckets:</p>
+<p>A device like a PC - which typically has a very fast AMD or nvidia GPU - a dedicated card for processing graphics. Previously these were primarily used for playing games. They can be very high performance for models, but the downside is that they typically don't have a lot of memory - maybe 24 or 32 gigabytes at best, which can barely run a good model like Qwen 3.8 27B memory.</p>
+<p>Then there are unified memory machines, like Macs - where there is only one pool of memory that both the system and the AI can draw from. Here, the memory runs much more slowly than a GPU, but it's easier to find systems with 48 or 96gb of memory avaliable for models.</p>
+<p>So with this in mind, if you want to run what is probably best local model -  Qwen 3.8 27B:</p>
+<table><thead><tr><th></th><th><strong>Performance</strong></th><th><strong>Context</strong></th></tr></thead><tbody><tr><td>AMD Windows laptop w/ 12GB GPU with Q2 (does not fit, so some part of this spills into main system memory which is why this is so slow)</td><td>7 tok/s output<br />55 tok/s prefill<br />(I believe this</td><td>64K</td></tr><tr><td>DGX Spark</td><td>32.4 tok/s output<br />777 tok/s prefill</td><td>256K</td></tr><tr><td>Windows 7950X3D + AI Pro 9700</td><td>31.8 tok/s output<br />681 tok/s prefill</td><td>256K</td></tr><tr><td>Mac M4 Max 64gb</td><td>21.9 tok/s output<br />232 tok/s prefill</td><td>256K</td></tr></tbody></table>
+<p><em>Note: Significant optimizations have happened since this table was made</em></p>
+<p><strong>A laptop comparison</strong></p>
+<p>Here is a view of two laptops that could run AI - a Windows laptop with a dedicated GPU and an older Mac.</p>
+<p><strong>AMD Ryzen AI 9 HX 370 w/ Radeon 890M · NVIDIA GeForce RTX 5070 Ti Laptop GPU · 31 GB · llama-cpp · 1 trial per task · 2026-09-02 · gezel 7694351b · catalog 0.1.52</strong> — different device, different gezel build, different catalog version, different trial count</p>
+<p><strong>vs.</strong></p>
+<p><strong>M2 · Apple M2 (integrated GPU) · 16 GB · llama-cpp · 1 trial per task · 2026-09-03 · gezel a06b1070 · catalog 0.1.52</strong> — different device, different gezel build, different catalog version, different trial count</p>
+<table><thead><tr><th>Model</th><th>Size</th><th>Tasks passed</th><th>Quality</th><th>Mac M2 Performance</th><th>AMD Ryzen 9 Windows Performance</th></tr></thead><tbody><tr><td>gemma4-<br />12b-q4 (kv: f16)</td><td>12B</td><td>10/11 (some tasks run once — count not rate)</td><td>6.6/10 (3 pieces)</td><td>13.7 tok/s output<br />100 tok/s prefill</td><td>24.6 tok/s output<br />1,495 tok/s prefill</td></tr><tr><td>ornith1.5-<br />9b-q4 (kv: f16)</td><td>9B</td><td>10/11 (some tasks run once — count not rate)</td><td>6.5/10 (1 pieces)</td><td>9.8 tok/s output<br />154 tok/s prefill</td><td>57.7 tok/s output<br />2,230 tok/s prefill</td></tr><tr><td>qwen3.5-<br />9b-q4 (kv: f16)</td><td>9B</td><td>9/11 (some tasks run once — count not rate)</td><td>3.8/10 (1 pieces)</td><td>9.2 tok/s output<br />121 tok/s prefill</td><td>29.9 tok/s output<br />329 tok/s prefill</td></tr></tbody></table>
+<h4>So what should you use?</h4>
+<p>"It depends". Qwen 3.8 27B seems like it does really well for reasoning. Gemma4 31B seems good for writing and general tasks. There are also many tweaks and different models available on <a href="http://Huggingface.co">Huggingface.co</a>.</p>
+<h4><strong>What should you buy?</strong></h4>
+<p>If you are spending under $5,000, I would just buy the Mac with the most RAM you can afford. Ideally at least 32 GB of RAM.</p>
+<!-- /squisq:content -->
+                </div>
+            </div>
+
+            <footer class="wrap wrap--prose post-end">
+                <p class="post-end-note">Thanks for reading. More notes from the workshop are on the blog.</p>
+                <a class="btn btn--ghost" href="/blog/">&larr; All posts</a>
+            </footer>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap footer-grid">
+            <div class="footer-brand">
+                <img src="/assets/bendyline-wordmark.webp" alt="Bendyline" width="480" height="323" loading="lazy">
+                <p>Honest free software. Hopefully it makes the world a little better.</p>
+            </div>
+            <nav aria-labelledby="footer-products">
+                <h2 id="footer-products">Products</h2>
+                <ul>
+                    <li><a href="https://gezel.com">Gezel</a></li>
+                    <li><a href="https://gezel.com/docs/npm-packages/">Gezel Platform</a></li>
+                    <li><a href="https://docblocks.com">DocBlocks</a></li>
+                    <li><a href="https://qualla.com">Qualla</a></li>
+                </ul>
+            </nav>
+            <nav aria-labelledby="footer-open-source">
+                <h2 id="footer-open-source">Open source</h2>
+                <ul>
+                    <li><a href="https://squigglysquare.com">Squiggly Square</a></li>
+                    <li><a href="https://molen.dev">Molen</a></li>
+                    <li><a href="/gezk/">gezk format</a></li>
+                    <li><a href="https://github.com/bendyline">GitHub</a></li>
+                </ul>
+            </nav>
+            <nav aria-labelledby="footer-company">
+                <h2 id="footer-company">Company</h2>
+                <ul>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/support/">Support</a></li>
+                    <li><a href="/privacy/">Privacy</a></li>
+                    <li><a href="https://www.youtube.com/@bendyline">YouTube</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="wrap footer-base">
+            <span>&copy; 2026 Bendyline LLC</span>
+            <a href="mailto:support@bendyline.com">support@bendyline.com</a>
+        </div>
+    </footer>
+
+    <script>
+        // Fill the dateline and reading time from the same catalog entry the blog
+        // list reads, so the two always agree. The dateline uses the catalog's
+        // firstPublishedDate; without JavaScript, or until the catalog loads, the
+        // post's `date` frontmatter shows instead.
+        (function () {
+            const time = document.querySelector("[data-post-date]");
+            const reading = document.querySelector("[data-post-reading]");
+
+            // Formats like the blog list ("October 28, 2026"): a bare date is a
+            // calendar day; a timestamp is shown in the reader's time zone.
+            function showDate(value) {
+                const day = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+                const date = day ? new Date(Date.UTC(+day[1], +day[2] - 1, +day[3])) : new Date(value);
+                if (!time || Number.isNaN(date.getTime())) return;
+                time.dateTime = value;
+                time.textContent = date.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    timeZone: day ? "UTC" : undefined,
+                });
+                time.hidden = false;
+            }
+
+            if (time) {
+                const written = time.textContent.trim();
+                time.hidden = !written;
+                if (written) showDate(written);
+            }
+
+            const catalogUrl = new URL("/posts/catalog.json", location.href);
+            fetch(catalogUrl)
+                .then((response) => (response.ok ? response.json() : null))
+                .then((catalog) => {
+                    const entry = ((catalog && catalog.documents) || []).find(
+                        (item) => new URL(item.path, catalogUrl).pathname === location.pathname,
+                    );
+                    if (!entry) return;
+                    if (entry.firstPublishedDate) showDate(entry.firstPublishedDate);
+                    if (reading && entry.wordCount) {
+                        reading.textContent = `${Math.max(1, Math.round(entry.wordCount / 225))} min read`;
+                    }
+                })
+                .catch(() => {});
+        })();
+    </script>
+</body>
+</html>
