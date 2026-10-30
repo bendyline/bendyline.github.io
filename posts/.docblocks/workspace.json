@@ -3,7 +3,8 @@
   "documents": {
     "outputTemplates": {
       "html": "_templates/post.html"
-    }
+    },
+    "siteUrl": "https://bendyline.com/posts/"
   },
   "catalog": {
     "title": "Bendyline Blog",
