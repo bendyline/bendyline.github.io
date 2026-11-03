@@ -187,6 +187,55 @@
       "wordCount": 1848,
       "excerpt": "DocBlocks started off as a simple markdown editor, but the vision has always been to let you do more with your content. Convert to video. Save off web pages. Produce slideshows. Quiz via flashcard. Act as a teleprompter. Write a blog post that saves as HTML, like I'm doing now.…",
       "contentHash": "d595ca557a0fd8170a5a9df073e28b2b23a87d9f7606a4209f8dfa93bca82ddf"
+    },
+    {
+      "path": "indexingandnightshift.html",
+      "source": "indexingandnightshift_files/indexingandnightshift.md",
+      "format": "html",
+      "title": "Indexing and the Night Shift in Gezel",
+      "firstPublishedDate": "2026-11-02T02:59:16Z",
+      "lastModifiedDate": "2026-11-02T03:36:31Z",
+      "outline": [
+        {
+          "level": 2,
+          "title": "Indexing and the Night Shift in Gezel"
+        },
+        {
+          "level": 3,
+          "title": "Night shift"
+        },
+        {
+          "level": 3,
+          "title": "Also: Use your cloud account to its fullest"
+        },
+        {
+          "level": 3,
+          "title": "Run models of the largest size"
+        },
+        {
+          "level": 3,
+          "title": "Keeping your Hardware Healthy"
+        },
+        {
+          "level": 3,
+          "title": "Indexing"
+        },
+        {
+          "level": 3,
+          "title": "Finding Problems and Smells"
+        },
+        {
+          "level": 3,
+          "title": "Tasks"
+        },
+        {
+          "level": 3,
+          "title": "Search: An attempt was made"
+        }
+      ],
+      "wordCount": 1484,
+      "excerpt": "Gezel (gezel.com) uses the power of local AI models to assist you with work. Admittedly, local AI models are not nearly as powerful as cloud models, but for so many tasks, they can be so useful and get the job done. One benefit from local AI is that you can run them on the…",
+      "contentHash": "040884e3892b361fda793f70753dea50c570e55f241e6fa822c3d9453f8a5d06"
     }
   ]
 }
