@@ -60,6 +60,15 @@
     .squisq-feature, .squisq-feature--right { flex-direction: column; }
     .squisq-feature__media { flex-basis: auto; width: 100%; }
   }
+  .squisq-video-embed { display: block; max-width: 720px; margin: 1.25em 0; }
+  .squisq-video-embed[data-orientation="portrait"] { max-width: 340px; }
+  .squisq-video-embed-frame { position: relative; display: block; overflow: hidden; border-radius: 6px; background: #000; }
+  .squisq-video-embed-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .squisq-video-embed-poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .squisq-video-embed-play { position: absolute; left: 50%; top: 50%; width: 64px; height: 44px; margin: -22px 0 0 -32px; border-radius: 12px; background: rgba(0, 0, 0, 0.72); }
+  .squisq-video-embed-play::after { content: ''; position: absolute; left: 26px; top: 12px; border-style: solid; border-width: 10px 0 10px 16px; border-color: transparent transparent transparent #fff; }
+  .squisq-video-embed-provider { position: absolute; left: 12px; bottom: 10px; color: #fff; font-size: 0.8em; font-weight: 600; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); }
+  .squisq-video-embed-caption { margin-top: 0.4em; font-size: 0.875em; opacity: 0.8; }
 </style>
 <link rel="stylesheet" href="/assets/site.css">
     <link rel="stylesheet" href="/assets/post.css">
@@ -69,13 +78,13 @@
     <meta property="og:description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Bendyline">
-    <meta property="og:image" content="https://bendyline.com/posts/indexingandnightshift_files/og-image.png?v=5252bfee">
+    <meta property="og:image" content="https://bendyline.com/posts/indexingandnightshift_files/og-image.png?v=acfac9e0">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Indexing and the Night Shift in Gezel">
     <meta name="twitter:description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
-    <meta name="twitter:image" content="https://bendyline.com/posts/indexingandnightshift_files/og-image.png?v=5252bfee">
+    <meta name="twitter:image" content="https://bendyline.com/posts/indexingandnightshift_files/og-image.png?v=acfac9e0">
 </head>
 <body>
     <header class="site-header">
@@ -105,6 +114,7 @@
                     <!-- squisq:content -->
 <h2>Indexing and the Night Shift in Gezel</h2>
 <p>Gezel (<a href="http://gezel.com">gezel.com</a>) uses the power of local AI models to assist you with work. Admittedly, local AI models are not nearly as powerful as cloud models, but for so many tasks, they can be so useful and get the job done. One benefit from local AI is that you can run them on the hardware you already have, or that you can easily acquire, and to complement the work you're already doing.</p>
+<figure class="squisq-video-embed" data-provider="youtube" data-orientation="landscape"><span class="squisq-video-embed-frame" style="aspect-ratio: 16 / 9"><iframe src="https://www.youtube-nocookie.com/embed/9OBEkFF-3RU" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy"></iframe></span></figure>
 <p>But going further: what if you could put your expensive hardware to work when you aren't using it, to assist you when you need it? What if you could have it working nearly around the clock, "for free" (besides electricity) - to help you out?</p>
 <p><img src="indexingandnightshift_files/pasted-05fcd684-367f-4c1a-afdc-ca03cba28a78.png" alt="pasted 05fcd684 367f 4c1a afdc ca03cba28a78" /></p>
 <h3>Night shift</h3>
@@ -142,6 +152,8 @@
 <p>Conversely, for advanced models, using Gezel search slowed performance compared to the control group, as these models spent additional time reasoning over search results alongside their native actions.</p>
 <p>So: we have an awesome search MCP tool that runs with your index, but we can't recommend using it with the cutting-edge of models. But for local AI, it is useful.</p>
 <table><thead><tr><th>Agent</th><th>Tool calls without Gezel (median)</th><th>Time without Gezel</th><th>Called Gezel's search</th><th>Cost vs no Gezel</th><th>Time vs no Gezel</th></tr></thead><tbody><tr><td>Sonnet 5 (main trial)</td><td>22</td><td>119 s</td><td>116 of 120</td><td>−19% (−27% to −10%)</td><td>−33% (−42% to −22%)</td></tr><tr><td>Sonnet 5.5</td><td>11</td><td>39 s</td><td>40 of 40</td><td>0% (−6% to +6%)</td><td>0% (−7% to +7%)</td></tr><tr><td>Sonnet 5.5, t1c</td><td>11</td><td>37 s</td><td>40 of 40</td><td>+1% (−3% to +5%)</td><td>+1% (−3% to +6%)</td></tr><tr><td>Opus 5.5</td><td>8</td><td>73 s</td><td>16 of 40</td><td>−1% (−6% to +4%)</td><td>−3% (−9% to +3%)</td></tr><tr><td>Codex (main trial)</td><td>7</td><td>60 s</td><td>120 of 120</td><td>+16% tokens (+7% to +26%)</td><td>+9% (+5% to +14%)</td></tr><tr><td>Codex, t1c</td><td>7</td><td>59 s</td><td>40 of 40</td><td>+13% tokens (+2% to +26%)</td><td>+10% (+6% to +15%)</td></tr></tbody></table>
+<h3>Summary</h3>
+<p>Keeping in mind the capabilities of local models, and that they may not be the speediest things in existence, we're doubling down on the night shift and related capabilities -- to do things useful for you, while you sleep. A key ingredient is a rich multilayered index that you can reuse as views, as search, and to make your AI smarter. Stay tuned for more improvements and if you have feedback - or something you need to be done! -- leave an issue at github.com/bendyline/gezel/issues.</p>
 <!-- /squisq:content -->
                 </div>
             </div>

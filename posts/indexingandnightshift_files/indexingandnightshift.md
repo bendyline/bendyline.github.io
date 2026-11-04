@@ -9,7 +9,10 @@ squisq-html-output: static
 
 Gezel ([gezel.com](http://gezel.com)) uses the power of local AI models to assist you with work. Admittedly, local AI models are not nearly as powerful as cloud models, but for so many tasks, they can be so useful and get the job done. One benefit from local AI is that you can run them on the hardware you already have, or that you can easily acquire, and to complement the work you're already doing.
 
+https://www.youtube.com/watch?v=9OBEkFF-3RU
+
 But going further: what if you could put your expensive hardware to work when you aren't using it, to assist you when you need it? What if you could have it working nearly around the clock, "for free" (besides electricity) - to help you out?
+
 
 ![pasted 05fcd684 367f 4c1a afdc ca03cba28a78](pasted-05fcd684-367f-4c1a-afdc-ca03cba28a78.png)
 
@@ -97,5 +100,9 @@ So: we have an awesome search MCP tool that runs with your index, but we can't r
 | Opus 5.5 | 8 | 73 s | 16 of 40 | −1% (−6% to +4%) | −3% (−9% to +3%) |
 | Codex (main trial) | 7 | 60 s | 120 of 120 | +16% tokens (+7% to +26%) | +9% (+5% to +14%) |
 | Codex, t1c | 7 | 59 s | 40 of 40 | +13% tokens (+2% to +26%) | +10% (+6% to +15%) |
+
+### Summary
+
+Keeping in mind the capabilities of local models, and that they may not be the speediest things in existence, we're doubling down on the night shift and related capabilities -- to do things useful for you, while you sleep. A key ingredient is a rich multilayered index that you can reuse as views, as search, and to make your AI smarter. Stay tuned for more improvements and if you have feedback - or something you need to be done! -- leave an issue at github.com/bendyline/gezel/issues. 
 
 
