@@ -189,6 +189,46 @@
       "contentHash": "d595ca557a0fd8170a5a9df073e28b2b23a87d9f7606a4209f8dfa93bca82ddf"
     },
     {
+      "path": "rtxsparkvstheworld.md",
+      "format": "markdown",
+      "title": "Enter RTX Spark",
+      "firstPublishedDate": "2026-11-04T00:30:55Z",
+      "lastModifiedDate": "2026-11-04T00:30:55Z",
+      "outline": [
+        {
+          "level": 3,
+          "title": "Enter RTX Spark"
+        },
+        {
+          "level": 3,
+          "title": "The Comparison"
+        },
+        {
+          "level": 3,
+          "title": "The Punchline: AI Speed"
+        },
+        {
+          "level": 3,
+          "title": "Bugs in Gezel and Eval Judging"
+        },
+        {
+          "level": 3,
+          "title": "Pass Rate and Judging"
+        },
+        {
+          "level": 3,
+          "title": "Lenovo Yoga 9n 2-in-1 RTX Spark as hardware"
+        },
+        {
+          "level": 3,
+          "title": "Final Thoughts"
+        }
+      ],
+      "wordCount": 2566,
+      "excerpt": "This is the first in a series of articles on testing and evaluating local models. These tests compare complete Gezel/model/engine configurations across five computers. They show useful differences in inference speed and memory capacity, but setup defects, differing exclusions…",
+      "contentHash": "49c97ec9b1e6fe6e2998a17f330f2e7505747333960ea2f6521c3e29e51dbc9d"
+    },
+    {
       "path": "indexingandnightshift.html",
       "source": "indexingandnightshift_files/indexingandnightshift.md",
       "format": "html",
