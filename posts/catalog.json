@@ -187,6 +187,104 @@
       "wordCount": 1848,
       "excerpt": "DocBlocks started off as a simple markdown editor, but the vision has always been to let you do more with your content. Convert to video. Save off web pages. Produce slideshows. Quiz via flashcard. Act as a teleprompter. Write a blog post that saves as HTML, like I'm doing now.…",
       "contentHash": "d595ca557a0fd8170a5a9df073e28b2b23a87d9f7606a4209f8dfa93bca82ddf"
+    },
+    {
+      "path": "indexingandnightshift.html",
+      "source": "indexingandnightshift_files/indexingandnightshift.md",
+      "format": "html",
+      "title": "Indexing and the Night Shift in Gezel",
+      "firstPublishedDate": "2026-11-02T02:59:16Z",
+      "lastModifiedDate": "2026-11-04T16:00:37Z",
+      "outline": [
+        {
+          "level": 2,
+          "title": "Indexing and the Night Shift in Gezel"
+        },
+        {
+          "level": 3,
+          "title": "Night shift"
+        },
+        {
+          "level": 3,
+          "title": "Also: Use your cloud account to its fullest"
+        },
+        {
+          "level": 3,
+          "title": "Run models of the largest size"
+        },
+        {
+          "level": 3,
+          "title": "Keeping your Hardware Healthy"
+        },
+        {
+          "level": 3,
+          "title": "Indexing"
+        },
+        {
+          "level": 3,
+          "title": "Finding Problems and Smells"
+        },
+        {
+          "level": 3,
+          "title": "Tasks"
+        },
+        {
+          "level": 3,
+          "title": "Search: An attempt was made"
+        },
+        {
+          "level": 3,
+          "title": "Summary"
+        }
+      ],
+      "wordCount": 1578,
+      "excerpt": "Gezel (gezel.com) uses the power of local AI models to assist you with work. Admittedly, local AI models are not nearly as powerful as cloud models, but for so many tasks, they can be so useful and get the job done. One benefit from local AI is that you can run them on the…",
+      "contentHash": "2a2b76cfbe055eafc4ce507287d90d378fca361f7c8cd4fb7ccf785a1df78c2c"
+    },
+    {
+      "path": "rtxsparkvstheworld.html",
+      "source": "rtxsparkvstheworld_files/rtxsparkvstheworld.md",
+      "format": "html",
+      "title": "RTX Spark vs. the World",
+      "firstPublishedDate": "2026-11-04T16:02:08Z",
+      "lastModifiedDate": "2026-11-04T16:02:11Z",
+      "outline": [
+        {
+          "level": 2,
+          "title": "RTX Spark vs. the World"
+        },
+        {
+          "level": 3,
+          "title": "Enter RTX Spark"
+        },
+        {
+          "level": 3,
+          "title": "The Comparison"
+        },
+        {
+          "level": 3,
+          "title": "The Punchline: AI Speed"
+        },
+        {
+          "level": 3,
+          "title": "Bugs in Gezel and Eval Judging"
+        },
+        {
+          "level": 3,
+          "title": "Pass Rate and Judging"
+        },
+        {
+          "level": 3,
+          "title": "Lenovo Yoga 9n 2-in-1 RTX Spark as hardware"
+        },
+        {
+          "level": 3,
+          "title": "Final Thoughts"
+        }
+      ],
+      "wordCount": 2591,
+      "excerpt": "This is the first in a series of articles on testing and evaluating local models. These tests compare complete Gezel/model/engine configurations across five computers. They show useful differences in inference speed and memory capacity.",
+      "contentHash": "724c04368c35c2b6b3f71b17d890683551a1dd56e11a8b29cf9f70b7e848f2aa"
     }
   ]
 }
