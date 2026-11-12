@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<!-- A Bendyline blog post. DocBlocks generates each posts/*.html page through
+     posts/_templates/post.html: edit that template or the post's Markdown,
+     not the generated page. -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docbench: how small local models handle document work &middot; Bendyline</title>
+    <meta name="description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
+    <link rel="icon" href="/assets/bendyline128.png">
+    <style data-squisq>
+  .squisq-feature {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    align-items: center;
+    margin: 1.75em 0;
+  }
+  .squisq-feature--right { flex-direction: row-reverse; }
+  .squisq-feature__media {
+    flex: 0 0 42%;
+    min-width: 0;
+  }
+  .squisq-feature__media--empty { display: none; }
+  /* Default: image fills the media column. */
+  .squisq-feature__media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+  }
+  /* "Sized" media: the image carried explicit width/height attrs (the
+     WYSIWYG editor wrote them after a resize). Honor the attribute
+     values and center the image inside the media column with padding. */
+  .squisq-feature__media--sized {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    box-sizing: border-box;
+  }
+  /* Leave width and height untouched here -- the HTML attributes set
+     the intrinsic dimensions, and CSS overrides would silently discard
+     the author's sizing. max-width: 100% still keeps the image from
+     overflowing the column on narrow viewports; HTML5 derives the
+     aspect ratio from the width/height pair so the scale stays right. */
+  .squisq-feature__media--sized img {
+    max-width: 100%;
+    display: block;
+    border-radius: 6px;
+  }
+  .squisq-feature__body {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .squisq-feature__body > :first-child { margin-top: 0; }
+  .squisq-feature__body > :last-child { margin-bottom: 0; }
+  @media (max-width: 600px) {
+    .squisq-feature, .squisq-feature--right { flex-direction: column; }
+    .squisq-feature__media { flex-basis: auto; width: 100%; }
+  }
+</style>
+<link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/post.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Docbench: how small local models handle document work">
+    <meta property="og:description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Bendyline">
+    <meta property="og:image" content="https://bendyline.com/posts/docbench_files/og-image.png?v=c6df7fae">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Docbench: how small local models handle document work">
+    <meta name="twitter:description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
+    <meta name="twitter:image" content="https://bendyline.com/posts/docbench_files/og-image.png?v=c6df7fae">
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="/"><img src="/assets/bendyline-wordmark.webp" alt="Bendyline home" width="480" height="323"></a>
+            <nav class="site-nav" aria-label="Main">
+                <a class="nav-section" href="/#products">Products</a>
+                <a class="nav-section" href="/#open-source">Open source</a>
+                <a href="/blog/">Blog</a>
+                <a href="/support/">Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <article class="post-article">
+            <div class="wrap wrap--prose">
+                <div class="post-intro">
+                    <a class="eyebrow post-eyebrow" href="/blog/">Blog</a>
+                    <p class="post-dateline">
+                        <time data-post-date></time>
+                        <span class="post-reading" data-post-reading></span>
+                    </p>
+                </div>
+
+                <div class="post-body" data-post-body>
+                    <!-- squisq:content -->
+<h1>Docbench: how small local models handle document work</h1>
+<p>DocBlocks recently added support for using local models to provide AI features for document tasks. You can select a model, it downloads, and you get basic features like document review and content editing.</p>
+<p>Pretty quickly, we ran into an obvious usability problem: how are users supposed to know which models to use, especially amongst a choice of a lot of models? Though we have some good measurements from Gezel's overall scorecard, we set out to measure and create a focused synthetic benchmark of model usability for documents. Separately, it was pretty obvious that there were useful models and there were useless models, correlated to model size and we needed a way to quantify that. Enter "docbench".</p>
+<p>For docbench, we focus on really small models in the under-12-billion-parameter class. This is because we expect that the typical user will not be running on a workstation class machine with powerful video cards; rather, they'll run with modest GPUs or "just" a CPU by itself. Models that are in the 1-4 billion parameter range are typically runnable on conventional modern computers with at least 16gb of RAM, or a modern higher-end phone.</p>
+<p>So towards that end, we scored 22 local models, from 0.8B to 35B parameters, on the work DocBlocks asks of them: reviewing, writing, diagrams, slides, study aids and transcript cleanup. From this, we created a 100 point weighted scale and included elements of static analysis and AI-based output judging. For comparison, we also compared against GPT 6.1 Sol, Claude Opus 5.5, and Claude Sonnet 5.5 via their CLI command lines.</p>
+<p>The headlines: Qwen 3.8 27B leads at 81 of 100, Gemma 4 12B is statistically level with it at 79, and the best models at 4B and under reach about 71. Review separates models most: large models find real problems, while 1–2B models pad their reviews with trivial or wrong suggestions. For comparison, cloud models score between 87 and 91 - at least 6 points higher than the highest model that we've tested.</p>
+<h2>What docbench measures</h2>
+<p>Docbench covers every AI feature DocBlocks ships, grouped into six families and weighted by how much people rely on them. Each model answers the same 102 test cases (142 outputs, since tasks with variable output run three times), and every answer is scored 0–100.</p>
+<table><thead><tr><th>Family</th><th>Weight</th><th>What the model is asked to do</th><th>Cases</th><th>Score mix</th></tr></thead><tbody><tr><td>Review and feedback</td><td>25%</td><td>Eight review styles: general, resume, facts and sources, conciseness, plain language, <em>The Elements of Style</em>, the UN editorial manual, creative ideas</td><td>28</td><td>15% checks, 85% judge</td></tr><tr><td>Writing</td><td>25%</td><td>Compose from scratch, append to a document, insert into one, rewrite a selection</td><td>19</td><td>30% checks, 70% judge</td></tr><tr><td>Diagrams and illustrations</td><td>20%</td><td>Pick what to illustrate, build diagrams of 13 kinds, draw SVG illustrations, write briefs for an image model</td><td>30</td><td>Checks only for picture ideas; 30/70 for the rest</td></tr><tr><td>Slides</td><td>10%</td><td>Turn a document into slide suggestions for a deck</td><td>8</td><td>30% checks, 70% judge</td></tr><tr><td>Study aids</td><td>15%</td><td>Summaries, quizzes and flashcards that stay true to the source</td><td>12</td><td>25% checks, 75% judge</td></tr><tr><td>Narration cleanup</td><td>5%</td><td>Clean up a dictated transcript without changing what was said</td><td>5</td><td>40% checks, 60% judge</td></tr></tbody></table>
+<p>A family's score is the mean of its tasks, and docbench is the weighted mean of the six families. The test documents are deliberately moderate in quality, so a good reviewer has real problems to find. See Appendix A for more on how each result is concerned.</p>
+<h2>The results</h2>
+<p>Across a few runs and two devices, we found that three models share the top band, a group of 4–9B models follows within 10 points, and scores fall quickly below 3B. Family scores are 0–100; the order is by docbench score. Note that download size loosely correlates to how much memory is occupied, though some models, like Nanbeige 4.2 are outliers in that they take up far more memory than their size implies.</p>
+<table><thead><tr><th>Model</th><th>Parameters</th><th>Download</th><th>Docbench (95% range)</th><th>Review</th><th>Writing</th><th>Diagrams</th><th>Slides</th><th>Study</th><th>Narration</th></tr></thead><tbody><tr><td>Claude Opus 5.5 via Claude CLI <sup>2</sup></td><td>--</td><td>--</td><td>89.5 (88.4-90.6)</td><td>89</td><td>91</td><td>91</td><td>92</td><td>84</td><td>92</td></tr><tr><td>GPT-6.1 Sol via Codex <sup>2</sup></td><td>--</td><td>--</td><td>89.5 (88.4-90.4)</td><td>88</td><td>93</td><td>90</td><td>94</td><td>83</td><td>92</td></tr><tr><td>Claude Sonnet 5.5 <sup>2</sup></td><td>--</td><td>--</td><td>87.1 (85.8 - 88.2)</td><td>83</td><td>89</td><td>90</td><td>91</td><td>84</td><td>84</td></tr><tr><td>Qwen 3.8 27B Q4</td><td>27B</td><td>16.5 GB</td><td><strong>81</strong> (79–82)</td><td>72</td><td>89</td><td>82</td><td>89</td><td>74</td><td>86</td></tr><tr><td>Qwen 3.8 27B Q2</td><td>27B</td><td>9.8 GB</td><td><strong>79</strong> (77–81)</td><td>69</td><td>87</td><td>78</td><td>89</td><td>74</td><td>87</td></tr><tr><td>Gemma 4 12B</td><td>12B</td><td>6.7 GB</td><td><strong>79</strong> (77–81)</td><td>70</td><td>83</td><td>84</td><td>86</td><td>72</td><td>88</td></tr><tr><td>Qwen 3.6 35B-A3B (MoE)</td><td>35B</td><td>22.7 GB</td><td><strong>76</strong> (73–79)</td><td>61</td><td>89</td><td>73</td><td>89</td><td>74</td><td>86</td></tr><tr><td>Ornith 1.5 9B</td><td>9B</td><td>5.6 GB</td><td><strong>73</strong> (71–75)</td><td>50</td><td>87</td><td>78</td><td>86</td><td>73</td><td>77</td></tr><tr><td>Gemma 4 E4B</td><td>8B</td><td>4.2 GB</td><td><strong>73</strong> (71–75)</td><td>52</td><td>86</td><td>74</td><td>86</td><td>69</td><td>86</td></tr><tr><td>Qwen 3.5 9B</td><td>9B</td><td>5.9 GB</td><td><strong>72</strong> (70–74)</td><td>52</td><td>87</td><td>72</td><td>84</td><td>71</td><td>82</td></tr><tr><td>Qwen 3.5 4B</td><td>4B</td><td>2.8 GB</td><td><strong>71</strong> (69–72)</td><td>47</td><td>85</td><td>77</td><td>85</td><td>67</td><td>79</td></tr><tr><td>Nanbeige 4.2 3B <sup>1</sup></td><td>3B</td><td>2.7 GB</td><td><strong>71</strong> (68–73)</td><td>53</td><td>83</td><td>71</td><td>83</td><td>69</td><td>79</td></tr><tr><td>Nemotron 3.5 Bolt E4B</td><td>8B</td><td>6.2 GB</td><td><strong>69</strong> (67–72)</td><td>50</td><td>85</td><td>66</td><td>82</td><td>68</td><td>83</td></tr><tr><td>GPT-OSS 20B (MoE) <sup>1</sup></td><td>20B</td><td>11.7 GB</td><td><strong>67</strong> (64–69)</td><td>40</td><td>83</td><td>73</td><td>79</td><td>67</td><td>75</td></tr><tr><td>Granite 4.2 8B</td><td>8B</td><td>5.3 GB</td><td><strong>66</strong> (63–68)</td><td>38</td><td>82</td><td>69</td><td>82</td><td>67</td><td>76</td></tr><tr><td>Gemma 4 E2B</td><td>2.3B</td><td>2.6 GB</td><td><strong>64</strong> (61–66)</td><td>40</td><td>74</td><td>69</td><td>80</td><td>65</td><td>72</td></tr><tr><td>MiniCPM5 2B</td><td>2B</td><td>1.6 GB</td><td><strong>59</strong> (57–62)</td><td>35</td><td>74</td><td>60</td><td>75</td><td>59</td><td>75</td></tr><tr><td>Granite 4.2 3B</td><td>3B</td><td>2.2 GB</td><td><strong>59</strong> (56–61)</td><td>33</td><td>74</td><td>60</td><td>78</td><td>59</td><td>67</td></tr><tr><td>Qwen 3.5 2B</td><td>2B</td><td>1.3 GB</td><td><strong>56</strong> (53–58)</td><td>30</td><td>74</td><td>51</td><td>75</td><td>55</td><td>71</td></tr><tr><td>LFM3 1.7B†</td><td>1.7B</td><td>1.0 GB</td><td><strong>55</strong> (52–58)</td><td>30</td><td>68</td><td>70</td><td>76</td><td>57</td><td>13</td></tr><tr><td>Apple Foundation Models <sup>2 3</sup></td><td>3B</td><td>--</td><td>54.4 (51.7-57.1)</td><td>26</td><td>78</td><td>45</td><td>73</td><td>55</td><td>75</td></tr><tr><td>Llama 3.2 3B†</td><td>3B</td><td>2.0 GB</td><td><strong>54</strong> (51–56)</td><td>32</td><td>66</td><td>56</td><td>64</td><td>53</td><td>68</td></tr><tr><td>LFM2.5 2.6B†</td><td>2.6B</td><td>1.7 GB</td><td><strong>47</strong> (44–49)</td><td>40</td><td>72</td><td>50</td><td>0</td><td>57</td><td>0</td></tr><tr><td>Qwen 3.5 0.8B</td><td>0.8B</td><td>0.5 GB</td><td><strong>43</strong> (40–45)</td><td>20</td><td>56</td><td>32</td><td>70</td><td>46</td><td>67</td></tr><tr><td>MiniCPM5 1B</td><td>1B</td><td>0.7 GB</td><td><strong>37</strong> (35–40)</td><td>14</td><td>54</td><td>32</td><td>63</td><td>34</td><td>47</td></tr></tbody></table>
+<p>† - Custom license: scored, but DocBlocks never recommends them. "E4B" and "E2B" models run like 4B and 2B models but carry more parameters in embeddings.</p>
+<p><sup>1</sup> - Re-measured after two fixes to Gezel</p>
+<p><sup>2</sup> - Run in a second pass on a different device, but with the same software. Comparison tests for similar models were +/- 1.3 points judged, likely sampling noise</p>
+<p><sup>3 -</sup> For Apple Foundation Models, about 3 of its points are lost because all 12 illustration cases score zero because DocBlocks only offers illustrations on a 16K+ context, and Apple has 8K</p>
+<p>A few results stand out:</p>
+<ul><li><p><strong>Writing is easy; review is not.</strong> Writing scores run from 54 to 89; review runs from 14 to 72, and it is the weakest family for every model in the top two bands.</p></li><li><p><strong>A 2-bit 27B nearly matches its 4-bit build.</strong> Qwen 3.8 27B at Q2 scores 79 in 9.8 GB, level with Gemma 4 12B and ahead of every other model that size.</p></li><li><p><strong>Bigger is not always better.</strong> The 35B mixture-of-experts model and GPT-OSS 20B (an older model) both trail the dense 12B Gemma, mostly on review.</p></li><li><p><strong>Zeros mean the output was unusable.</strong> LFM2.5's slide and narration answers ran past their length limits every time, so DocBlocks could show nothing.</p></li></ul>
+<h2>Review differences</h2>
+<p>Perhaps not surprisingly, every model is better at finding typos than at structure.</p>
+<p>To test review capability we bucketed planted issues in a document into small, moderate, and substantial problems that models could find:</p>
+<ul><li><p>Small covers basic grammatical fixes, doubled words, misspellings, and subject verb agreement</p></li><li><p>Moderate covers broader stylistic issues with content. For example, passive and vague language, wordiness</p></li><li><p>Substantial covers more document-level feedback. For example, factual contradictions in the document, conflicting references to previous sections, or statements first made in the concluding summary of a document</p></li></ul>
+<p>More specific eview styles plant problems of their own kind:</p>
+<ul><li><p><strong>Fact check.</strong> A water-works notice advises residents to boil their water "because boiling water removes lead". It does not (it can concentrate lead), so the safety advice is wrong. Smaller plants include arithmetic slips, such as "36 (60%)" when 36 of 48 is 75%.</p></li><li><p><strong>Resume.</strong> Flagging duties instead of accomplishments ("Responsible for maintaining the internal reporting dashboard"), results with no number ("Improved page load time on the analytics site"), and jobs out of reverse-chronological order.</p></li><li><p><strong>Policy.</strong> "It applies to all full-time employees" contradicts a later section that gives part-time staff remote days, and "core hours" are required but never defined.</p></li></ul>
+<p>The top model finds 92% of the planted small problems but only 10% of the substantial ones, and models under 2B add more trivial or wrong suggestions than real ones. A "trivial" suggestion restates the text or praises it ("This is a correct sentence"). It costs the reader time without improving the draft, so it counts against the model like a wrong one. Some documents have nothing wrong with them at all. A model that invents problems there loses points.</p>
+<p>These counts come from the general review task: four moderate-quality documents with about eight planted problems each.</p>
+<table><thead><tr><th>Model</th><th>Real suggestions per document: small · moderate · substantial</th><th>Trivial per document</th><th>Wrong per document</th><th>Planted problems found: small · moderate · substantial</th></tr></thead><tbody><tr><td>Qwen 3.8 27B Q4</td><td>2.8 · 2.0 · 0.3</td><td>0.0</td><td>0.0</td><td>92% · 73% · 10%</td></tr><tr><td>Gemma 4 12B</td><td>2.5 · 1.5 · 0.5</td><td>0.3</td><td>0.0</td><td>83% · 55% · 20%</td></tr><tr><td>Qwen 3.6 35B-A3B</td><td>2.7 · 1.3 · 0.3</td><td>0.3</td><td>0.3</td><td>78% · 50% · 13%</td></tr><tr><td>Ornith 1.5 9B</td><td>2.5 · 0.8 · 0.3</td><td>2.0</td><td>1.0</td><td>83% · 36% · 40%</td></tr><tr><td>Qwen 3.5 9B</td><td>1.8 · 1.0 · 0.8</td><td>0.5</td><td>0.5</td><td>58% · 55% · 30%</td></tr><tr><td>Qwen 3.5 4B</td><td>1.0 · 0.3 · 0.3</td><td>0.8</td><td>0.8</td><td>33% · 18% · 10%</td></tr><tr><td>Gemma 4 E2B</td><td>1.3 · 0.8 · 0.0</td><td>1.3</td><td>1.5</td><td>50% · 36% · 10%</td></tr><tr><td>MiniCPM5 2B</td><td>1.7 · 0.3 · 0.3</td><td>1.3</td><td>1.3</td><td>56% · 13% · 13%</td></tr><tr><td>Qwen 3.5 0.8B</td><td>0.7 · 0.0 · 0.0</td><td>3.3</td><td>0.3</td><td>33% · 0% · 0%</td></tr><tr><td>MiniCPM5 1B</td><td>0.0 · 0.0 · 0.3</td><td>3.3</td><td>1.0</td><td>0% · 0% · 10%</td></tr></tbody></table>
+<h3>Images and Diagrams</h3>
+<p>Freehand drawing separates models more than any other task, while diagrams barely do. Asked for an SVG picture of the water cycle, the largest models drew a recognizable scene with all four stages labeled; the smallest drew loose shapes with no cycle, or nothing at all.</p>
+<table><thead><tr><th>Model</th><th>SVG illustrations (0–100)</th><th>Shows its subject (0–10)</th><th>Composition (0–10)</th><th>Diagrams (0–100)</th></tr></thead><tbody><tr><td>Qwen 3.8 27B Q4</td><td>79</td><td>6.3</td><td>5.8</td><td>91</td></tr><tr><td>Qwen 3.6 35B-A3B</td><td>73</td><td>6.3</td><td>4.8</td><td>91</td></tr><tr><td>Gemma 4 12B</td><td>66</td><td>5.1</td><td>3.7</td><td>91</td></tr><tr><td>GPT-OSS 20B</td><td>62</td><td>4.9</td><td>3.9</td><td>91</td></tr><tr><td>Gemma 4 E4B</td><td>60</td><td>3.9</td><td>2.5</td><td>89</td></tr><tr><td>Qwen 3.5 4B</td><td>55</td><td>3.0</td><td>2.3</td><td>85</td></tr><tr><td>LFM3 1.7B</td><td>52</td><td>2.1</td><td>1.5</td><td>85</td></tr><tr><td>Gemma 4 E2B</td><td>51</td><td>2.3</td><td>1.7</td><td>76</td></tr><tr><td>Qwen 3.5 0.8B</td><td>25</td><td>1.0</td><td>0.6</td><td>55</td></tr><tr><td>MiniCPM5 1B</td><td>14</td><td>0.0</td><td>0.2</td><td>41</td></tr></tbody></table>
+<p>The gap comes from who does the drawing:</p>
+<ul><li><p><strong>For a diagram, DocBlocks draws.</strong> The model only fills in a structured spec — which kind of diagram, which boxes, labels and links — and DocBlocks renders it, so the picture is always clean. Most models from 3B up score 85–91, and even LFM3 at 1.7B reaches 85.</p></li><li><p><strong>For an illustration, the model draws.</strong> It writes the SVG itself: every coordinate, shape and label position. That takes spatial planning that small models do not have.</p></li><li><p><strong>Even the best drawings are modest.</strong> Qwen 3.8 27B averages 6.3 of 10 for showing its subject: simple, labelled scenes, closer to clip art than to illustration.</p></li><li><p><strong>Small models rarely invent, they just cannot draw.</strong> Most score 5–9 of 10 for faithfulness to the source while scoring 1–3 for showing the subject.</p></li><li><p><strong>Some failures are invisible in the code.</strong> Qwen 3.5 0.8B's water cycle is valid SVG that draws nothing: its styling made every label transparent and it drew no shapes. That is why the judge grades the rendered picture, not the SVG source.</p></li></ul>
+<p>Six models' answers to the same water-cycle prompt, with the judge's grades:</p>
+<p><img src="docbench_files/pasted-c14079e6-4c8d-42c0-9891-72ea7bfb129b.png" alt="pasted c14079e6 4c8d 42c0 9891 72ea7bfb129b" /></p>
+<h2>Summary</h2>
+<p>This set of tests clearly show that there is a completely wide-open range of capability available for consumer-grade hardware: from barely able to coherently review, to useful functionality, to  near-frontier quality.</p>
+<p>The guidance is still simple: pick the highest band your machine can hold. DocBlocks does this for you: its model list ranks downloadable models by docbench among those that fit your computer or phone.</p>
+<p>As a rough guide by download size:</p>
+<ul><li><p><strong>Lots of GPU or unified memory:</strong> Qwen 3.8 27B at Q4 (16.5 GB), the top score.</p></li><li><p><strong>About half that:</strong> Qwen 3.8 27B at Q2 (9.8 GB) or Gemma 4 12B (6.7 GB), both in the top band.</p></li><li><p><strong>A typical laptop:</strong> Gemma 4 E4B (4.2 GB, 73) or Qwen 3.5 4B (2.8 GB, 71).</p></li><li><p><strong>Phones and small machines:</strong> Gemma 4 E2B (2.6 GB, 64). Below 2B, writing help is still usable, but reviews are mostly noise.</p></li></ul>
+<p>A separate conclusion: models like Gemma4 12B strike a useful sweetspot of very useful functionality but also being able to be run on higher end PCs and Macs. It offers promise that local models can provide real value to wide user bases for free, besides the hardware and electricity cost.</p>
+<h2>Appendix A: More Measurement Details</h2>
+<p>Every answer goes through the same code a real DocBlocks request does, then gets automatic checks and a grade from an AI judge.</p>
+<ol><li><p><strong>The product's own path.</strong> The benchmark calls DocBlocks' real pipelines — its prompts, parsers, repairs and retries — through Gezel, the local model runtime DocBlocks uses, with each model's catalog settings applied. The model sees exactly what a user's request would send, with the date and random seeds fixed.</p></li><li><p><strong>One modest setup for every model.</strong> Each model ran on llama.cpp, mostly as a 4-bit (Q4) build, with a 32,768-token context: what Gezel gives a constrained laptop.</p></li><li><p><strong>Automatic checks.</strong> First: could DocBlocks use the answer at all? It must parse, apply cleanly to the document, finish without being cut off, and keep the source's numbers and names. An answer DocBlocks could not show you scores 0.</p></li><li><p><strong>A judge for quality.</strong> Claude Opus 5.5 grades each usable answer against a written rubric for its task. Drawings are judged as rendered pictures, not as code.</p></li><li><p><strong>Answer keys for review.</strong> Each review document has planted problems tagged by how much fixing them changes the draft: small (a typo), moderate (a sentence) or substantial (structure, a contradiction, a buried point). The judge marks which ones a model found and labels each suggestion valid, trivial or wrong. Review is scored on finding problems (substantial ones count three times a small one) without padding, and clean documents with nothing to find penalize invented problems.</p></li><li><p><strong>Ranges and bands.</strong> A bootstrap over cases and repeat runs gives each score a 95% range. Models whose ranges overlap share a <strong>band</strong>, the fairest way to read the order.</p></li></ol>
+<p>Speed is not part of the score; a slow model that writes well still scores well.</p>
+<h3>Is the test fair?</h3>
+<p>The judge passed three consistency checks before any score was published, and a private test set ranked models the same way as the public one.</p>
+<ul><li><p><strong>It grades the same answer the same way.</strong> Re-grading a sample moved scores by 0.16 points on a 0–10 scale on average; the limit was 0.7.</p></li><li><p><strong>A second judge agrees.</strong> Claude Sonnet 5.5 graded the same sample, with agreement of 0.84 (Krippendorff's alpha; 0.6 was the bar).</p></li><li><p><strong>It cannot be fooled by damaged answers.</strong> We degraded good answers by cutting them short, padding them, changing their numbers, or turning review findings into "this sentence is correct". The judge marked them down 2 points or more in 56 of 62 cases (90%, the bar), and was weakest on list-like answers such as quizzes and slide points.</p></li></ul>
+<p>We also kept 32 test cases private and ran five models on them. If prompts had been tuned to the public documents, models would do worse on the private ones. They did not: the order is identical, and every model scored slightly higher on the private set.</p>
+<table><thead><tr><th>Model</th><th>Public set</th><th>Private set (95% range)</th><th>Difference</th></tr></thead><tbody><tr><td>Qwen 3.8 27B Q4</td><td>80.7</td><td>82.6 (80–85)</td><td>+1.9</td></tr><tr><td>Gemma 4 12B</td><td>78.8</td><td>81.3 (80–83)</td><td>+2.5</td></tr><tr><td>Qwen 3.5 4B</td><td>70.7</td><td>71.2 (68–74)</td><td>+0.5</td></tr><tr><td>MiniCPM5 2B</td><td>59.3</td><td>65.6 (63–69)</td><td>+6.3</td></tr><tr><td>Qwen 3.5 0.8B</td><td>42.7</td><td>43.6 (40–47)</td><td>+0.9</td></tr></tbody></table>
+<p>Family scores moved by up to 16 points between the two sets, because each family rests on few cases. Rank models by the overall score and band, and read family scores as a profile.</p>
+<h3>What these numbers do not tell you:</h3>
+<ul><li><p><strong>Other setups.</strong> Every model ran on one machine (an NVIDIA RTX Spark N1X with 23 GB of memory available), on llama.cpp, with a 32K context. Other engines and quantizations will score differently.</p></li><li><p><strong>Speed.</strong> It is not scored. On the test machine, the full benchmark took 7 minutes for Gemma 4 E2B and 4.4 hours for the 35B mixture-of-experts model.</p></li><li><p><strong>Anything outside English documents.</strong> All test documents are in English.</p></li><li><p><strong>Certainty from an AI judge.</strong> The judge passed its checks, but it is still a model, and it was weakest on list-like answers.</p></li><li><p><strong>Comparisons across versions.</strong> Scores compare within one docbench version (0.2); a new version re-measures every model.</p></li></ul>
+<!-- /squisq:content -->
+                </div>
+            </div>
+
+            <footer class="wrap wrap--prose post-end">
+                <p class="post-end-note">Thanks for reading. More notes from the workshop are on the blog.</p>
+                <a class="btn btn--ghost" href="/blog/">&larr; All posts</a>
+            </footer>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap footer-grid">
+            <div class="footer-brand">
+                <img src="/assets/bendyline-wordmark.webp" alt="Bendyline" width="480" height="323" loading="lazy">
+                <p>Honest free software. Hopefully it makes the world a little better.</p>
+            </div>
+            <nav aria-labelledby="footer-products">
+                <h2 id="footer-products">Products</h2>
+                <ul>
+                    <li><a href="https://gezel.com">Gezel</a></li>
+                    <li><a href="https://gezel.com/docs/npm-packages/">Gezel Platform</a></li>
+                    <li><a href="https://docblocks.com">DocBlocks</a></li>
+                    <li><a href="https://qualla.com">Qualla</a></li>
+                </ul>
+            </nav>
+            <nav aria-labelledby="footer-open-source">
+                <h2 id="footer-open-source">Open source</h2>
+                <ul>
+                    <li><a href="https://squigglysquare.com">Squiggly Square</a></li>
+                    <li><a href="https://molen.dev">Molen</a></li>
+                    <li><a href="/gezk/">gezk format</a></li>
+                    <li><a href="https://github.com/bendyline">GitHub</a></li>
+                </ul>
+            </nav>
+            <nav aria-labelledby="footer-company">
+                <h2 id="footer-company">Company</h2>
+                <ul>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/support/">Support</a></li>
+                    <li><a href="/privacy/">Privacy</a></li>
+                    <li><a href="https://www.youtube.com/@bendyline">YouTube</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="wrap footer-base">
+            <span>&copy; 2026 Bendyline LLC</span>
+            <a href="mailto:support@bendyline.com">support@bendyline.com</a>
+        </div>
+    </footer>
+
+    <script>
+        // Fill the dateline and reading time from the same catalog entry the blog
+        // list reads, so the two always agree. The dateline uses the catalog's
+        // firstPublishedDate; without JavaScript, or until the catalog loads, the
+        // post's `date` frontmatter shows instead.
+        (function () {
+            const time = document.querySelector("[data-post-date]");
+            const reading = document.querySelector("[data-post-reading]");
+
+            // Formats like the blog list ("October 28, 2026"): a bare date is a
+            // calendar day; a timestamp is shown in the reader's time zone.
+            function showDate(value) {
+                const day = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+                const date = day ? new Date(Date.UTC(+day[1], +day[2] - 1, +day[3])) : new Date(value);
+                if (!time || Number.isNaN(date.getTime())) return;
+                time.dateTime = value;
+                time.textContent = date.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    timeZone: day ? "UTC" : undefined,
+                });
+                time.hidden = false;
+            }
+
+            if (time) {
+                const written = time.textContent.trim();
+                time.hidden = !written;
+                if (written) showDate(written);
+            }
+
+            const catalogUrl = new URL("/posts/catalog.json", location.href);
+            fetch(catalogUrl)
+                .then((response) => (response.ok ? response.json() : null))
+                .then((catalog) => {
+                    const entry = ((catalog && catalog.documents) || []).find(
+                        (item) => new URL(item.path, catalogUrl).pathname === location.pathname,
+                    );
+                    if (!entry) return;
+                    if (entry.firstPublishedDate) showDate(entry.firstPublishedDate);
+                    if (reading && entry.wordCount) {
+                        reading.textContent = `${Math.max(1, Math.round(entry.wordCount / 225))} min read`;
+                    }
+                })
+                .catch(() => {});
+        })();
+    </script>
+</body>
+</html>

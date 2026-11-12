@@ -132,6 +132,55 @@
       "contentHash": "e0452c1970140ea582a76a652f4c90eb75d9e7c3cf73a5f6e4a49a531ae860ea"
     },
     {
+      "path": "docbench.html",
+      "source": "docbench_files/docbench.md",
+      "format": "html",
+      "title": "Docbench: how small local models handle document work",
+      "firstPublishedDate": "2026-11-12T22:10:17Z",
+      "lastModifiedDate": "2026-11-12T22:39:06Z",
+      "outline": [
+        {
+          "level": 1,
+          "title": "Docbench: how small local models handle document work"
+        },
+        {
+          "level": 2,
+          "title": "What docbench measures"
+        },
+        {
+          "level": 2,
+          "title": "The results"
+        },
+        {
+          "level": 2,
+          "title": "Review differences"
+        },
+        {
+          "level": 3,
+          "title": "Images and Diagrams"
+        },
+        {
+          "level": 2,
+          "title": "Summary"
+        },
+        {
+          "level": 2,
+          "title": "Appendix A: More Measurement Details"
+        },
+        {
+          "level": 3,
+          "title": "Is the test fair?"
+        },
+        {
+          "level": 3,
+          "title": "What these numbers do not tell you:"
+        }
+      ],
+      "wordCount": 3058,
+      "excerpt": "DocBlocks recently added support for using local models to provide AI features for document tasks. You can select a model, it downloads, and you get basic features like document review and content editing.",
+      "contentHash": "7a27a1b919346e47152446d07e36a177ce3e19cc6ec37839813ff1272fb4b2d7"
+    },
+    {
       "path": "howdocblocksusesgezelasanapi.html",
       "source": "howdocblocksusesgezelasanapi_files/howdocblocksusesgezelasanapi.md",
       "format": "html",
