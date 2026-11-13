@@ -60,6 +60,15 @@
     .squisq-feature, .squisq-feature--right { flex-direction: column; }
     .squisq-feature__media { flex-basis: auto; width: 100%; }
   }
+  .squisq-video-embed { display: block; max-width: 720px; margin: 1.25em 0; }
+  .squisq-video-embed[data-orientation="portrait"] { max-width: 340px; }
+  .squisq-video-embed-frame { position: relative; display: block; overflow: hidden; border-radius: 6px; background: #000; }
+  .squisq-video-embed-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .squisq-video-embed-poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .squisq-video-embed-play { position: absolute; left: 50%; top: 50%; width: 64px; height: 44px; margin: -22px 0 0 -32px; border-radius: 12px; background: rgba(0, 0, 0, 0.72); }
+  .squisq-video-embed-play::after { content: ''; position: absolute; left: 26px; top: 12px; border-style: solid; border-width: 10px 0 10px 16px; border-color: transparent transparent transparent #fff; }
+  .squisq-video-embed-provider { position: absolute; left: 12px; bottom: 10px; color: #fff; font-size: 0.8em; font-weight: 600; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); }
+  .squisq-video-embed-caption { margin-top: 0.4em; font-size: 0.875em; opacity: 0.8; }
 </style>
 <link rel="stylesheet" href="/assets/site.css">
     <link rel="stylesheet" href="/assets/post.css">
@@ -69,13 +78,13 @@
     <meta property="og:description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Bendyline">
-    <meta property="og:image" content="https://bendyline.com/posts/docbench_files/og-image.png?v=7b27ed35">
+    <meta property="og:image" content="https://bendyline.com/posts/docbench_files/og-image.png?v=c6df7fae">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Docbench: how small local models handle document work">
     <meta name="twitter:description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
-    <meta name="twitter:image" content="https://bendyline.com/posts/docbench_files/og-image.png?v=7b27ed35">
+    <meta name="twitter:image" content="https://bendyline.com/posts/docbench_files/og-image.png?v=c6df7fae">
 </head>
 <body>
     <header class="site-header">
@@ -104,6 +113,8 @@
                 <div class="post-body" data-post-body>
                     <!-- squisq:content -->
 <h1>Docbench: how small local models handle document work</h1>
+<p>YouTube version:</p>
+<figure class="squisq-video-embed" data-provider="youtube" data-orientation="landscape"><span class="squisq-video-embed-frame" style="aspect-ratio: 16 / 9"><iframe src="https://www.youtube-nocookie.com/embed/t9W6KSOdJgU" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy"></iframe></span></figure>
 <p>DocBlocks recently added support for using local models to provide AI features for document tasks. You can select a model, it downloads, and you get basic features like document review and content editing.</p>
 <p><video src="docbench_files/screen-20261112-145823-edited.mp4" controls="" width="480"></video></p>
 <p>Pretty quickly, we ran into an obvious usability problem: how are users supposed to know which models to use, especially amongst a choice of a lot of models? Though we have some good measurements from Gezel's overall scorecard, we set out to measure and create a focused synthetic benchmark of model usability for documents.</p>

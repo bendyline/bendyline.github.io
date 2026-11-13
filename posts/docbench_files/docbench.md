@@ -7,6 +7,10 @@ squisq-html-output: static
 ---
 # Docbench: how small local models handle document work
 
+YouTube version:
+
+[https://www.youtube.com/watch?v=t9W6KSOdJgU](https://www.youtube.com/watch?v=t9W6KSOdJgU)
+
 DocBlocks recently added support for using local models to provide AI features for document tasks. You can select a model, it downloads, and you get basic features like document review and content editing.
 
 <video src="screen-20261112-145823-edited.mp4" controls width="480"></video>
