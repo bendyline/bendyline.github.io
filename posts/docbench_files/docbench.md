@@ -9,13 +9,22 @@ squisq-html-output: static
 
 DocBlocks recently added support for using local models to provide AI features for document tasks. You can select a model, it downloads, and you get basic features like document review and content editing.
 
-Pretty quickly, we ran into an obvious usability problem: how are users supposed to know which models to use, especially amongst a choice of a lot of models? Though we have some good measurements from Gezel's overall scorecard, we set out to measure and create a focused synthetic benchmark of model usability for documents. Separately, it was pretty obvious that there were useful models and there were useless models, correlated to model size and we needed a way to quantify that. Enter "docbench".
+<video src="screen-20261112-145823-edited.mp4" controls width="480"></video>
+
+Pretty quickly, we ran into an obvious usability problem: how are users supposed to know which models to use, especially amongst a choice of a lot of models? Though we have some good measurements from Gezel's overall scorecard, we set out to measure and create a focused synthetic benchmark of model usability for documents. 
+
+Separately, it was pretty obvious that models varied wildly on usefulness, correlated to model size. We needed a way to quantify that. Enter "docbench".
 
 For docbench, we focus on really small models in the under-12-billion-parameter class. This is because we expect that the typical user will not be running on a workstation class machine with powerful video cards; rather, they'll run with modest GPUs or "just" a CPU by itself. Models that are in the 1-4 billion parameter range are typically runnable on conventional modern computers with at least 16gb of RAM, or a modern higher-end phone.
 
-So towards that end, we scored 22 local models, from 0.8B to 35B parameters, on the work DocBlocks asks of them: reviewing, writing, diagrams, slides, study aids and transcript cleanup. From this, we created a 100 point weighted scale and included elements of static analysis and AI-based output judging. For comparison, we also compared against GPT 6.1 Sol, Claude Opus 5.5, and Claude Sonnet 5.5 via their CLI command lines.
+So towards that end, we scored 24 local models, from 0.8B to 35B parameters, on the work DocBlocks asks of them: reviewing, writing, diagrams, slides, study aids and transcript cleanup. From this, we created a 100 point weighted scale and included elements of static analysis and AI-based output judging. For comparison, we also compared against GPT 6.1 Sol, Claude Opus 5.5, and Claude Sonnet 5.5 via their CLI command lines.
 
-The headlines: Qwen 3.8 27B leads at 81 of 100, Gemma 4 12B is statistically level with it at 79, and the best models at 4B and under reach about 71. Review separates models most: large models find real problems, while 1–2B models pad their reviews with trivial or wrong suggestions. For comparison, cloud models score between 87 and 91 - at least 6 points higher than the highest model that we've tested.
+Putting the headlines before the details: 
+
+- Qwen 3.8 27B Q4 leads at 81 of 100, Gemma 4 12B is statistically level with it at 79, and the best models at 4B and under reach about 71.
+- Review separates models most: large models find real problems, while 1–2B models pad their reviews with trivial or wrong suggestions.
+- For comparison, modern cloud models score between 87 and 91, at least 6 points higher than the highest local model tested. Even historical cloud models (e.g., Claude Sonnet 4.6) have performed better.
+- Although this rubric seemed to do a pretty good job of separating out lower-end models on real world tasks, I suspect if we had even harder editing and writing challenges, you'd see cloud models pull ahead farther. In other words, I believe cloud models probably topped out the difficulty of these challenges, but would be more differentiated on tougher challenges (reviewing a scientific paper, for example.)
 
 
 ## What docbench measures
@@ -31,40 +40,46 @@ Docbench covers every AI feature DocBlocks ships, grouped into six families and 
 | Study aids | 15% | Summaries, quizzes and flashcards that stay true to the source | 12 | 25% checks, 75% judge |
 | Narration cleanup | 5% | Clean up a dictated transcript without changing what was said | 5 | 40% checks, 60% judge |
 
-A family's score is the mean of its tasks, and docbench is the weighted mean of the six families. The test documents are deliberately moderate in quality, so a good reviewer has real problems to find. See Appendix A for more on how each result is concerned.
+A family's score is the mean of its tasks, and docbench is the weighted mean of the six families. The test documents are deliberately moderate in quality, so a good reviewer has real problems to find. See Appendix A for more on how each result is calculated.
+
 
 
 ## The results
 
-Across a few runs and two devices, we found that three models share the top band, a group of 4–9B models follows within 10 points, and scores fall quickly below 3B. Family scores are 0–100; the order is by docbench score. Note that download size loosely correlates to how much memory is occupied, though some models, like Nanbeige 4.2 are outliers in that they take up far more memory than their size implies.
+Across a few runs and two devices, we found that four models share the top band, a group of 4–9B models follows within 10 points, and scores fall quickly below 3B. Family scores are 0–100; the order is by docbench score. Note that download size loosely correlates to how much memory is occupied, though some models, like Nanbeige 4.2 are outliers in that they take up far more memory than their size implies.
 
-| Model | Parameters | Download | Docbench (95% range) | Review | Writing | Diagrams | Slides | Study | Narration |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Claude Opus 5.5 via Claude CLI <sup>2</sup> | -- | -- | 89.5 (88.4-90.6) | 89 | 91 | 91 | 92 | 84 | 92 |
-| GPT-6.1 Sol via Codex <sup>2</sup> | -- | -- | 89.5 (88.4-90.4) | 88 | 93 | 90 | 94 | 83 | 92 |
-| Claude Sonnet 5.5 <sup>2</sup> | -- | -- | 87.1 (85.8 - 88.2) | 83 | 89 | 90 | 91 | 84 | 84 |
-| Qwen 3.8 27B Q4 | 27B | 16.5 GB | **81** (79–82) | 72 | 89 | 82 | 89 | 74 | 86 |
-| Qwen 3.8 27B Q2 | 27B | 9.8 GB | **79** (77–81) | 69 | 87 | 78 | 89 | 74 | 87 |
-| Gemma 4 12B | 12B | 6.7 GB | **79** (77–81) | 70 | 83 | 84 | 86 | 72 | 88 |
-| Qwen 3.6 35B-A3B (MoE) | 35B | 22.7 GB | **76** (73–79) | 61 | 89 | 73 | 89 | 74 | 86 |
-| Ornith 1.5 9B | 9B | 5.6 GB | **73** (71–75) | 50 | 87 | 78 | 86 | 73 | 77 |
-| Gemma 4 E4B | 8B | 4.2 GB | **73** (71–75) | 52 | 86 | 74 | 86 | 69 | 86 |
-| Qwen 3.5 9B | 9B | 5.9 GB | **72** (70–74) | 52 | 87 | 72 | 84 | 71 | 82 |
-| Qwen 3.5 4B | 4B | 2.8 GB | **71** (69–72) | 47 | 85 | 77 | 85 | 67 | 79 |
-| Nanbeige 4.2 3B <sup>1</sup> | 3B | 2.7 GB | **71** (68–73) | 53 | 83 | 71 | 83 | 69 | 79 |
-| Nemotron 3.5 Bolt E4B | 8B | 6.2 GB | **69** (67–72) | 50 | 85 | 66 | 82 | 68 | 83 |
-| GPT-OSS 20B (MoE) <sup>1</sup> | 20B | 11.7 GB | **67** (64–69) | 40 | 83 | 73 | 79 | 67 | 75 |
-| Granite 4.2 8B | 8B | 5.3 GB | **66** (63–68) | 38 | 82 | 69 | 82 | 67 | 76 |
-| Gemma 4 E2B | 2.3B | 2.6 GB | **64** (61–66) | 40 | 74 | 69 | 80 | 65 | 72 |
-| MiniCPM5 2B | 2B | 1.6 GB | **59** (57–62) | 35 | 74 | 60 | 75 | 59 | 75 |
-| Granite 4.2 3B | 3B | 2.2 GB | **59** (56–61) | 33 | 74 | 60 | 78 | 59 | 67 |
-| Qwen 3.5 2B | 2B | 1.3 GB | **56** (53–58) | 30 | 74 | 51 | 75 | 55 | 71 |
-| LFM3 1.7B† | 1.7B | 1.0 GB | **55** (52–58) | 30 | 68 | 70 | 76 | 57 | 13 |
-| Apple Foundation Models <sup>2 3</sup> | 3B | -- | 54.4 (51.7-57.1) | 26 | 78 | 45 | 73 | 55 | 75 |
-| Llama 3.2 3B† | 3B | 2.0 GB | **54** (51–56) | 32 | 66 | 56 | 64 | 53 | 68 |
-| LFM2.5 2.6B† | 2.6B | 1.7 GB | **47** (44–49) | 40 | 72 | 50 | 0 | 57 | 0 |
-| Qwen 3.5 0.8B | 0.8B | 0.5 GB | **43** (40–45) | 20 | 56 | 32 | 70 | 46 | 67 |
-| MiniCPM5 1B | 1B | 0.7 GB | **37** (35–40) | 14 | 54 | 32 | 63 | 34 | 47 |
+| Model | Download | Docbench (95% range) | Review | Writing | Diagrams | Slides | Study | Narration |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Claude Opus 5.5 via Claude CLI <sup>2</sup> | -- | 89.5 (88.4-90.6) | 89 | 91 | 91 | 92 | 84 | 92 |
+| GPT-6.1 Sol via Codex <sup>2</sup> | -- | 89.5 (88.4-90.4) | 88 | 93 | 90 | 94 | 83 | 92 |
+| Claude Sonnet 5.5 <sup>2</sup> | -- | 87.1 (85.8 - 88.2) | 83 | 89 | 90 | 91 | 84 | 84 |
+| GPT-5.6 Sol via Codex | -- | 86.5 (84.8-88) | 84 | 92 | 87 | 88 | 81 | 85 |
+| Claude Sonnet 4.6 <sup>2</sup> | -- | 83.5 (81.6-85.2) | 78 | 88 | 85 | 91 | 77 | 86 |
+| Gemma 4 31B <sup>2</sup> | 17.57 GB | 83.1 (80.7-83.8) | 74 | 89 | 85 | 84 | 78 | 89 |
+| Claude Haiku 4.5 <sup>2</sup> | -- | 81.5 (80.1-82.9) | 71 | 89 | 88 | 87 | 79 | 90 |
+| Qwen 3.8 27B Q4 | 16.5 GB | **81** (79–82) | 72 | 89 | 82 | 89 | 74 | 86 |
+| Qwen 3.8 27B Q2 | 9.8 GB | **79** (77–81) | 69 | 87 | 78 | 89 | 74 | 87 |
+| Gemma 4 12B <sup>2</sup> | 6.7 GB | **79.7** (77–81) | 70 | 83 | 84 | 86 | 72 | 88 |
+| Gemma 4 26B-A4B | 14.5 GB | 79.2 (77.7-80.7) | 67 | 88 | 83 | 89 | 73 | 85 |
+| Qwen 3.6 35B-A3B (MoE) | 22.7 GB | **76** (73–79) | 61 | 89 | 73 | 89 | 74 | 86 |
+| Ornith 1.5 9B | 5.6 GB | **73** (71–75) | 50 | 87 | 78 | 86 | 73 | 77 |
+| Gemma 4 E4B | 4.2 GB | **73** (71–75) | 52 | 86 | 74 | 86 | 69 | 86 |
+| Qwen 3.5 9B | 5.9 GB | **72** (70–74) | 52 | 87 | 72 | 84 | 71 | 82 |
+| Qwen 3.5 4B | 2.8 GB | **71** (69–72) | 47 | 85 | 77 | 85 | 67 | 79 |
+| Nanbeige 4.2 3B <sup>1</sup> | 2.7 GB | **71** (68–73) | 53 | 83 | 71 | 83 | 69 | 79 |
+| Nemotron 3.5 Bolt E4B | 6.2 GB | **69** (67–72) | 50 | 85 | 66 | 82 | 68 | 83 |
+| GPT-OSS 20B (MoE) <sup>1</sup> | 11.7 GB | **67** (64–69) | 40 | 83 | 73 | 79 | 67 | 75 |
+| Granite 4.2 8B | 5.3 GB | **66** (63–68) | 38 | 82 | 69 | 82 | 67 | 76 |
+| Gemma 4 E2B | 2.6 GB | **64** (61–66) | 40 | 74 | 69 | 80 | 65 | 72 |
+| MiniCPM5 2B | 1.6 GB | **59** (57–62) | 35 | 74 | 60 | 75 | 59 | 75 |
+| Granite 4.2 3B | 2.2 GB | **59** (56–61) | 33 | 74 | 60 | 78 | 59 | 67 |
+| Qwen 3.5 2B | 1.3 GB | **56** (53–58) | 30 | 74 | 51 | 75 | 55 | 71 |
+| LFM3 1.7B† | 1.0 GB | **55** (52–58) | 30 | 68 | 70 | 76 | 57 | 13 |
+| Apple Foundation Models <sup>2 3</sup> | -- | 54.4 (51.7-57.1) | 26 | 78 | 45 | 73 | 55 | 75 |
+| Llama 3.2 3B† | 2.0 GB | **54** (51–56) | 32 | 66 | 56 | 64 | 53 | 68 |
+| LFM2.5 2.6B† | 1.7 GB | **47** (44–49) | 40 | 72 | 50 | 0 | 57 | 0 |
+| Qwen 3.5 0.8B | 0.5 GB | **43** (40–45) | 20 | 56 | 32 | 70 | 46 | 67 |
+| MiniCPM5 1B | 0.7 GB | **37** (35–40) | 14 | 54 | 32 | 63 | 34 | 47 |
 
 † - Custom license: scored, but DocBlocks never recommends them. "E4B" and "E2B" models run like 4B and 2B models but carry more parameters in embeddings.
 
@@ -87,18 +102,17 @@ Perhaps not surprisingly, every model is better at finding typos than at structu
 
 To test review capability we bucketed planted issues in a document into small, moderate, and substantial problems that models could find:
 
-- Small covers basic grammatical fixes, doubled words, misspellings, and subject verb agreement
-- Moderate covers broader stylistic issues with content. For example, passive and vague language, wordiness
-- Substantial covers more document-level feedback. For example, factual contradictions in the document, conflicting references to previous sections, or statements first made in the concluding summary of a document
+- **Small** covers basic grammatical fixes, doubled words, misspellings, and subject verb agreement
+- **Moderate** covers broader stylistic issues with content. For example, passive and vague language, wordiness
+- **Substantial** covers more document-level feedback. For example, factual contradictions in the document, conflicting references to previous sections, or statements first made in the concluding summary of a document
 
-More specific eview styles plant problems of their own kind:
+More specific review styles plant problems of their own kind:
 
 - **Fact check.** A water-works notice advises residents to boil their water "because boiling water removes lead". It does not (it can concentrate lead), so the safety advice is wrong. Smaller plants include arithmetic slips, such as "36 (60%)" when 36 of 48 is 75%.
 - **Resume.** Flagging duties instead of accomplishments ("Responsible for maintaining the internal reporting dashboard"), results with no number ("Improved page load time on the analytics site"), and jobs out of reverse-chronological order.
 - **Policy.** "It applies to all full-time employees" contradicts a later section that gives part-time staff remote days, and "core hours" are required but never defined.
 
-The top model finds 92% of the planted small problems but only 10% of the substantial ones, and models under 2B add more trivial or wrong suggestions than real ones. A "trivial" suggestion restates the text or praises it ("This is a correct sentence"). It costs the reader time without improving the draft, so it counts against the model like a wrong one. Some documents have nothing wrong with them at all. A model that invents problems there loses points.
-
+One of the top local models finds 92% of the planted small problems but only 10% of the substantial ones, and models under 2B add more trivial or wrong suggestions than real ones. A "trivial" suggestion restates the text or praises it ("This is a correct sentence"). It costs the reader time without improving the draft, so it counts against the model like a wrong one. Some documents have nothing wrong with them at all. A model that invents problems there loses points.
 
 These counts come from the general review task: four moderate-quality documents with about eight planted problems each.
 
@@ -117,7 +131,7 @@ These counts come from the general review task: four moderate-quality documents 
 
 ### Images and Diagrams
 
-Freehand drawing separates models more than any other task, while diagrams barely do. Asked for an SVG picture of the water cycle, the largest models drew a recognizable scene with all four stages labeled; the smallest drew loose shapes with no cycle, or nothing at all.
+Freehand drawing separates models more than any other task, while diagrams (rendered via strict schema'ed JSON) barely do. Asked for an SVG picture of the water cycle, the largest models drew a recognizable scene with all four stages labeled; the smallest drew loose shapes with no cycle, or nothing at all.
 
 | Model | SVG illustrations (0–100) | Shows its subject (0–10) | Composition (0–10) | Diagrams (0–100) |
 | --- | --- | --- | --- | --- |
@@ -134,20 +148,26 @@ Freehand drawing separates models more than any other task, while diagrams barel
 
 The gap comes from who does the drawing:
 
-- **For a diagram, DocBlocks draws.** The model only fills in a structured spec — which kind of diagram, which boxes, labels and links — and DocBlocks renders it, so the picture is always clean. Most models from 3B up score 85–91, and even LFM3 at 1.7B reaches 85.
+- **For a diagram, DocBlocks draws.** The model only fills in a structured spec (JSON to a schema) — which kind of diagram, which boxes, labels and links — and DocBlocks renders it, so the picture is always clean. Most models from 3B up score 85–91, and even LFM3 at 1.7B reaches 85.
 - **For an illustration, the model draws.** It writes the SVG itself: every coordinate, shape and label position. That takes spatial planning that small models do not have.
 - **Even the best drawings are modest.** Qwen 3.8 27B averages 6.3 of 10 for showing its subject: simple, labelled scenes, closer to clip art than to illustration.
 - **Small models rarely invent, they just cannot draw.** Most score 5–9 of 10 for faithfulness to the source while scoring 1–3 for showing the subject.
 - **Some failures are invisible in the code.** Qwen 3.5 0.8B's water cycle is valid SVG that draws nothing: its styling made every label transparent and it drew no shapes. That is why the judge grades the rendered picture, not the SVG source.
 
+
 Six models' answers to the same water-cycle prompt, with the judge's grades:
 
-![pasted c14079e6 4c8d 42c0 9891 72ea7bfb129b](pasted-c14079e6-4c8d-42c0-9891-72ea7bfb129b.png)
+<img alt="pasted c14079e6 4c8d 42c0 9891 72ea7bfb129b" src="pasted-c14079e6-4c8d-42c0-9891-72ea7bfb129b.png" width="750" height="396">
+
+
+Here are the cloud equivalents:
+
+<img alt="water cycle four" src="water-cycle-four.png" width="748" height="579">
 
 
 ## Summary
 
-This set of tests clearly show that there is a completely wide-open range of capability available for consumer-grade hardware: from barely able to coherently review, to useful functionality, to  near-frontier quality. 
+This set of tests clearly shows that there is a wide-open range of capability available for consumer-grade hardware: from barely able to coherently review, to useful functionality, to near-frontier quality. 
 
 The guidance is still simple: pick the highest band your machine can hold. DocBlocks does this for you: its model list ranks downloadable models by docbench among those that fit your computer or phone. 
 
@@ -158,7 +178,9 @@ As a rough guide by download size:
 - **A typical laptop:** Gemma 4 E4B (4.2 GB, 73) or Qwen 3.5 4B (2.8 GB, 71).
 - **Phones and small machines:** Gemma 4 E2B (2.6 GB, 64). Below 2B, writing help is still usable, but reviews are mostly noise.
 
-A separate conclusion: models like Gemma4 12B strike a useful sweetspot of very useful functionality but also being able to be run on higher end PCs and Macs. It offers promise that local models can provide real value to wide user bases for free, besides the hardware and electricity cost.
+Gemma 4 12B is the sweet spot: strong enough to be genuinely useful, small enough to run on most modern PCs and Macs. Free, private, and good enough for real document work. It offers promise that local models can provide real value to wide user bases for free, besides the hardware and electricity cost.
+
+
 
 
 ## Appendix A: More Measurement Details

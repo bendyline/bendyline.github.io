@@ -137,7 +137,7 @@
       "format": "html",
       "title": "Docbench: how small local models handle document work",
       "firstPublishedDate": "2026-11-12T22:10:17Z",
-      "lastModifiedDate": "2026-11-12T22:39:06Z",
+      "lastModifiedDate": "2026-11-13T22:09:10Z",
       "outline": [
         {
           "level": 1,
@@ -176,9 +176,9 @@
           "title": "What these numbers do not tell you:"
         }
       ],
-      "wordCount": 3058,
+      "wordCount": 3214,
       "excerpt": "DocBlocks recently added support for using local models to provide AI features for document tasks. You can select a model, it downloads, and you get basic features like document review and content editing.",
-      "contentHash": "7a27a1b919346e47152446d07e36a177ce3e19cc6ec37839813ff1272fb4b2d7"
+      "contentHash": "56baec961598249ccc4e3f97df7463150273db2860ee7421f584ff7f968d9de6"
     },
     {
       "path": "howdocblocksusesgezelasanapi.html",
