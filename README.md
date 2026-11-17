@@ -8,7 +8,7 @@ Run it locally with `npm run web` (serves on http://localhost:3090).
 
 - `index.html`: home page (products, open-source projects, latest posts)
 - `blog/`: the blog listing
-- `support/`, `privacy/`, `gezk/`: inner pages
+- `support/`, `privacy/`, `terms/`, `gezk/`: inner pages
 - `assets/site.css`: shared styles for every page except the generated posts
 - `assets/posts.js`: renders post lists from `posts/catalog.json`
 - `assets/showcase.js`: the rotating product showcase in the home page hero
