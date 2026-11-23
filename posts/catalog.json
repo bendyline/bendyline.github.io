@@ -132,6 +132,51 @@
       "contentHash": "e0452c1970140ea582a76a652f4c90eb75d9e7c3cf73a5f6e4a49a531ae860ea"
     },
     {
+      "path": "taskstrategies.html",
+      "source": "taskstrategies_files/taskstrategies.md",
+      "format": "html",
+      "title": "Building a Couch: Lessons in AI Organizational Design",
+      "firstPublishedDate": "2026-11-20T23:28:16Z",
+      "lastModifiedDate": "2026-11-23T22:22:19Z",
+      "outline": [
+        {
+          "level": 2,
+          "title": "Building a Couch: Lessons in AI Organizational Design"
+        },
+        {
+          "level": 2,
+          "title": "The Hypothesis: Highly Structured Tasks"
+        },
+        {
+          "level": 2,
+          "title": "What we compared"
+        },
+        {
+          "level": 2,
+          "title": "Strategy Results"
+        },
+        {
+          "level": 2,
+          "title": "Moving to a new strategy for Gezel"
+        },
+        {
+          "level": 2,
+          "title": "Against raw harnesses"
+        },
+        {
+          "level": 2,
+          "title": "A frontier model: Claude Sonnet 5.5"
+        },
+        {
+          "level": 2,
+          "title": "Summary"
+        }
+      ],
+      "wordCount": 4038,
+      "excerpt": "Gezel is based on the idea of putting people in control of their AI by harnessing the power of local models. While frontier models are powerful and can do very sophisticated work, local models have a noticeably lower plateau on the complexity of tasks they can undertake.…",
+      "contentHash": "5097ff511db8edd977c51713b482d98c3b29f8be358f85c876c6a43e72407d86"
+    },
+    {
       "path": "docbench.html",
       "source": "docbench_files/docbench.md",
       "format": "html",

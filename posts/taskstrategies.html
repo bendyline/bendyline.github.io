@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<!-- A Bendyline blog post. DocBlocks generates each posts/*.html page through
+     posts/_templates/post.html: edit that template or the post's Markdown,
+     not the generated page. -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building a Couch: Lessons in AI Organizational Design &middot; Bendyline</title>
+    <meta name="description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
+    <link rel="icon" href="/assets/bendyline128.png">
+    <style data-squisq>
+  .squisq-feature {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    align-items: center;
+    margin: 1.75em 0;
+  }
+  .squisq-feature--right { flex-direction: row-reverse; }
+  .squisq-feature__media {
+    flex: 0 0 42%;
+    min-width: 0;
+  }
+  .squisq-feature__media--empty { display: none; }
+  /* Default: image fills the media column. */
+  .squisq-feature__media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+  }
+  /* "Sized" media: the image carried explicit width/height attrs (the
+     WYSIWYG editor wrote them after a resize). Honor the attribute
+     values and center the image inside the media column with padding. */
+  .squisq-feature__media--sized {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    box-sizing: border-box;
+  }
+  /* Leave width and height untouched here -- the HTML attributes set
+     the intrinsic dimensions, and CSS overrides would silently discard
+     the author's sizing. max-width: 100% still keeps the image from
+     overflowing the column on narrow viewports; HTML5 derives the
+     aspect ratio from the width/height pair so the scale stays right. */
+  .squisq-feature__media--sized img {
+    max-width: 100%;
+    display: block;
+    border-radius: 6px;
+  }
+  .squisq-feature__body {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .squisq-feature__body > :first-child { margin-top: 0; }
+  .squisq-feature__body > :last-child { margin-bottom: 0; }
+  @media (max-width: 600px) {
+    .squisq-feature, .squisq-feature--right { flex-direction: column; }
+    .squisq-feature__media { flex-basis: auto; width: 100%; }
+  }
+</style>
+<link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/post.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Building a Couch: Lessons in AI Organizational Design">
+    <meta property="og:description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Bendyline">
+    <meta property="og:image" content="https://bendyline.com/posts/taskstrategies_files/og-image.png?v=6ce0e189">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Building a Couch: Lessons in AI Organizational Design">
+    <meta name="twitter:description" content="Notes from the Bendyline workshop: product news, deep dives, and what we're learning as we build.">
+    <meta name="twitter:image" content="https://bendyline.com/posts/taskstrategies_files/og-image.png?v=6ce0e189">
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="/"><img src="/assets/bendyline-wordmark.webp" alt="Bendyline home" width="480" height="323"></a>
+            <nav class="site-nav" aria-label="Main">
+                <a class="nav-section" href="/#products">Products</a>
+                <a class="nav-section" href="/#open-source">Open source</a>
+                <a href="/blog/">Blog</a>
+                <a href="/support/">Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <article class="post-article">
+            <div class="wrap wrap--prose">
+                <div class="post-intro">
+                    <a class="eyebrow post-eyebrow" href="/blog/">Blog</a>
+                    <p class="post-dateline">
+                        <time data-post-date></time>
+                        <span class="post-reading" data-post-reading></span>
+                    </p>
+                </div>
+
+                <div class="post-body" data-post-body>
+                    <!-- squisq:content -->
+<h2>Building a Couch: Lessons in AI Organizational Design</h2>
+<p><a href="https://gezel.com">Gezel</a> is based on the idea of putting people in control of their AI by harnessing the power of local models. While frontier models are powerful and can do very sophisticated work, local models have a noticeably lower plateau on the complexity of tasks they can undertake. Nevertheless, local models have a number of advantages over frontier models (cost; privacy; control). We believe, with the right set of supports, local models are good enough to do many common knowledge worker tasks (e.g., reviewing docs; transcribing audio; monitoring inboxes; data analysis). In a recent test of <a href="https://bendyline.com/posts/docbench.html">local models for document tasks</a>, they are more than capable for tasks like review.</p>
+<p>To maximize capabilities of local models, there is a role for a "local oriented" harness with specific support for local models, with more infrastructure and support to add "catch up" capability to local models. <a href="https://gezel.com">Gezel</a> is one such local oriented harness. As part of this, we've been trying multiple different ideas (<a href="https://bendyline.com/posts/introducingknowledge.html">knowledge</a>, <a href="http://bendyline.com/posts/indexingandnightshift.html">night shift</a>) to accommodate these limitations, and with good success. But this essay is about the windy road of the main local-AI facilitating idea: Highly Structured Tasks.</p>
+<h2>The Hypothesis: Highly Structured Tasks</h2>
+<p>One major hypothesis for "local model" support infrastructure is well-thought-through plans - called "craftbooks" in Gezel - for common knowledge worker tasks that are more structured and rigorous equivalents of freeform "skill.md" files. These craftbooks center around a number of phases, with static validation gates, where each phase is a structured session by itself.</p>
+<p>For an example, let's take the task of "Write a research document about superconductors". A craftbook breaks down that request into a "recipe" of several steps:</p>
+<ol><li><p>Assemble sources and review the research</p></li><li><p>Build an outline of the research document</p></li><li><p>Write the document based on the outline</p></li><li><p>Review the document (fact check)</p></li><li><p>Export the document to a finalized package</p></li></ol>
+<p>For each of these steps, Gezel will assign an agent of human-esque roles for these: a "researcher" for step 1, a "writer" for steps 2 and 3, a "reviewer "for step 4, and back to the writer for step 5. Each step is its own independent session so that context can be kept narrow. Having independent roles allows us to keep models very focused on task - a researcher only needs to find quality sources and produce summarizations; the writer only needs to focus on coherent prose; the reviewer only needs to find bugs. This makes the prompt (system prompt + toolset) for these models very tight and focused, and workable in small context sizes (32K tokens, say).</p>
+<p>On top of this, craftbooks layer on a concept of step gates (static checks) to keep models honest - for example, a model couldn't pass the Outline phase until it had a file called <a href="http://outline.md">outline.md</a> that was at least, say, 3kb large (i.e., it had some substance.) A model was sent back to the drawing board within the phase if it didn't meet fixed criteria from a growing library of criteria.</p>
+<p>There are two obvious downsides to this structure: "wall clock time" to get jobs complete could rise significantly because of per-step rework (spinning in a step). Also, for local models, reloading a prompt (prefill) at every step change can add 1-3 minutes per step before any results are delivered. The other downside: it would take a lot of tweaking and testing to build a system of step gates (exit criteria) that did more help than harm. But if it improves product quality by, say, 20%, maybe these tradeoffs are worth it.</p>
+<p>On paper, this seemed like good working hypothesis for a system that can boost local model efficacy. Also, this is not a new idea; in 2024/early 2025 similar "role based frameworks" were built for frontier models but that were left by the wayside as models like Opus became more... omniscient. However, maybe local models running in less than 32gb of RAM, by virtue of size, are closer to that early 2025 world than the frontier of late 2026.</p>
+<p>So "stepwise, crew design" is (spoilers: was) a core part of the design of Gezel.</p>
+<p>We've been way overdue to test this strategy out. Now is the time to see: does this step by step framework produce better results? Does it earn its place? Is it a load bearing assumption that bears the load?</p>
+<h2>What we compared</h2>
+<p>To test this, we outlined several different strategies for achieving medium to large tasks. These strategies differ in terms of how tasks are divided up, and where they are tested. Running tasks "step by step", with roles per step, is/was the default of Gezel based on the logic above.</p>
+<p>Before we describe these strategies, we should introduce the concept of a "contract". A contract is a specification of what the final outputs should be oriented around: the goal, the deliverables, and a quality bar of criteria the runtime can check (e.g., a section exists, the tests pass, every cited figure appears in its source).</p>
+<p>Here is what an example contract looks like for a "build a runbook" task (where a "runbook" is an engineering checklist+manual):</p>
+<blockquote><p>Goal: An on-call runbook a tired engineer can follow literally: when to use it and when not to, prerequisites, numbered copy-pasteable steps that each say what to expect and how to verify it, warnings before risky steps, a rollback, and an escalation path.</p><p>Deliverables: <code>runbook.md</code> — The runbook, in Markdown.</p><p>Quality bar: The runbook is a complete document organized under headings
+[checked] · It says when to use it and when not to
+[checked] · It lists prerequisites (access, tools, safety checks) before the procedure
+[checked] · The procedure is written as numbered steps
+[checked] · Commands are written out exactly in code formatting
+[checked] · It has a rollback section
+[checked] · It has an escalation section
+[checked] · Steps say what output to expect and how to verify each one worked
+[checked] · Risky or destructive steps carry a warning before them
+[checked] · Nothing is left unfinished: no TBD, TODO or FIXME
+[checked] · Each step is unambiguous and in order
+[…] · Commands, thresholds, names and contacts come from what the person supplied […]</p><p>The runtime checks the [checked] items before the task can finish and names anything unmet.</p></blockquote>
+<p>As an analogy, you could compare these strategies to paths for assembling Ikea furniture: you buy furniture (e.g., a couch) and it comes "assembly required" in a tight flatpack box. You need to assemble it from dozens of assorted pieces (wood crossbars and slats; screws, dowels).</p>
+<p>In the real world, this Ikea furniture is also accompanied by a picture on the box and dimensions (you know what the end goal looks like) -- the "contract", if you will -- and it also has a multi-step instruction guide. You can see in the table below how each strategy analogizes to a strategy for assembling Ikea furniture.</p>
+<table><thead><tr><th>Strategy</th><th>Who works</th><th>What the model is told</th><th>What is checked</th><th>Analogy as an Ikea couch assembly scenario</th></tr></thead><tbody><tr><td>Step by step <br />(the Gezel default)</td><td>A specialist per step (e.g., a planner, writer, reviewer), each in a fresh conversation</td><td>One step's instructions at a time</td><td>Each step's own gate, then a final review</td><td>A team of experts - dowel fitters, screwdriver masters, and so on - reads an Ikea manual and divides up the work. After each step, the results are tested for conformance. The final couch is also tested.</td></tr><tr><td>One owner, whole recipe</td><td>One gezel (with a general role type and a union of tools), one conversation</td><td>Every step, in order</td><td>Every step's gate</td><td>An individual reads and sticks to the Ikea manual and does all the steps by them self. After each step, the results are tested for conformance.</td></tr><tr><td>Goal, recipe as advice</td><td>One gezel, one conversation</td><td>The end-state contract, plus the recipe as optional advice</td><td>The end-state contract only</td><td>An individual is shown a picture of the finished product, and is shown the manual. They don't need to follow the manual, though. The final product is tested and judged.</td></tr><tr><td>Goal only</td><td>One gezel, one conversation</td><td>The end-state contract</td><td>The end-state contract only</td><td>An individual is shown a picture of the finished couch. The final product is tested and judged.</td></tr><tr><td>Request only ("just a prompt")</td><td>One gezel, one conversation</td><td>The person's request; no contract</td><td>Nothing until grading</td><td>An individual is just told to build a couch. The final product is judged</td></tr><tr><td>Contract shown, not checked ("just a prompt + expected end state)</td><td>One gezel, one conversation</td><td>The end-state contract</td><td>Nothing until grading</td><td>An individual is given the manual. The final product is judged</td></tr><tr><td>pi</td><td>pi 1.4.0, an outside agent tool</td><td>The request, and the project's description and objectives</td><td>Nothing until grading</td><td>pi is told to build a couch. The final couch is judged</td></tr><tr><td>OpenCode</td><td>OpenCode 1.19.4, an outside agent tool</td><td>The request, and the project's description and objectives</td><td>Nothing until grading</td><td>OpenCode is told to build a couch. The final couch is judged</td></tr></tbody></table>
+<h2>Strategy Results</h2>
+<p>For the primary round, we measured 18 craftbooks across research, coding, data, and multi-deliverable areas, across four strategies and three models, for a total of 504 trials. This was run on an nvidia DGX Spark using llama.cpp. Models ran with at least 128k context size, and no test hit that limit.</p>
+<table><thead><tr><th>Model</th><th>Strategy</th><th>Passed</th><th>Criteria met</th><th>Quality</th><th>Wall Clock Time (median min)</th></tr></thead><tbody><tr><td>Gemma 4 E4B</td><td>step by step (old Gezel default)</td><td>17/36</td><td>0.83</td><td>4.75</td><td>4.6</td></tr><tr><td></td><td>one owner, whole recipe</td><td>12/36</td><td>0.81</td><td>4.89</td><td>3.8</td></tr><tr><td></td><td>goal, recipe as advice</td><td>18/36</td><td>0.88</td><td>5.58</td><td>2.5</td></tr><tr><td></td><td>goal only (new Gezel default)</td><td>18/36</td><td>0.89</td><td>5.47</td><td>1.6</td></tr><tr><td>Qwen 3.5 9B</td><td>step by step<br />(old Gezel default)</td><td>16/36</td><td>0.94</td><td>5.41</td><td>6.0</td></tr><tr><td></td><td>one owner, whole recipe</td><td>23/36</td><td>0.96</td><td>5.87</td><td>4.4</td></tr><tr><td></td><td>goal, recipe as advice</td><td>18/36</td><td>0.95</td><td>5.64</td><td>1.9</td></tr><tr><td></td><td>goal only (new Gezel default)</td><td>23/36</td><td>0.96</td><td>5.93</td><td>1.6</td></tr><tr><td>Qwen 3.8 27B</td><td>step by step (old Gezel default)</td><td>50/54</td><td>0.99</td><td>7.92</td><td>13.8</td></tr><tr><td></td><td>one owner, whole recipe</td><td>44/54</td><td>0.99</td><td>7.83</td><td>15.8</td></tr><tr><td></td><td>goal, recipe as advice</td><td>47/54</td><td>0.99</td><td>8.03</td><td>5.8</td></tr><tr><td></td><td>goal only(new Gezel default)</td><td>50/54</td><td>0.99</td><td>7.90</td><td>4.4</td></tr></tbody></table>
+<p>Here are some of the (surprising) results:</p>
+<ul><li><p><strong>On small on-device models, giving the model the goal and the quality bar beats walking it through the steps.</strong> Pooled over every round, Qwen 3.5 9B finished 59 of 90 tasks this way against 39 of 90 step by step (+22 points, 95% interval +9 to +36). Gemma 4 E4B went from 33 to 42 of 78. Judged quality rose by 0.6 to 0.9 points out of 10, with intervals above zero.</p></li><li><p><strong>On a larger model, quality is the same either way, and the goal-only run is three times faster.</strong> Qwen 3.8 27B passed 56 of 60 against 55 of 60, with judged quality within ±0.3 points, at 0.34× the wall time.</p></li><li><p><strong>Across all three models, 157 of 228 tasks passed goal-only against 127 step by step</strong> (+13 points, 95% interval +5 to +22). The gain sits in code, data and multi-deliverable work. On research documents and operations writing, quality was the same either way overall. Two books went the other way: the slide deck, where small models without the recipe often never produced the PowerPoint file, and the press release.</p></li><li><p><strong>Every on-device model was faster without the recipe:</strong> 0.16× to 0.35× the wall time of step-by-step runs, reading a fifth to a quarter of the input tokens.</p></li><li><p><strong>The quality bar is what helps, not the recipe.</strong> Hiding the bar and giving only the request cost 22 to 31 points of pass rate and about one judged point on every model. Handing over the recipe as advice on top of the bar added nothing measurable, and made runs 1.3 to 1.4 times slower.</p></li></ul>
+<p><strong>Why does less structure help a small model?</strong> The trial records point to four things:</p>
+<ul><li><p>A step-by-step run is a relay: each step starts a fresh conversation that knows only what earlier steps wrote to files, so a fact the planner noted but the writer never opened is lost.</p></li><li><p>Each step also has its own gate with a limited number of attempts before the task is judged a failure, and small models blow through those attempts quickly, frequently on minutiae (getting a file name slightly wrong). In some cases, these gates were bugged or just too strict (but we've been evolving gates over many months, pointing at how hard it is to get the balance of helpful-but-not-too-strict just right)</p></li><li><p>Every hand-off costs a full system prompt and tool list again, which is where the extra time and tokens go.</p></li><li><p>A goal-based owner keeps everything in one conversation and stops when the contract is met.</p></li></ul>
+<h2>Moving to a new strategy for Gezel</h2>
+<p>Based on the results above, we're moving away from "stepwise" task completion and onto a simpler goal/"contract evaluation" format form models, across the board. We still think there is a strong role for "craftbooks" as a repository of canonical "contracts" for common tasks coupled with prompts; the recipe of a structured set of steps to accomplish goals is less useful. So, we've begun retrofitting all craftbooks with good, tested contract definitions.</p>
+<p>One other note where "role-based" execution can still come into play is review. Having an explicit review phase after significant work is done (writing content; doing coding tasks) can help improve overall outcomes. While we're converting most models to use the "one giant end to end session" to complete tasks, we're still considering and adding an explicit "review phase" at the end, where a model can provide feedback to itself and iterate further. We're also testing whether those review sessions should just be additional steps at the end (within a session, ask the model to review itself) or "fresh eyes" evaluations (spin up a separate independent session for a model to review and judge, then send feedback to the original session). We're still testing, but finding that reviews within a session can still be helpful for tasks.</p>
+<h2>Against raw harnesses</h2>
+<p>One question then: does "just" having a strong goal/contract evaluation really pose a significant value against a "bare harness"? For "bare harness", we consider a mode where a prompt is passed and the results are subjectively judged (e.g., a person decides they like or don't like what the AI model produced) for correctness. This becomes a referendum on the value of Gezel compared to other harnesses which act in that "bare" mode.</p>
+<p>So we tested Gezel in "bare harness" mode and compared that with the new goal/strategy mode: just processing prompts the user passes in + some basic context in the form of a system prompt. In addition, we tested similar open harnesses pi and OpenCode that also inherently operate in this bare mode.</p>
+<p><strong>We also tested two other popular harnesses, pi and OpenCode, on how they handle the same request as the message.</strong> To make the comparison equivalent between gezel and OpenCode/pi equivalent, we also had a "+ book description" variant that appended to the tool's own system prompt: the project's description, its mission objectives, and the list of input files and required deliverables that every Gezel arm also gets, in plain words without Gezel's tool names.</p>
+<table><thead><tr><th>Model</th><th>Arm</th><th>Passed</th><th>Criteria met</th><th>Quality</th><th>Quality Δ vs goal only</th><th>Quality Δ vs request only</th><th>Wall (median min)</th></tr></thead><tbody><tr><td>Qwen 3.5 9B</td><td>Gezel, goal only</td><td>12/14</td><td>0.98</td><td>6.58</td><td>(control)</td><td>+0.48 [−0.04, +1.22]</td><td>1.3</td></tr><tr><td></td><td>Gezel, bare harness</td><td>7/14</td><td>0.92</td><td>6.10</td><td>−0.48 [−1.22, +0.04]</td><td>(control)</td><td>1.2</td></tr><tr><td></td><td>pi</td><td>8/14</td><td>0.80</td><td>5.88</td><td>−0.70 [−2.29, +0.33]</td><td>−0.23 [−1.09, +0.37]</td><td>0.7</td></tr><tr><td></td><td>pi + book description</td><td>6/14</td><td>0.83</td><td>5.41</td><td>−1.17 [−2.17, −0.21]</td><td>−0.69 [−1.70, +0.05]</td><td>1.3</td></tr><tr><td></td><td>OpenCode</td><td>5/14</td><td>0.69</td><td>4.64</td><td>−1.94 [−3.27, −0.68]</td><td>−1.46 [−2.58, −0.36]</td><td>1.3</td></tr><tr><td></td><td>OpenCode + book description</td><td>6/14</td><td>0.87</td><td>6.02</td><td>−0.56 [−1.74, +0.31]</td><td>−0.08 [−0.58, +0.45]</td><td>1.4</td></tr><tr><td>Qwen 3.8 27B</td><td>Gezel, goal only</td><td>13/14</td><td>0.97</td><td>7.68</td><td>(control)</td><td>+0.14 [−0.71, +0.82]</td><td>4.7</td></tr><tr><td></td><td>Gezel, bare harness</td><td>10/14</td><td>0.95</td><td>7.54</td><td>−0.14 [−0.82, +0.71]</td><td>(control)</td><td>5.3</td></tr><tr><td></td><td>pi</td><td>10/14</td><td>0.84</td><td>7.01</td><td>−0.67 [−1.91, +0.39]</td><td>−0.53 [−1.46, +0.30]</td><td>2.4</td></tr><tr><td></td><td>pi + book description</td><td>9/14</td><td>0.92</td><td>7.46</td><td>−0.23 [−0.89, +0.58]</td><td>−0.08 [−0.29, +0.14]</td><td>4.4</td></tr><tr><td></td><td>OpenCode</td><td>10/14</td><td>0.89</td><td>6.99</td><td>−0.70 [−1.86, +0.43]</td><td>−0.55 [−1.33, +0.07]</td><td>3.6</td></tr><tr><td></td><td>OpenCode + book description</td><td>9/14</td><td>0.92</td><td>7.45</td><td>−0.23 [−0.91, +0.65]</td><td>−0.09 [−0.36, +0.13]</td><td>6.2</td></tr></tbody></table>
+<p>What this shows:</p>
+<ul><li><p><strong>Gezel's new "goal tested" default passed more tasks than either outside tool on both models:</strong> 12 of 14 on the 9B against 5 to 8, and 13 of 14 on the 27B against 9 or 10. On the 9B every outside arm's pass-rate interval lies below zero (−29 to −50 points); on the 27B the intervals cross zero. With 14 pairs per cell, no pass/fail difference survives the Holm correction, so as registered this reading is descriptive.</p></li><li><p><strong>With the craftbook's description, the outside tools matched Gezel given only the request on judged quality, except pi on the 9B.</strong> On the 27B both came within a tenth of a point, with narrow intervals; on the 9B OpenCode did too (−0.08), and pi trailed by 0.69 [−1.70, +0.05]. They met slightly fewer of the criteria (0.03 to 0.09 fewer, every interval below zero).</p></li><li><p><strong>Without the description, they trailed further:</strong> pi by 0.23 and 0.53 points, OpenCode by 1.46 and 0.55. The plain arms wrote the invoices as JSON, Markdown or plain text (one run gave its text files a <code>.pdf</code> name), where the contract asks for HTML, and on the 9B none of the four plain runs wrote the run summary.</p></li><li><p><strong>The 9B's worst outside-tool failures came from losing track of file paths.</strong> Under OpenCode, one runbook run invented a <code>/workspace/</code> folder, failed its one write there, and then read the missing file 228 times until it stopped. A codemod run copied the project's folder path with one word missing, so every edit of the rename missed, and then reported "Done" with nothing changed. Under pi with the description, one run saved the runbook as <code>source/runbook.md</code> instead of <code>runbook.md</code>. The judge scored these three 0.0 to 0.1. No Gezel trial in this comparison scored below 3.0.</p></li><li><p><strong>pi was the fastest:</strong> 0.58× and 0.51× the goal-only wall time on the 9B and 27B. Plain OpenCode took 1.11× and 0.66×. With the project context description, both tools worked longer on the 27B (0.71× and 1.15×). Decode speed was the same in every arm (63 to 66 tokens a second on the 9B, 28 to 32 on the 27B), so these are differences in work, not in the engine. pi's largest prompt was a third to a half the size of Gezel's (4.6k to 8.2k tokens against 13.5k to 16.6k); OpenCode's was 10.5k to 14.2k.</p></li></ul>
+<h2>A frontier model: Claude Sonnet 5.5</h2>
+<p>We also ran this test with Claude Sonnet. Gezel ran Sonnet through its own Anthropic API provider; pi and OpenCode each ran it through their own built-in Anthropic provider with their default settings, so nothing of Gezel sat in their path. Gezel ran cloud models "one owner, whole recipe" by default at the time, so that is the control. Passing counts each code book's tests on the final folder, as above.</p>
+<table><thead><tr><th>Arm</th><th>Passed</th><th>Criteria met</th><th>Quality</th><th>Quality Δ vs one owner</th><th>Wall (median min)</th><th>Cost per task (median)</th></tr></thead><tbody><tr><td>Gezel, step by step</td><td>14/14</td><td>1.00</td><td>8.11</td><td>−0.05 [−0.25, +0.12]</td><td>2.7</td><td>$0.60</td></tr><tr><td>Gezel, one owner, whole recipe</td><td>13/14</td><td>1.00</td><td>8.17</td><td>(control)</td><td>1.6</td><td>$0.56</td></tr><tr><td>Gezel, recipe as advice</td><td>13/14</td><td>1.00</td><td>8.10</td><td>−0.07 [−0.38, +0.27]</td><td>0.8</td><td>$0.13</td></tr><tr><td>Gezel, goal only</td><td>14/14</td><td>1.00</td><td>8.17</td><td>+0.00 [−0.35, +0.38]</td><td>0.7</td><td>$0.12</td></tr><tr><td>Gezel, request only</td><td>10/14</td><td>0.94</td><td>7.82</td><td>−0.35 [−0.72, −0.05]</td><td>0.6</td><td>$0.10</td></tr><tr><td>pi</td><td>8/14</td><td>0.83</td><td>6.90</td><td>−1.26 [−2.73, −0.07]</td><td>0.4</td><td>$0.03</td></tr><tr><td>pi + book description</td><td>10/14</td><td>0.94</td><td>7.86</td><td>−0.30 [−0.65, −0.02]</td><td>0.4</td><td>$0.03</td></tr><tr><td>OpenCode</td><td>9/14</td><td>0.86</td><td>7.49</td><td>−0.67 [−1.68, +0.01]</td><td>0.4</td><td>$0.06</td></tr><tr><td>OpenCode + book description</td><td>8/14</td><td>0.92</td><td>8.07</td><td>−0.10 [−0.34, +0.11]</td><td>0.5</td><td>$0.07</td></tr></tbody></table>
+<p>Costs are from each tool's own token counts, priced at the rates pi and OpenCode both carry for Sonnet 5.5 ($2 per million input tokens, $2.50 cache writes, $0.10 cache reads, $10 output). Gezel does not separate cache writes from other uncached input, so its figures are upper bounds.</p>
+<p>What this shows:</p>
+<ul><li><p><strong>On a frontier model the strategy barely matters for quality.</strong> All four Gezel strategies passed 13 or 14 of 14 and scored 8.1 to 8.2. Goal only matched the current cloud default on quality at 0.37× the time and about a fifth of the cost, because a single conversation with only the contract in it reads far less (median 26k uncached input tokens against 161k).</p></li><li><p><strong>Having an output contract matters even here.</strong> Without it, Gezel+Sonnet 5.5 passed 10 of 14 and lost 0.35 points.</p></li><li><p><strong>Given the same information, the outside tools match Gezel without the contract.</strong> With the book description, pi tied Gezel's request-only arm exactly on passes (10 of 14 each) and on quality (+0.04 [−0.27, +0.33]). OpenCode scored a little higher (+0.25 [+0.02, +0.48]) and passed two fewer. Without the description, both trailed: pi by 0.92 points [−2.08, +0.04], OpenCode by 0.33 [−1.38, +0.38].</p></li><li><p><strong>What none of them could do was meet a format only the contract states.</strong> Every failure of Gezel's request-only arm and of pi with the description was a named section the request never asks for: the retrospective's six headings, and a "Skipped clients" heading in the invoice summary. Without the description, the outside tools also wrote the invoices as Markdown; the request names no format, and the contract asks for HTML.</p></li><li><p><strong>The outside tools are much cheaper per task.</strong> Gezel's standing prompt (its character, project and tool descriptions) is large; pi's is small. A goal-only Gezel task cost about $0.12 against pi's $0.03.</p></li></ul>
+<h2>Summary</h2>
+<p>Asking models to perform tasks in a step-by-step manner, with careful step prescriptions and numerous end-of-step checks, was maybe a good idea but turns out to be too fussy to get right. For small models like Qwen 3.5 9b, step by step presents more opportunities for models to get confused and trip over themselves which outweigh any structured benefits. With higher end models like Qwen 3.8 27B and Sonnet, they can work in any mode and overcome the "paperwork" of step by step mode, but the resultant quality is about the same and it just takes 2-3x "wall clock time".</p>
+<p>What does help is having a contract - a specification of what the final outputs should be oriented around including goal, the deliverables, and a quality bar of criteria the runtime can check. Even with more advanced models like Sonnet, it can be a 10+% boost in model efficacy. Having statically and subjectively evaluated contracts and/or an explicit model review phase can still give overall benefits for model outcomes.</p>
+<p>In Gezel, future directions are that craftbooks can and will be a conveyance for these contracts.</p>
+<!-- /squisq:content -->
+                </div>
+            </div>
+
+            <footer class="wrap wrap--prose post-end">
+                <p class="post-end-note">Thanks for reading. More notes from the workshop are on the blog.</p>
+                <a class="btn btn--ghost" href="/blog/">&larr; All posts</a>
+            </footer>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap footer-grid">
+            <div class="footer-brand">
+                <img src="/assets/bendyline-wordmark.webp" alt="Bendyline" width="480" height="323" loading="lazy">
+                <p>Honest software. Hopefully it makes the world a little better.</p>
+            </div>
+            <nav aria-labelledby="footer-products">
+                <h2 id="footer-products">Products</h2>
+                <ul>
+                    <li><a href="https://gezel.com">Gezel</a></li>
+                    <li><a href="https://gezel.com/docs/npm-packages/">Gezel Platform</a></li>
+                    <li><a href="https://docblocks.com">DocBlocks</a></li>
+                    <li><a href="https://qualla.com">Qualla</a></li>
+                </ul>
+            </nav>
+            <nav aria-labelledby="footer-open-source">
+                <h2 id="footer-open-source">Open source</h2>
+                <ul>
+                    <li><a href="https://squigglysquare.com">Squiggly Square</a></li>
+                    <li><a href="https://molen.dev">Molen</a></li>
+                    <li><a href="/gezk/">gezk format</a></li>
+                    <li><a href="https://github.com/bendyline">GitHub</a></li>
+                </ul>
+            </nav>
+            <nav aria-labelledby="footer-company">
+                <h2 id="footer-company">Company</h2>
+                <ul>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/support/">Support</a></li>
+                    <li><a href="/privacy/">Privacy</a></li>
+                    <li><a href="/terms/">Terms</a></li>
+                    <li><a href="https://www.youtube.com/@bendyline">YouTube</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="wrap footer-base">
+            <span>&copy; 2026 Bendyline LLC</span>
+            <a href="mailto:support@bendyline.com">support@bendyline.com</a>
+        </div>
+    </footer>
+
+    <script>
+        // Fill the dateline and reading time from the same catalog entry the blog
+        // list reads, so the two always agree. The dateline uses the catalog's
+        // firstPublishedDate; without JavaScript, or until the catalog loads, the
+        // post's `date` frontmatter shows instead.
+        (function () {
+            const time = document.querySelector("[data-post-date]");
+            const reading = document.querySelector("[data-post-reading]");
+
+            // Formats like the blog list ("October 28, 2026"): a bare date is a
+            // calendar day; a timestamp is shown in the reader's time zone.
+            function showDate(value) {
+                const day = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+                const date = day ? new Date(Date.UTC(+day[1], +day[2] - 1, +day[3])) : new Date(value);
+                if (!time || Number.isNaN(date.getTime())) return;
+                time.dateTime = value;
+                time.textContent = date.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    timeZone: day ? "UTC" : undefined,
+                });
+                time.hidden = false;
+            }
+
+            if (time) {
+                const written = time.textContent.trim();
+                time.hidden = !written;
+                if (written) showDate(written);
+            }
+
+            const catalogUrl = new URL("/posts/catalog.json", location.href);
+            fetch(catalogUrl)
+                .then((response) => (response.ok ? response.json() : null))
+                .then((catalog) => {
+                    const entry = ((catalog && catalog.documents) || []).find(
+                        (item) => new URL(item.path, catalogUrl).pathname === location.pathname,
+                    );
+                    if (!entry) return;
+                    if (entry.firstPublishedDate) showDate(entry.firstPublishedDate);
+                    if (reading && entry.wordCount) {
+                        reading.textContent = `${Math.max(1, Math.round(entry.wordCount / 225))} min read`;
+                    }
+                })
+                .catch(() => {});
+        })();
+    </script>
+</body>
+</html>

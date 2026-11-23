@@ -431,6 +431,125 @@ h3 {
     fill: var(--paper);
 }
 
+/* ---------- Home: apps ---------- */
+
+/* Store badges are the stores' own artwork. Size them only through
+   `.store-badge img`; never recolor, crop, or dim one. Each store asks for
+   clear space of a quarter of the badge's height (the row gap) and a height
+   of at least 40px. A listing that is not live yet is a `.store-pending`
+   plate of our own, never a faded badge. */
+.apps {
+    padding: 16px 0 80px;
+}
+
+.apps .section-head {
+    margin-bottom: 2.25rem;
+}
+
+.apps-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+}
+
+.app-tile {
+    display: flex;
+    flex-direction: column;
+    padding: 2.25rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.app-tile h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.app-tile > p {
+    color: var(--ink-soft);
+}
+
+.store-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 14px;
+    padding-top: 1.5rem;
+}
+
+.store-badge {
+    display: inline-flex;
+    flex: none;
+    border-radius: 8px;
+}
+
+.store-badge img {
+    width: auto;
+    height: 46px;
+}
+
+.store-pending {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 10px;
+    min-height: 46px;
+    padding: 5px 15px 5px 12px;
+    border: 1.5px dashed var(--line-strong);
+    border-radius: 8px;
+    color: var(--muted);
+}
+
+.store-pending svg {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.store-pending-text {
+    display: grid;
+    gap: 1px;
+    line-height: 1.15;
+}
+
+.store-pending-status {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.store-pending-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.app-tile > .app-tile-note {
+    margin-top: auto;
+    padding-top: 1.25rem;
+    font-size: 0.92rem;
+    color: var(--muted);
+}
+
+.app-tile-note a {
+    font-weight: 600;
+}
+
+.trademark-note {
+    max-width: 62em;
+    margin-top: 1.75rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+}
+
 /* ---------- Home: principles ---------- */
 
 .principles {
@@ -511,12 +630,10 @@ h3 {
     height: 52px;
 }
 
+/* What kind of thing a product is and where it runs: a plain line of facts. */
 .product-kicker {
     margin-bottom: 0.5rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    font-size: 0.9rem;
     color: var(--muted);
 }
 
@@ -527,7 +644,8 @@ h3 {
     border-radius: var(--radius-control);
     background: var(--sun-soft);
     color: var(--brand-hover);
-    letter-spacing: 0.04em;
+    font-size: 0.82rem;
+    font-weight: 600;
 }
 
 .feature-card h3 {
@@ -1133,9 +1251,23 @@ h3 {
     }
 
     .principles-grid,
+    .apps-grid,
     .product-grid,
     .infra-grid {
         grid-template-columns: 1fr;
+    }
+
+    .apps {
+        padding-bottom: 56px;
+    }
+
+    /* 42px keeps the App Store and Google Play badges on one row at 390px. */
+    .store-badge img {
+        height: 42px;
+    }
+
+    .store-pending {
+        min-height: 42px;
     }
 
     .feature-card {
@@ -1143,6 +1275,7 @@ h3 {
         gap: 2rem;
     }
 
+    .app-tile,
     .product-card,
     .infra-body {
         padding: 1.75rem;

@@ -13,6 +13,23 @@ Run it locally with `npm run web` (serves on http://localhost:3090).
 - `assets/posts.js`: renders post lists from `posts/catalog.json`
 - `assets/showcase.js`: the rotating product showcase in the home page hero
 
+### Store badges
+
+The "On the App Store and Google Play" section of the home page links each app's store listings. The badges in
+`assets/stores/` are the stores' own artwork: size them only through `.store-badge img` in
+`site.css`, and never recolor or crop them.
+
+A listing that is not live yet is a `.store-pending` plate ("Coming soon") with its live badge in a
+comment beside it. `grep -n "store:" index.html` finds them. When a store approves the app:
+
+1. Delete that store's `pending` comment and plate, and uncomment the `live` badge below it.
+2. For the Microsoft Store, replace `STORE_ID` with the product's Store ID from Partner Center.
+3. If the trademark line under the section does not name that store yet, add it (Mac App Store is
+   a service mark of Apple Inc.; Microsoft Store is a trademark of the Microsoft group of companies).
+
+docblocks.com carries the same markers; its steps are in `packages/site/README.md` in the DocBlocks
+repository. Pending today: `store:mac-app-store` and `store:microsoft-store`, both for DocBlocks.
+
 ### Writing a post
 
 Posts live in `posts/` as a [DocBlocks](https://docblocks.com) workspace. Each post is a Markdown
