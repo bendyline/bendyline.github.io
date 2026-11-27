@@ -15,7 +15,7 @@ Run it locally with `npm run web` (serves on http://localhost:3090).
 
 ### Store badges
 
-The "On the App Store and Google Play" section of the home page links each app's store listings. The badges in
+The "In the app stores" section of the home page links each app's store listings. The badges in
 `assets/stores/` are the stores' own artwork: size them only through `.store-badge img` in
 `site.css`, and never recolor or crop them.
 
@@ -28,7 +28,8 @@ comment beside it. `grep -n "store:" index.html` finds them. When a store approv
    a service mark of Apple Inc.; Microsoft Store is a trademark of the Microsoft group of companies).
 
 docblocks.com carries the same markers; its steps are in `packages/site/README.md` in the DocBlocks
-repository. Pending today: `store:mac-app-store` and `store:microsoft-store`, both for DocBlocks.
+repository. Nothing is pending today: DocBlocks is live on the App Store (iPhone, iPad, and Mac),
+Google Play, and the Microsoft Store.
 
 ### Writing a post
 

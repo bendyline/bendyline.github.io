@@ -5,6 +5,9 @@ squisq-output-format: html
 squisq-updatefrommarkdown: true
 squisq-html-output: static
 squisq-transform: dynamic-slides
+squisq-summary-density: keypoints
+squisq-cover-template: sectionHeader
+squisq-theme: gezellig
 ---
 
 ## Building a Couch: Lessons in AI Organizational Design
@@ -12,6 +15,22 @@ squisq-transform: dynamic-slides
 [Gezel](https://gezel.com) is based on the idea of putting people in control of their AI by harnessing the power of local models. While frontier models are powerful and can do very sophisticated work, local models have a noticeably lower plateau on the complexity of tasks they can undertake. Nevertheless, local models have a number of advantages over frontier models (cost; privacy; control). We believe, with the right set of supports, local models are good enough to do many common knowledge worker tasks (e.g., reviewing docs; transcribing audio; monitoring inboxes; data analysis). In a recent test of [local models for document tasks](https://bendyline.com/posts/docbench.html), they are more than capable for tasks like review.
 
 To maximize capabilities of local models, there is a role for a "local oriented" harness with specific support for local models, with more infrastructure and support to add "catch up" capability to local models. [Gezel](https://gezel.com) is one such local oriented harness. As part of this, we've been trying multiple different ideas ([knowledge](https://bendyline.com/posts/introducingknowledge.html), [night shift](http://bendyline.com/posts/indexingandnightshift.html)) to accommodate these limitations, and with good success. But this essay is about the windy road of the main local-AI facilitating idea: Highly Structured Tasks.
+
+### Building a Couch: Lessons in AI Organizational Design {[summary passage=gjji7w-4i origin=ai layout=title]}
+
+- Gezel is based on the idea of putting people in control of their AI by harnessing the power of local models.
+
+### Building a Couch: Lessons in AI Organizational Design {[summary passage=z2u9cv-fk layout=cards]}
+
+- Cost
+- Privacy
+- Control
+
+### Building a Couch: Lessons in AI Organizational Design {[summary passage=1hh610a-dv origin=ai layout=cards]}
+
+- Local oriented harness with support
+- Multiple ideas to accommodate limitations
+- Highly Structured Tasks as main idea
 
 ## The Hypothesis: Highly Structured Tasks
 
@@ -36,6 +55,24 @@ On paper, this seemed like good working hypothesis for a system that can boost l
 So "stepwise, crew design" is (spoilers: was) a core part of the design of Gezel.
 
 We've been way overdue to test this strategy out. Now is the time to see: does this step by step framework produce better results? Does it earn its place? Is it a load bearing assumption that bears the load?
+
+### The Hypothesis: Highly Structured Tasks {[summary passage=y64vl0-fx origin=ai layout=statement]}
+
+- Craftbooks: structured equivalents of freeform files
+- Phases: static validation gates
+- Steps: structured sessions
+
+### The Hypothesis: Highly Structured Tasks {[summary passage=18nw0aw-pc origin=ai layout=cards]}
+
+- Craftbooks use step gates to ensure models meet static checks
+- Models must pass Outline phase with outline.md at least 3kb
+- Models sent back if they fail fixed criteria from growing library
+
+### The Hypothesis: Highly Structured Tasks {[summary passage=1wpzh9n-kc origin=ai layout=cards]}
+
+- Stepwise, crew design was core to Gezel’s design
+- Local models under 32gb RAM may mirror early 2025 frameworks
+- This strategy was overdue for testing now
 
 ## What we compared
 
@@ -81,6 +118,12 @@ In the real world, this Ikea furniture is also accompanied by a picture on the b
 | OpenCode | OpenCode 1.19.4, an outside agent tool | The request, and the project's description and objectives | Nothing until grading | OpenCode is told to build a couch. The final couch is judged |
 
 
+### What we compared {[summary passage=65d8w0-l8 origin=ai layout=cards]}
+
+- Comparing task division methods
+- Different testing locations
+- Introducing the contract concept
+
 ## Strategy Results
 
 For the primary round, we measured 18 craftbooks across research, coding, data, and multi-deliverable areas, across four strategies and three models, for a total of 504 trials. This was run on an nvidia DGX Spark using llama.cpp. Models ran with at least 128k context size, and no test hit that limit.
@@ -118,12 +161,35 @@ Here are some of the (surprising) results:
 - A goal-based owner keeps everything in one conversation and stops when the contract is met.
 
 
+### Strategy Results {[summary passage=18qmeyp-191 origin=ai layout=cards]}
+
+- Goal and quality bar beats step-by-step on small models
+- Qwen 3.5 9B finished 59 of 90 tasks
+- Quality rose by 0.6 points across rounds
+
+### Strategy Results {[summary passage=z6z0an-nn origin=ai layout=cards]}
+
+- 157 of 228 tasks passed goal-only
+- Quality bar helps, not the recipe
+- Hiding the bar costs 22 to 31 points
+
 ## Moving to a new strategy for Gezel
 
 Based on the results above, we're moving away from "stepwise" task completion and onto a simpler goal/"contract evaluation" format form models, across the board. We still think there is a strong role for "craftbooks" as a repository of canonical "contracts" for common tasks coupled with prompts; the recipe of a structured set of steps to accomplish goals is less useful. So, we've begun retrofitting all craftbooks with good, tested contract definitions.
 
 One other note where "role-based" execution can still come into play is review. Having an explicit review phase after significant work is done (writing content; doing coding tasks) can help improve overall outcomes. While we're converting most models to use the "one giant end to end session" to complete tasks, we're still considering and adding an explicit "review phase" at the end, where a model can provide feedback to itself and iterate further. We're also testing whether those review sessions should just be additional steps at the end (within a session, ask the model to review itself) or "fresh eyes" evaluations (spin up a separate independent session for a model to review and judge, then send feedback to the original session). We're still testing, but finding that reviews within a session can still be helpful for tasks.
 
+
+### Moving to a new strategy for Gezel {[summary passage=1faa7am-dn origin=ai layout=cards]}
+
+- Craftbooks now hold contract definitions
+- Models shift to goal/contract format
+- Retrofitting craftbooks with tested definitions
+
+### Moving to a new strategy for Gezel {[summary passage=1dwl7me-n7 origin=ai layout=cards]}
+
+- Reviews within a session can still be helpful for tasks
+- Testing whether review sessions should be additional steps or fresh eyes evaluations
 
 ## Against raw harnesses
 
@@ -156,6 +222,12 @@ What this shows:
 - **The 9B's worst outside-tool failures came from losing track of file paths.** Under OpenCode, one runbook run invented a `/workspace/` folder, failed its one write there, and then read the missing file 228 times until it stopped. A codemod run copied the project's folder path with one word missing, so every edit of the rename missed, and then reported "Done" with nothing changed. Under pi with the description, one run saved the runbook as `source/runbook.md` instead of `runbook.md`. The judge scored these three 0.0 to 0.1. No Gezel trial in this comparison scored below 3.0.
 - **pi was the fastest:** 0.58× and 0.51× the goal-only wall time on the 9B and 27B. Plain OpenCode took 1.11× and 0.66×. With the project context description, both tools worked longer on the 27B (0.71× and 1.15×). Decode speed was the same in every arm (63 to 66 tokens a second on the 9B, 28 to 32 on the 27B), so these are differences in work, not in the engine. pi's largest prompt was a third to a half the size of Gezel's (4.6k to 8.2k tokens against 13.5k to 16.6k); OpenCode's was 10.5k to 14.2k.
 
+### Against raw harnesses {[summary passage=16o6vyw-uq origin=ai layout=cards]}
+
+- Craftbooks matched outside tools except pi on 9B
+- OpenCode and pi met fewer criteria on 27B
+- Plain arms wrote invoices in various formats
+
 ## A frontier model: Claude Sonnet 5.5
 
 We also ran this test with Claude Sonnet. Gezel ran Sonnet through its own Anthropic API provider; pi and OpenCode each ran it through their own built-in Anthropic provider with their default settings, so nothing of Gezel sat in their path. Gezel ran cloud models "one owner, whole recipe" by default at the time, so that is the control. Passing counts each code book's tests on the final folder, as above.
@@ -183,6 +255,18 @@ What this shows:
 - **The outside tools are much cheaper per task.** Gezel's standing prompt (its character, project and tool descriptions) is large; pi's is small. A goal-only Gezel task cost about $0.12 against pi's $0.03.
 
 
+### A frontier model: Claude Sonnet 5.5 {[summary passage=s1ne0d-133 origin=ai layout=cards]}
+
+- Gezel ran cloud models one owner, whole recipe
+- Arm passed criteria met quality standards
+- Costs from token counts priced at rates
+
+### A frontier model: Claude Sonnet 5.5 {[summary passage=1n3cd6n-oj origin=ai layout=cards]}
+
+- Gezel strategies passed 13 or 14 of 14
+- Output contract matters for quality
+- Without contract, Gezel+Sonnet 5.5 lost 0.35 points
+
 ## Summary
 
 Asking models to perform tasks in a step-by-step manner, with careful step prescriptions and numerous end-of-step checks, was maybe a good idea but turns out to be too fussy to get right. For small models like Qwen 3.5 9b, step by step presents more opportunities for models to get confused and trip over themselves which outweigh any structured benefits. With higher end models like Qwen 3.8 27B and Sonnet, they can work in any mode and overcome the "paperwork" of step by step mode, but the resultant quality is about the same and it just takes 2-3x "wall clock time".
@@ -191,4 +275,14 @@ What does help is having a contract - a specification of what the final outputs 
 
 In Gezel, future directions are that craftbooks can and will be a conveyance for these contracts.
 
+### Structured mode too fussy {[summary passage=1qdhtxv-g3 origin=ai layout=cards]}
 
+- Step-by-step presents more confusion
+- Higher end models overcome paperwork
+- Resultant quality same
+
+### Summary {[summary passage=1sqz6nk-eh origin=ai layout=cards]}
+
+- Craftbooks will carry contracts
+- Contracts define outputs with goals
+- Reviews boost model efficacy
