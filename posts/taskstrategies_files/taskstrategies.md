@@ -5,12 +5,15 @@ squisq-output-format: html
 squisq-updatefrommarkdown: true
 squisq-html-output: static
 squisq-transform: dynamic-slides
-squisq-summary-density: keypoints
-squisq-cover-template: sectionHeader
+squisq-cover-template: bigText
 squisq-theme: gezellig
+squisq-summary-density: keypoints
+squisq-summary-section-titles: true
 ---
 
-## Building a Couch: Lessons in AI Organizational Design
+## Local AI Task Strategies
+
+[https://youtu.be/q3xYowLhTY0](https://youtu.be/q3xYowLhTY0)
 
 [Gezel](https://gezel.com) is based on the idea of putting people in control of their AI by harnessing the power of local models. While frontier models are powerful and can do very sophisticated work, local models have a noticeably lower plateau on the complexity of tasks they can undertake. Nevertheless, local models have a number of advantages over frontier models (cost; privacy; control). We believe, with the right set of supports, local models are good enough to do many common knowledge worker tasks (e.g., reviewing docs; transcribing audio; monitoring inboxes; data analysis). In a recent test of [local models for document tasks](https://bendyline.com/posts/docbench.html), they are more than capable for tasks like review.
 
@@ -18,19 +21,19 @@ To maximize capabilities of local models, there is a role for a "local oriented"
 
 ### Building a Couch: Lessons in AI Organizational Design {[summary passage=gjji7w-4i origin=ai layout=title]}
 
-- Gezel is based on the idea of putting people in control of their AI by harnessing the power of local models.
+- Gezel puts people in control of their AI
+- Harnesses the power of local models
 
-### Building a Couch: Lessons in AI Organizational Design {[summary passage=z2u9cv-fk layout=cards]}
+### Local models are not as powerful as frontier, but have advantages {[summary passage=z2u9cv-fk layout=cards]}
 
-- Cost
-- Privacy
-- Control
+- Cost: advantage over frontier models
+- Privacy: advantage over frontier models
+- Control: advantage over frontier models
 
-### Building a Couch: Lessons in AI Organizational Design {[summary passage=1hh610a-dv origin=ai layout=cards]}
+### Local AI needs help to achieve its best {[summary passage=1hh610a-dv layout=cards]}
 
-- Local oriented harness with support
-- Multiple ideas to accommodate limitations
-- Highly Structured Tasks as main idea
+- Local harness: infrastructure to add catch-up capability
+- Structured tasks: the main idea for local AI facilitation
 
 ## The Hypothesis: Highly Structured Tasks
 
@@ -56,23 +59,34 @@ So "stepwise, crew design" is (spoilers: was) a core part of the design of Gezel
 
 We've been way overdue to test this strategy out. Now is the time to see: does this step by step framework produce better results? Does it earn its place? Is it a load bearing assumption that bears the load?
 
-### The Hypothesis: Highly Structured Tasks {[summary passage=y64vl0-fx origin=ai layout=statement]}
+### &#x20;{[summary]}
 
-- Craftbooks: structured equivalents of freeform files
-- Phases: static validation gates
-- Steps: structured sessions
+- Acts as a recipe for common tasks
+- Includes static validation gates per-step
 
-### The Hypothesis: Highly Structured Tasks {[summary passage=18nw0aw-pc origin=ai layout=cards]}
+### Craftbooks structure knowledge work into rigorous phases {[summary passage=y64vl0-fx origin=ai layout=statement]}
 
-- Craftbooks use step gates to ensure models meet static checks
-- Models must pass Outline phase with outline.md at least 3kb
-- Models sent back if they fail fixed criteria from growing library
+- Acts as a recipe for common tasks
+- Includes static validation gates
 
-### The Hypothesis: Highly Structured Tasks {[summary passage=1wpzh9n-kc origin=ai layout=cards]}
+### Distinct roles drive the workflow {[summary passage=4guwlw-nt layout=steps]}
 
-- Stepwise, crew design was core to Gezel’s design
-- Local models under 32gb RAM may mirror early 2025 frameworks
-- This strategy was overdue for testing now
+- Researcher: finds quality sources
+- Writer: builds outline
+- Writer: writes prose
+- Reviewer: fact checks the document
+
+### Step gates keep models honest but add tradeoffs {[summary passage=18nw0aw-pc origin=ai layout=cards]}
+
+- Static checks: models fail if files lack substance
+- Wall clock time: per-step rework delays completion
+- Prefill cost: local models add 1-3 minutes per step
+
+### Testing the stepwise crew design hypothesis {[summary passage=1wpzh9n-kc origin=ai layout=cards]}
+
+- History: Role based frameworks were left by the wayside
+- Context: Local models are closer to that early 2025 world
+- Goal: See if the step by step framework produces better results
 
 ## What we compared
 
@@ -110,19 +124,25 @@ In the real world, this Ikea furniture is also accompanied by a picture on the b
 | --- | --- | --- | --- | --- |
 | Step by step <br>(the Gezel default) | A specialist per step (e.g., a planner, writer, reviewer), each in a fresh conversation | One step's instructions at a time | Each step's own gate, then a final review | A team of experts - dowel fitters, screwdriver masters, and so on - reads an Ikea manual and divides up the work. After each step, the results are tested for conformance. The final couch is also tested. |
 | One owner, whole recipe | One gezel (with a general role type and a union of tools), one conversation | Every step, in order | Every step's gate | An individual reads and sticks to the Ikea manual and does all the steps by them self. After each step, the results are tested for conformance. |
-| Goal, recipe as advice | One gezel, one conversation | The end-state contract, plus the recipe as optional advice | The end-state contract only | An individual is shown a picture of the finished product, and is shown the manual. They don't need to follow the manual, though. The final product is tested and judged. |
-| Goal only | One gezel, one conversation | The end-state contract | The end-state contract only | An individual is shown a picture of the finished couch. The final product is tested and judged. |
+| Goal, recipe as advice | One gezel, one conversation | The end-state contract, plus the recipe as optional advice | The end-state contract only | An individual is shown a picture of the finished product, and is shown the manual. They don't need to follow the manual, though. The final product is tested and judged, and the builder goes back to fix things that are not right. |
+| Goal only | One gezel, one conversation | The end-state contract | The end-state contract only | An individual is shown a picture of the finished couch. The final product is tested and judged, and the user goes back to fix things that are not right. |
 | Request only ("just a prompt") | One gezel, one conversation | The person's request; no contract | Nothing until grading | An individual is just told to build a couch. The final product is judged |
-| Contract shown, not checked ("just a prompt + expected end state) | One gezel, one conversation | The end-state contract | Nothing until grading | An individual is given the manual. The final product is judged |
+| Contract shown, not checked ("just a prompt + expected end state) | One gezel, one conversation | The end-state contract | Nothing until grading | An individual is given the picture of the finished couch. The final product is judged |
 | pi | pi 1.4.0, an outside agent tool | The request, and the project's description and objectives | Nothing until grading | pi is told to build a couch. The final couch is judged |
 | OpenCode | OpenCode 1.19.4, an outside agent tool | The request, and the project's description and objectives | Nothing until grading | OpenCode is told to build a couch. The final couch is judged |
 
 
-### What we compared {[summary passage=65d8w0-l8 origin=ai layout=cards]}
+### &#x20;{[summary]}
 
-- Comparing task division methods
-- Different testing locations
-- Introducing the contract concept
+- Contract: goal, deliverables, and quality bar
+- Default (control): step-by-step execution with roles
+- Scope: medium to large task strategies
+
+### Strategies differ in task division and testing location {[summary passage=65d8w0-l8 origin=ai layout=cards]}
+
+- Contract: goal, deliverables, and quality bar
+- Default: step-by-step execution with roles
+- Scope: medium to large task strategies
 
 ## Strategy Results
 
@@ -161,17 +181,23 @@ Here are some of the (surprising) results:
 - A goal-based owner keeps everything in one conversation and stops when the contract is met.
 
 
-### Strategy Results {[summary passage=18qmeyp-191 origin=ai layout=cards]}
+### Goal-only strategy outperforms step-by-step on small models {[summary passage=18qmeyp-191 origin=ai layout=cards]}
 
-- Goal and quality bar beats step-by-step on small models
-- Qwen 3.5 9B finished 59 of 90 tasks
-- Quality rose by 0.6 points across rounds
+- Small models: +22 points pass rate
+- Large models: 3x faster, same quality
 
-### Strategy Results {[summary passage=z6z0an-nn origin=ai layout=cards]}
+### Goal-only beats step-by-step on speed and code {[summary passage=z6z0an-nn origin=ai layout=cards]}
 
-- 157 of 228 tasks passed goal-only
-- Quality bar helps, not the recipe
-- Hiding the bar costs 22 to 31 points
+- Code: goal-only gains 13 points over step-by-step
+- Speed: goal-only runs 0.16x to 0.35x wall time
+- Quality: hiding the bar costs 22 to 31 points
+
+### Four reasons less structure helps small models {[summary passage=1qxbk7g-oh origin=ai layout=cards]}
+
+- Relay: facts lost when files are not opened
+- Gates: limited attempts often fail on minutiae
+- Hand-offs: full system prompt and tool list cost
+- Owner: one conversation stops when contract is met
 
 ## Moving to a new strategy for Gezel
 
@@ -180,16 +206,17 @@ Based on the results above, we're moving away from "stepwise" task completion an
 One other note where "role-based" execution can still come into play is review. Having an explicit review phase after significant work is done (writing content; doing coding tasks) can help improve overall outcomes. While we're converting most models to use the "one giant end to end session" to complete tasks, we're still considering and adding an explicit "review phase" at the end, where a model can provide feedback to itself and iterate further. We're also testing whether those review sessions should just be additional steps at the end (within a session, ask the model to review itself) or "fresh eyes" evaluations (spin up a separate independent session for a model to review and judge, then send feedback to the original session). We're still testing, but finding that reviews within a session can still be helpful for tasks.
 
 
-### Moving to a new strategy for Gezel {[summary passage=1faa7am-dn origin=ai layout=cards]}
+### Gezel shifts to contract evaluation {[summary passage=1faa7am-dn origin=ai layout=cards]}
 
-- Craftbooks now hold contract definitions
-- Models shift to goal/contract format
-- Retrofitting craftbooks with tested definitions
+- Strategy: goal/contract evaluation replaces stepwise tasks
+- Craftbooks: repository of canonical contracts and prompts
+- Retrofit: all craftbooks updated with tested definitions
 
-### Moving to a new strategy for Gezel {[summary passage=1dwl7me-n7 origin=ai layout=cards]}
+### Review phases refine outcomes {[summary passage=1dwl7me-n7 origin=ai layout=cards]}
 
-- Reviews within a session can still be helpful for tasks
-- Testing whether review sessions should be additional steps or fresh eyes evaluations
+- Self-review: models iterate within the same session
+- Fresh eyes: separate independent session judges work
+- Testing: in-session reviews still help task results
 
 ## Against raw harnesses
 
@@ -222,17 +249,27 @@ What this shows:
 - **The 9B's worst outside-tool failures came from losing track of file paths.** Under OpenCode, one runbook run invented a `/workspace/` folder, failed its one write there, and then read the missing file 228 times until it stopped. A codemod run copied the project's folder path with one word missing, so every edit of the rename missed, and then reported "Done" with nothing changed. Under pi with the description, one run saved the runbook as `source/runbook.md` instead of `runbook.md`. The judge scored these three 0.0 to 0.1. No Gezel trial in this comparison scored below 3.0.
 - **pi was the fastest:** 0.58× and 0.51× the goal-only wall time on the 9B and 27B. Plain OpenCode took 1.11× and 0.66×. With the project context description, both tools worked longer on the 27B (0.71× and 1.15×). Decode speed was the same in every arm (63 to 66 tokens a second on the 9B, 28 to 32 on the 27B), so these are differences in work, not in the engine. pi's largest prompt was a third to a half the size of Gezel's (4.6k to 8.2k tokens against 13.5k to 16.6k); OpenCode's was 10.5k to 14.2k.
 
-### Against raw harnesses {[summary passage=16o6vyw-uq origin=ai layout=cards]}
+### Goal contracts outperform bare harnesses {[summary passage=1pmgkyp-1qc origin=ai layout=cards]}
 
-- Craftbooks matched outside tools except pi on 9B
-- OpenCode and pi met fewer criteria on 27B
-- Plain arms wrote invoices in various formats
+- Gezel goal mode: highest quality scores
+- Bare harness: lower criteria met
+
+### Gezel's default outperforms outside tools on task completion {[summary passage=16o6vyw-uq origin=ai layout=cards]}
+
+- Goal tested: 12 of 14 tasks passed on 9B model
+- Goal tested: 13 of 14 tasks passed on 27B model
+- Outside tools: 5 to 10 tasks passed depending on model
+
+### Gezel kept paths; raw harnesses lost them {[summary passage=18ypjip-tq origin=ai layout=comparison]}
+
+- Raw: invented paths, missed edits, scored 0.0 to 0.1
+- Gezel: no trial scored below 3.0
 
 ## A frontier model: Claude Sonnet 5.5
 
 We also ran this test with Claude Sonnet. Gezel ran Sonnet through its own Anthropic API provider; pi and OpenCode each ran it through their own built-in Anthropic provider with their default settings, so nothing of Gezel sat in their path. Gezel ran cloud models "one owner, whole recipe" by default at the time, so that is the control. Passing counts each code book's tests on the final folder, as above.
 
-| Arm | Passed | Criteria met | Quality | Quality Δ vs one owner | Wall (median min) | Cost per task (median) |
+| Arm | Passed | Criteria met | Quality | Quality Δ vs one owner | Wall (median min) | Estimated Cost per task (median) |
 | --- | --- | --- | --- | --- | --- | --- |
 | Gezel, step by step | 14/14 | 1.00 | 8.11 | −0.05 [−0.25, +0.12] | 2.7 | $0.60 |
 | Gezel, one owner, whole recipe | 13/14 | 1.00 | 8.17 | (control) | 1.6 | $0.56 |
@@ -248,24 +285,29 @@ Costs are from each tool's own token counts, priced at the rates pi and OpenCode
 
 What this shows:
 
-- **On a frontier model the strategy barely matters for quality.** All four Gezel strategies passed 13 or 14 of 14 and scored 8.1 to 8.2. Goal only matched the current cloud default on quality at 0.37× the time and about a fifth of the cost, because a single conversation with only the contract in it reads far less (median 26k uncached input tokens against 161k).
-- **Having an output contract matters even here.** Without it, Gezel+Sonnet 5.5 passed 10 of 14 and lost 0.35 points.
+- **Having an output contract matters with frontier models.** Without it, Gezel+Sonnet 5.5 passed 10 of 14 and lost 0.35 points.
+- **Beyond a contract, On a frontier model, the strategy barely matters for quality.** All four Gezel strategies passed 13 or 14 of 14 and scored 8.1 to 8.2. Goal only matched the current cloud default on quality at 0.37× the time and about a fifth of the cost, because a single conversation with only the contract in it reads far less (median 26k uncached input tokens against 161k).
 - **Given the same information, the outside tools match Gezel without the contract.** With the book description, pi tied Gezel's request-only arm exactly on passes (10 of 14 each) and on quality (+0.04 [−0.27, +0.33]). OpenCode scored a little higher (+0.25 [+0.02, +0.48]) and passed two fewer. Without the description, both trailed: pi by 0.92 points [−2.08, +0.04], OpenCode by 0.33 [−1.38, +0.38].
-- **What none of them could do was meet a format only the contract states.** Every failure of Gezel's request-only arm and of pi with the description was a named section the request never asks for: the retrospective's six headings, and a "Skipped clients" heading in the invoice summary. Without the description, the outside tools also wrote the invoices as Markdown; the request names no format, and the contract asks for HTML.
-- **The outside tools are much cheaper per task.** Gezel's standing prompt (its character, project and tool descriptions) is large; pi's is small. A goal-only Gezel task cost about $0.12 against pi's $0.03.
+- **What none of them could do was meet a format only the contract states.** Every failure of Gezel's request-only arm and of pi with the description was a named section the request never asks for: the retrospective's six headings, and a "Skipped clients" heading in the invoice summary. Without the description, the outside tools also wrote the invoices as Markdown; the request names no format, and the contract asks for HTML. You could argue that "prompt only" results from Gezel/pi/OpenCode (~missing 3 to 4 tests) failure don't matter as much because it fumbled the end formats of the data files and outputs - the user might not care whether data is formatted as markdown vs. CSV vs HTML so these are all "minor failures."
+- **The outside tools are much cheaper per task.** Gezel's standing prompt (its character, project and tool descriptions) is large; pi's is small. A goal-only Gezel task cost about $0.12 against pi's $0.03 in estimated cost per task.
 
 
 ### A frontier model: Claude Sonnet 5.5 {[summary passage=s1ne0d-133 origin=ai layout=cards]}
 
-- Gezel ran cloud models one owner, whole recipe
-- Arm passed criteria met quality standards
-- Costs from token counts priced at rates
+- Gezel: 14/14 passed
+- pi: 8/14 passed
 
-### A frontier model: Claude Sonnet 5.5 {[summary passage=1n3cd6n-oj origin=ai layout=cards]}
+### On a frontier model, strategy matters less than the contract {[summary passage=1n3cd6n-oj origin=ai layout=cards]}
 
-- Gezel strategies passed 13 or 14 of 14
-- Output contract matters for quality
-- Without contract, Gezel+Sonnet 5.5 lost 0.35 points
+- Contract: Goal matched cloud quality at 0.37× time and a fifth of the cost
+- No contract: Gezel+Sonnet 5.5 passed 10 of 14 and lost 0.35 points
+- Outside tools: pi and OpenCode matched Gezel without the contract when given the book description
+
+### Contract gaps and cost gaps {[summary passage=vszna1-hb origin=ai layout=cards]}
+
+- Format: tools wrote Markdown, contract asks for HTML
+- Sections: tools added headings the request never asks for
+- Cost: Gezel \$0.12 per task, pi \$0.03
 
 ## Summary
 
@@ -275,14 +317,15 @@ What does help is having a contract - a specification of what the final outputs 
 
 In Gezel, future directions are that craftbooks can and will be a conveyance for these contracts.
 
-### Structured mode too fussy {[summary passage=1qdhtxv-g3 origin=ai layout=cards]}
+### Step-by-step is too fussy to get right {[summary passage=1qdhtxv-g3 origin=ai layout=cards]}
 
-- Step-by-step presents more confusion
-- Higher end models overcome paperwork
-- Resultant quality same
+- Small models: more opportunities to get confused
+- Higher end models: can work in any mode
+- Resultant quality: about the same
+- Wall clock time: 2-3x
 
-### Summary {[summary passage=1sqz6nk-eh origin=ai layout=cards]}
+### Contracts and craftbooks shape future model outcomes {[summary passage=1sqz6nk-eh origin=ai layout=cards]}
 
-- Craftbooks will carry contracts
-- Contracts define outputs with goals
-- Reviews boost model efficacy
+- Contracts: specify goals, deliverables, and quality criteria
+- Efficacy: contracts can boost model performance by 10% or more
+- Craftbooks: future conveyance for these contracts in Gezel

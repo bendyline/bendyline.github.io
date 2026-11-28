@@ -132,52 +132,6 @@
       "contentHash": "e0452c1970140ea582a76a652f4c90eb75d9e7c3cf73a5f6e4a49a531ae860ea"
     },
     {
-      "path": "taskstrategies.html",
-      "source": "taskstrategies_files/taskstrategies.md",
-      "format": "html",
-      "title": "Building a Couch: Lessons in AI Organizational Design",
-      "firstPublishedDate": "2026-11-20T23:28:16Z",
-      "lastModifiedDate": "2026-11-27T16:42:59Z",
-      "theme": "gezellig",
-      "outline": [
-        {
-          "level": 2,
-          "title": "Building a Couch: Lessons in AI Organizational Design"
-        },
-        {
-          "level": 2,
-          "title": "The Hypothesis: Highly Structured Tasks"
-        },
-        {
-          "level": 2,
-          "title": "What we compared"
-        },
-        {
-          "level": 2,
-          "title": "Strategy Results"
-        },
-        {
-          "level": 2,
-          "title": "Moving to a new strategy for Gezel"
-        },
-        {
-          "level": 2,
-          "title": "Against raw harnesses"
-        },
-        {
-          "level": 2,
-          "title": "A frontier model: Claude Sonnet 5.5"
-        },
-        {
-          "level": 2,
-          "title": "Summary"
-        }
-      ],
-      "wordCount": 4038,
-      "excerpt": "Gezel is based on the idea of putting people in control of their AI by harnessing the power of local models. While frontier models are powerful and can do very sophisticated work, local models have a noticeably lower plateau on the complexity of tasks they can undertake.…",
-      "contentHash": "b89b4f75f803ddac4bd2dc54b5976c2245881b9e9b8e94d7a9a07711ee7ec04f"
-    },
-    {
       "path": "docbench.html",
       "source": "docbench_files/docbench.md",
       "format": "html",
@@ -335,6 +289,52 @@
       "wordCount": 1578,
       "excerpt": "Gezel (gezel.com) uses the power of local AI models to assist you with work. Admittedly, local AI models are not nearly as powerful as cloud models, but for so many tasks, they can be so useful and get the job done. One benefit from local AI is that you can run them on the…",
       "contentHash": "2a2b76cfbe055eafc4ce507287d90d378fca361f7c8cd4fb7ccf785a1df78c2c"
+    },
+    {
+      "path": "taskstrategies.html",
+      "source": "taskstrategies_files/taskstrategies.md",
+      "format": "html",
+      "title": "Local AI Task Strategies",
+      "firstPublishedDate": "2026-11-20T23:28:16Z",
+      "lastModifiedDate": "2026-11-28T16:33:27Z",
+      "theme": "gezellig",
+      "outline": [
+        {
+          "level": 2,
+          "title": "Local AI Task Strategies"
+        },
+        {
+          "level": 2,
+          "title": "The Hypothesis: Highly Structured Tasks"
+        },
+        {
+          "level": 2,
+          "title": "What we compared"
+        },
+        {
+          "level": 2,
+          "title": "Strategy Results"
+        },
+        {
+          "level": 2,
+          "title": "Moving to a new strategy for Gezel"
+        },
+        {
+          "level": 2,
+          "title": "Against raw harnesses"
+        },
+        {
+          "level": 2,
+          "title": "A frontier model: Claude Sonnet 5.5"
+        },
+        {
+          "level": 2,
+          "title": "Summary"
+        }
+      ],
+      "wordCount": 4130,
+      "excerpt": "https://youtu.be/q3xYowLhTY0",
+      "contentHash": "8bdb9f8587d9979b14fd3220f813b6147d694868a917462e11476906e111ad51"
     },
     {
       "path": "rtxsparkvstheworld.html",
